@@ -17,12 +17,19 @@ import dagger.Provides;
  */
 @Module
 public class AppModule {
+
+//    @Singleton
+//    @Provides
+//    Application providesApplication(Application application) {
+//        return application;
+//    }
+
     @Singleton
     @Provides
-    Context providesContext(Application application) {
-        return application;
-        //        return application.getApplicationContext();
+    Context providesApplicationContext(Application application) {
+        return application.getApplicationContext();
     }
+
     @Singleton
     @Provides
     @NonNull

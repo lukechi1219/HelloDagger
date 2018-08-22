@@ -9,7 +9,6 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class ActivityModule {
     @ContributesAndroidInjector
     abstract MainActivity contributeMainActivity();
-
 //    @ContributesAndroidInjector
 //    abstract DisplayMessageActivity contributeDisplayMessageActivity();
 }

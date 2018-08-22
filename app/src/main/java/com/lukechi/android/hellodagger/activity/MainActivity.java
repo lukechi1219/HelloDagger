@@ -5,11 +5,22 @@ import android.os.Bundle;
 
 import com.lukechi.android.hellodagger.R;
 
-public class MainActivity extends AppCompatActivity {
+import com.lukechi.android.hellodagger.core.Heater;
+import com.lukechi.android.hellodagger.di.Injectable;
+
+import javax.inject.Inject;
+
+// important: use Injectable or other interface to inform dagger to do inject()
+public class MainActivity extends AppCompatActivity implements Injectable {
+
+    @Inject
+    Heater myHeater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // auto injected!!!
+        myHeater.heat();
     }
 }

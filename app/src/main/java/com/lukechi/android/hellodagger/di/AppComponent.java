@@ -7,6 +7,8 @@ import javax.inject.Singleton;
 import dagger.BindsInstance;
 import dagger.Component;
 import dagger.android.AndroidInjectionModule;
+
+import com.lukechi.android.hellodagger.HelloApp;
 import com.lukechi.android.hellodagger.di.module.ActivityModule;
 import com.lukechi.android.hellodagger.di.module.AppModule;
 
@@ -28,5 +30,5 @@ public interface AppComponent {
         AppComponent build();
     }
     // binds our Application
-    void inject(Application application);
+    void inject(HelloApp application);
 }

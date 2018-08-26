@@ -11,7 +11,6 @@ import dagger.android.support.DaggerAppCompatActivity;
 
 // DaggerAppCompatActivity
 // https://medium.com/@ffvanderlaan/you-could-also-have-your-baseactivity-extend-daggerappcompatactivity-then-you-would-not-need-e5faf54fad4e
-// important: use Injectable or other interface to inform dagger to do inject()
 public class MainActivity extends DaggerAppCompatActivity {
 
     @Inject

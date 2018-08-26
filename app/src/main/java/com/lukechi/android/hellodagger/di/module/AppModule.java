@@ -1,9 +1,9 @@
 package com.lukechi.android.hellodagger.di.module;
 
-import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.lukechi.android.hellodagger.HelloApp;
 import com.lukechi.android.hellodagger.core.Heater;
 import com.lukechi.android.hellodagger.core.impl.GasHeater;
 
@@ -20,13 +20,13 @@ public class AppModule {
 
 //    @Singleton
 //    @Provides
-//    Application providesApplication(Application application) {
+//    Application providesApplication(HelloApp application) {
 //        return application;
 //    }
 
     @Singleton
     @Provides
-    Context providesApplicationContext(Application application) {
+    Context providesApplicationContext(HelloApp application) {
         return application.getApplicationContext();
     }
 

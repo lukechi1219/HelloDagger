@@ -13,6 +13,7 @@ import dagger.android.AndroidInjection;
 import dagger.android.support.AndroidSupportInjection;
 import dagger.android.support.HasSupportFragmentInjector;
 
+@Deprecated
 public class AppInjector {
 
     private AppInjector() {
@@ -21,10 +22,12 @@ public class AppInjector {
     // binds our Application
     public static void init(HelloApp targetApp) {
 
-        DaggerAppComponent.builder()
-                .application(targetApp)
-                .build()
-                .inject(targetApp);
+        DaggerAppComponent.builder().create(targetApp);
+
+//        DaggerAppComponent.builder()
+//                .application(targetApp)
+//                .build()
+//                .inject(targetApp);
 
         Application.ActivityLifecycleCallbacks activityLifecycleCallbacks =
                 new Application.ActivityLifecycleCallbacks() {
@@ -61,7 +64,7 @@ public class AppInjector {
         /*
          * Register life cycle callbacks
          */
-        targetApp.registerActivityLifecycleCallbacks(activityLifecycleCallbacks);
+//        targetApp.registerActivityLifecycleCallbacks(activityLifecycleCallbacks);
     }
 
     private static void handleActivity(Activity activity) {

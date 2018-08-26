@@ -1,29 +1,21 @@
 package com.lukechi.android.hellodagger;
 
-import android.app.Activity;
-import android.app.Application;
+import com.lukechi.android.hellodagger.di.DaggerAppComponent;
 
-import javax.inject.Inject;
+import dagger.android.AndroidInjector;
+import dagger.android.DaggerApplication;
 
-import dagger.android.DispatchingAndroidInjector;
-import dagger.android.HasActivityInjector;
-import com.lukechi.android.hellodagger.di.AppInjector;
-
+// DaggerApplication
+// implements HasActivityInjector
+// https://android.jlelse.eu/new-android-injector-with-dagger-2-part-3-fe3924df6a89
+// https://github.com/SamYStudiO/beaver
 /**
  * 幾乎不需要異動 可以直接用在不同專案
  */
-public class HelloApp extends Application implements HasActivityInjector {
-    @Inject
-    DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
+public class HelloApp extends DaggerApplication {
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-        AppInjector.init(this);
-    }
-
-    @Override
-    public DispatchingAndroidInjector<Activity> activityInjector() {
-        return dispatchingAndroidInjector;
+    protected AndroidInjector<? extends HelloApp> applicationInjector() {
+        return DaggerAppComponent.builder().create(this);
     }
 }

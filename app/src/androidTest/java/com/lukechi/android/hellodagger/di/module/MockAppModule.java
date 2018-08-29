@@ -6,23 +6,15 @@ import android.support.annotation.NonNull;
 import com.lukechi.android.hellodagger.HelloApp;
 import com.lukechi.android.hellodagger.core.Heater;
 import com.lukechi.android.hellodagger.core.impl.GasHeater;
+import com.lukechi.android.hellodagger.core.impl.MockGasHeater;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 
-/**
- * 提供 被 inject 物件 的實作
- */
 @Module
-public class AppModule {
-
-//    @Singleton
-//    @Provides
-//    Application providesApplication(HelloApp application) {
-//        return application;
-//    }
+public class MockAppModule {
 
     @Singleton
     @Provides
@@ -33,8 +25,8 @@ public class AppModule {
     @Singleton
     @Provides
     @NonNull
-    protected Heater providesHeater(GasHeater gasHeater) {
+    protected Heater providesHeater(MockGasHeater mockGasHeater) {
         // important: if not self new instance, dagger will auto new and handle following dependencies
-        return gasHeater;
+        return mockGasHeater;
     }
 }

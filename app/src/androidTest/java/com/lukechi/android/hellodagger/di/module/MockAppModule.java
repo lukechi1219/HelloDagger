@@ -13,6 +13,9 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
+/**
+ * provide fake instances for testing
+ */
 @Module
 public class MockAppModule {
 

@@ -16,7 +16,8 @@ import dagger.android.support.AndroidSupportInjectionModule;
         ActivityModule.class,
         MockAppModule.class,
 })
-public interface TestAppComponent extends AndroidInjector<HelloApp> {
+// need this to bind MockAppModule
+public interface TestAppComponent extends AppComponent {
 
     @Component.Builder
     abstract class Builder extends AndroidInjector.Builder<HelloApp> {}

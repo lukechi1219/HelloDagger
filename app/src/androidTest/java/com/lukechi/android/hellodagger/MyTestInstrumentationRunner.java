@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.support.test.runner.AndroidJUnitRunner;
 
+// need this to new MockHelloApp -> DaggerTestAppComponent -> MockAppModule
 public class MyTestInstrumentationRunner extends AndroidJUnitRunner {
 
     @Override

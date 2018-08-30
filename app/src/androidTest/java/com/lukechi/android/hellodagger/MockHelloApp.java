@@ -1,11 +1,11 @@
 package com.lukechi.android.hellodagger;
 
-import com.lukechi.android.hellodagger.di.DaggerAppComponent;
+import com.lukechi.android.hellodagger.di.DaggerTestAppComponent;
 
 import dagger.android.AndroidInjector;
-import dagger.android.DaggerApplication;
 
-public class MockHelloApp extends DaggerApplication {
+// need this to call DaggerTestAppComponent
+public class MockHelloApp extends HelloApp {
 
     @Override
     protected AndroidInjector<? extends HelloApp> applicationInjector() {

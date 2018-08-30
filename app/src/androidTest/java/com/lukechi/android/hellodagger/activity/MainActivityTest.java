@@ -1,8 +1,11 @@
 package com.lukechi.android.hellodagger.activity;
 
 import android.app.Instrumentation;
+import android.content.Context;
+import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SmallTest;
+import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.lukechi.android.hellodagger.HelloApp;
@@ -12,11 +15,14 @@ import com.lukechi.android.hellodagger.di.module.MockAppModule;
 
 import org.junit.Before;
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import javax.inject.Inject;
 
 import it.cosenonjaviste.daggermock.DaggerMockRule;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * http://www.albertgao.xyz/2018/04/24/how-to-mock-dagger-android-injection-in-instrumented-tests-with-kotlin/
@@ -25,22 +31,17 @@ import it.cosenonjaviste.daggermock.DaggerMockRule;
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
 
-    @Inject
-    Heater heater;
-
     @Rule
-    public DaggerMockRule<TestAppComponent> daggerRule = new DaggerMockRule<>(TestAppComponent.class, new MockAppModule())
-            .set(new DaggerMockRule.ComponentSetter<TestAppComponent>() {
-                @Override
-                public void setComponent(TestAppComponent component) {
-                    HelloApp app = (HelloApp) InstrumentationRegistry.getInstrumentation().getTargetContext().getApplicationContext();
-                    component.inject(app);
-                }
-            });
+    public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class, false, false);
 
-    @Before
-    public void setUp() {
-        Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
-        HelloApp app = (HelloApp) instrumentation.getTargetContext().getApplicationContext();
+    @Test
+    public void testLaunchActivity() {
+
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getTargetContext();
+
+        assertEquals("com.lukechi.android.hellodagger", appContext.getPackageName());
+
+        activityTestRule.launchActivity(new Intent());
     }
 }

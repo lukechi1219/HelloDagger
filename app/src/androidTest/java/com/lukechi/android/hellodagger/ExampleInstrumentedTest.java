@@ -27,16 +27,6 @@ import static org.junit.Assert.assertEquals;
 public class ExampleInstrumentedTest {
 
     @Rule
-    public DaggerMockRule<TestAppComponent> daggerRule = new DaggerMockRule<>(TestAppComponent.class, new MockAppModule())
-            .set(new DaggerMockRule.ComponentSetter<TestAppComponent>() {
-                @Override
-                public void setComponent(TestAppComponent component) {
-                    HelloApp app = (HelloApp) InstrumentationRegistry.getInstrumentation().getTargetContext().getApplicationContext();
-                    component.inject(app);
-                }
-            });
-
-    @Rule
     public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class, false, false);
 
     @Test

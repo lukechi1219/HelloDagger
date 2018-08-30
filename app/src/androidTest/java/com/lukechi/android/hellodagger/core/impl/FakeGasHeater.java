@@ -4,10 +4,10 @@ import com.lukechi.android.hellodagger.core.Heater;
 
 import javax.inject.Inject;
 
-public class MockGasHeater implements Heater {
+public class FakeGasHeater implements Heater {
 
     @Inject
-    public MockGasHeater() {};
+    public FakeGasHeater() {};
 
     @Override
     public void heat() {

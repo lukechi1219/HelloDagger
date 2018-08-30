@@ -5,7 +5,7 @@ import com.lukechi.android.hellodagger.di.DaggerTestAppComponent;
 import dagger.android.AndroidInjector;
 
 // need this to call DaggerTestAppComponent
-public class MockHelloApp extends HelloApp {
+public class FakeHelloApp extends HelloApp {
 
     @Override
     protected AndroidInjector<? extends HelloApp> applicationInjector() {

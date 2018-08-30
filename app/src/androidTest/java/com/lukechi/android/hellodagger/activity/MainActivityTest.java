@@ -1,6 +1,5 @@
 package com.lukechi.android.hellodagger.activity;
 
-import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
@@ -8,19 +7,9 @@ import android.support.test.filters.SmallTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.lukechi.android.hellodagger.HelloApp;
-import com.lukechi.android.hellodagger.core.Heater;
-import com.lukechi.android.hellodagger.di.TestAppComponent;
-import com.lukechi.android.hellodagger.di.module.MockAppModule;
-
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import javax.inject.Inject;
-
-import it.cosenonjaviste.daggermock.DaggerMockRule;
 
 import static org.junit.Assert.assertEquals;
 

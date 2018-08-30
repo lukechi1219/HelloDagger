@@ -5,8 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.lukechi.android.hellodagger.HelloApp;
 import com.lukechi.android.hellodagger.core.Heater;
-import com.lukechi.android.hellodagger.core.impl.GasHeater;
-import com.lukechi.android.hellodagger.core.impl.MockGasHeater;
+import com.lukechi.android.hellodagger.core.impl.FakeGasHeater;
 
 import javax.inject.Singleton;
 
@@ -17,7 +16,7 @@ import dagger.Provides;
  * provide fake instances for testing
  */
 @Module
-public class MockAppModule {
+public class TestAppModule {
 
     @Singleton
     @Provides
@@ -28,7 +27,7 @@ public class MockAppModule {
     @Singleton
     @Provides
     @NonNull
-    protected Heater providesHeater(MockGasHeater mockGasHeater) {
+    protected Heater providesHeater(FakeGasHeater mockGasHeater) {
         // important: if not self new instance, dagger will auto new and handle following dependencies
         return mockGasHeater;
     }

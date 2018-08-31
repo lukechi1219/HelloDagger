@@ -10,6 +10,7 @@ public class GasHeater implements Heater {
 
     private final Context context;
 
+    // final inject is better
     @Inject
     public GasHeater(Context context) {
         this.context = context;

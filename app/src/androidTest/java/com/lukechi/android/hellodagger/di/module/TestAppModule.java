@@ -16,18 +16,18 @@ import dagger.Provides;
  * provide fake instances for testing
  */
 @Module
-public class TestAppModule {
+public final class TestAppModule {
 
     @Singleton
     @Provides
-    protected Context providesApplicationContext(HelloApp application) {
+    Context providesApplicationContext(HelloApp application) {
         return application.getApplicationContext();
     }
 
     @Singleton
     @Provides
     @NonNull
-    protected Heater providesHeater(FakeGasHeater mockGasHeater) {
+    Heater providesHeater(FakeGasHeater mockGasHeater) {
         // important: if not self new instance, dagger will auto new and handle following dependencies
         return mockGasHeater;
     }

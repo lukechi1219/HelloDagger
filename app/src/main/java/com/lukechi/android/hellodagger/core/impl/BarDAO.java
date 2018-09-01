@@ -13,6 +13,6 @@ public class BarDAO {
 
     public String queryAll() {
         System.out.println("queryAll from ip: " + fooConfig.getIp());
-        return "DATA";
+        return "DATA from " + fooConfig.getIp();
     }
 }

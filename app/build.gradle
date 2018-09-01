@@ -47,9 +47,9 @@ dependencies {
     testImplementation "com.google.dagger:dagger-android-support:${DAGGER_VERSION}"
     androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
     androidTestAnnotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER_VERSION}"
-    //
-    testImplementation 'com.github.fabioCollini.daggermock:daggermock:0.8.4'
-    androidTestImplementation 'com.github.fabioCollini.daggermock:daggermock:0.8.4'
+//    //
+//    testImplementation 'com.github.fabioCollini.daggermock:daggermock:0.8.4'
+//    androidTestImplementation 'com.github.fabioCollini.daggermock:daggermock:0.8.4'
     //
     testImplementation "org.mockito:mockito-core:+"
     androidTestImplementation "org.mockito:mockito-android:+"

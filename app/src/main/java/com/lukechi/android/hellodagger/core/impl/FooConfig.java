@@ -2,18 +2,18 @@ package com.lukechi.android.hellodagger.core.impl;
 
 import javax.inject.Inject;
 
-public class Foo {
+public class FooConfig {
 
     @Inject
-    public Foo() {}
+    public FooConfig() {}
 
-    private final String name = "real Foo";
+    private final String name = "real FooConfig";
 
     public String getName() {
         return name;
     }
 
     public void work() {
-        System.out.println("foo name is " + name);
+        System.out.println("fooConfig name is " + name);
     }
 }

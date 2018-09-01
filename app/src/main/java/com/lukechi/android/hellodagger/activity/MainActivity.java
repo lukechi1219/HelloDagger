@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.lukechi.android.hellodagger.R;
 import com.lukechi.android.hellodagger.core.Heater;
-import com.lukechi.android.hellodagger.core.impl.Baz;
+import com.lukechi.android.hellodagger.core.impl.BazService;
 
 import javax.inject.Inject;
 
@@ -18,7 +18,7 @@ public class MainActivity extends DaggerAppCompatActivity {
     Heater myHeater;
 
     @Inject
-    Baz baz;
+    BazService bazService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,6 @@ public class MainActivity extends DaggerAppCompatActivity {
         setContentView(R.layout.activity_main);
         // auto injected!!!
         myHeater.heat();
-        baz.work();
+        bazService.work();
     }
 }

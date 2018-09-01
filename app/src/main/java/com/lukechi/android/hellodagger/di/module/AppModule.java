@@ -42,13 +42,13 @@ public final class AppModule {
     }
 
     /**
-     * 如果 Foo 是 lib class, 就要在這邊 new, 否則不用在這邊寫, 在 Foo 加上 @Inject 就好, 但是變成這邊看不出來 dependency 關係
+     * 如果 FooConfig 是 lib class, 就要在這邊 new, 否則不用在這邊寫, 在 FooConfig 加上 @Inject 就好, 但是變成這邊看不出來 dependency 關係
      */
 //    @Singleton
 //    @Provides
 //    @NonNull
-//    Foo providesFoo() {
-//        return new Foo();
+//    FooConfig providesFoo() {
+//        return new FooConfig();
 //    }
 
 }

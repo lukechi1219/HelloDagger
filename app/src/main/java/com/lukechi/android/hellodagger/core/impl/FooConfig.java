@@ -4,16 +4,14 @@ import javax.inject.Inject;
 
 public class FooConfig {
 
+    private final String ip = "real FooConfig: 127.0.0.1";
+
     @Inject
-    public FooConfig() {}
-
-    private final String name = "real FooConfig";
-
-    public String getName() {
-        return name;
+    public FooConfig() {
+        System.out.println("init fooConfig " + ip);
     }
 
-    public void work() {
-        System.out.println("fooConfig name is " + name);
+    public String getIp() {
+        return ip;
     }
 }

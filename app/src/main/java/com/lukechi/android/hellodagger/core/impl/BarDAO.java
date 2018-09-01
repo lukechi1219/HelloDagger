@@ -11,7 +11,8 @@ public class BarDAO {
         this.fooConfig = fooConfig;
     }
 
-    public void work() {
-        fooConfig.work();
+    public String queryAll() {
+        System.out.println("queryAll from ip: " + fooConfig.getIp());
+        return "DATA";
     }
 }

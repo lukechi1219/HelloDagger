@@ -12,6 +12,6 @@ public class BazService {
     }
 
     public void work() {
-        barDAO.work();
+        System.out.println("work data: " + barDAO.queryAll());
     }
 }

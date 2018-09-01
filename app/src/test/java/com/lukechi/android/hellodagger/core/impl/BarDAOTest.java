@@ -1,5 +1,6 @@
 package com.lukechi.android.hellodagger.core.impl;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -14,11 +15,13 @@ public class BarDAOTest {
     @Mock
     FooConfig fooConfig;
 
+    @Before
+    public void setup() {
+        when(fooConfig.getIp()).thenReturn("abc");
+    }
+
     @Test
     public void queryAll() {
-
-        when(fooConfig.getIp()).thenReturn("abc");
-
         BarDAO barDAO = new BarDAO(fooConfig);
         String data = barDAO.queryAll();
 

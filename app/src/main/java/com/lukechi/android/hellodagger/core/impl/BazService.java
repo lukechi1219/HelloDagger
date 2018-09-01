@@ -11,7 +11,9 @@ public class BazService {
         this.barDAO = barDAO;
     }
 
-    public void work() {
-        System.out.println("work data: " + barDAO.queryAll());
+    public String work() {
+        String result = "work data: " + barDAO.queryAll();
+        System.out.println(result);
+        return result;
     }
 }

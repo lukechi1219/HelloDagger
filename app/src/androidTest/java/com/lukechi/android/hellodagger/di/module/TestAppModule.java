@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 
 import com.lukechi.android.hellodagger.HelloApp;
 import com.lukechi.android.hellodagger.core.Heater;
+import com.lukechi.android.hellodagger.core.impl.BazService;
+import com.lukechi.android.hellodagger.core.impl.FakeBazService;
 import com.lukechi.android.hellodagger.core.impl.FakeGasHeater;
 
 import javax.inject.Singleton;
@@ -27,8 +29,18 @@ public final class TestAppModule {
     @Singleton
     @Provides
     @NonNull
-    Heater providesHeater(FakeGasHeater mockGasHeater) {
+    Heater providesHeater(FakeGasHeater fakeGasHeater) {
         // important: if not self new instance, dagger will auto new and handle following dependencies
-        return mockGasHeater;
+        return fakeGasHeater;
+    }
+
+    /**
+     * AppModule 沒有 providesBazService() 是 Dagger 自動 inject , 但是為了測試, 我們可以在這邊指定 dependency .
+     */
+    @Singleton
+    @Provides
+    @NonNull
+    BazService providesBazService(FakeBazService fakeBazService) {
+        return fakeBazService;
     }
 }

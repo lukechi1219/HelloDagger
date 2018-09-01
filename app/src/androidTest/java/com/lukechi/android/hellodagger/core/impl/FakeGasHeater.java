@@ -11,6 +11,6 @@ public class FakeGasHeater implements Heater {
 
     @Override
     public void heat() {
-        System.out.println("heat with gas. mocked.");
+        System.out.println("heat with gas. Faked.");
     }
 }

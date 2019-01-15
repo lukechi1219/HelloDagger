@@ -10,6 +10,9 @@ import javax.inject.Inject;
 
 import dagger.android.support.DaggerAppCompatActivity;
 
+/**
+ * A class shouldn’t know anything about how it is injected. So we hide inject code into DaggerAppCompatActivity
+ */
 // DaggerAppCompatActivity
 // https://medium.com/@ffvanderlaan/you-could-also-have-your-baseactivity-extend-daggerappcompatactivity-then-you-would-not-need-e5faf54fad4e
 public class MainActivity extends DaggerAppCompatActivity {

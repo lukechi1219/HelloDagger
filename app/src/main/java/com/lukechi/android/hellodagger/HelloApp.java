@@ -11,6 +11,8 @@ import dagger.android.DaggerApplication;
 // https://github.com/SamYStudiO/beaver
 /**
  * 幾乎不需要異動 可以直接用在不同專案
+ *
+ * A class shouldn’t know anything about how it is injected.
  */
 public class HelloApp extends DaggerApplication {
 

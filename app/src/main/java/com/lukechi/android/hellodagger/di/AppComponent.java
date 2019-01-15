@@ -12,12 +12,14 @@ import dagger.android.support.AndroidSupportInjectionModule;
 
 /**
  * setup module bindings 設定 Application 要有哪些 modules
+ *
+ * AndroidSupportInjectionModule includes AndroidInjectionModule
  */
 @Singleton
 @Component(modules = {
-        AndroidSupportInjectionModule.class, // <- includes = AndroidInjectionModule.class
-        ActivityModule.class,
+        AndroidSupportInjectionModule.class,
         AppModule.class,
+        ActivityModule.class,
 })
 public interface AppComponent extends AndroidInjector<HelloApp> {
 

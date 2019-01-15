@@ -10,14 +10,17 @@ import dagger.Component;
 import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 
+/**
+ * AndroidSupportInjectionModule includes AndroidInjectionModule
+ */
 @Singleton
 @Component(modules = {
-        AndroidSupportInjectionModule.class, // <- includes = AndroidInjectionModule.class
-        ActivityModule.class,
+        AndroidSupportInjectionModule.class,
         TestAppModule.class,
+        ActivityModule.class,
 })
-// need this to bind TestAppModule
-public interface TestAppComponent extends AppComponent {
+// public interface TestAppComponent extends AppComponent {
+public interface TestAppComponent extends AndroidInjector<HelloApp> {
 
     @Component.Builder
     abstract class Builder extends AndroidInjector.Builder<HelloApp> {}

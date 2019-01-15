@@ -16,6 +16,9 @@ import dagger.android.DaggerApplication;
  */
 public class HelloApp extends DaggerApplication {
 
+    /**
+     * connects HelloApp with (Dagger) AppComponent
+     */
     @Override
     protected AndroidInjector<? extends HelloApp> applicationInjector() {
         return DaggerAppComponent.builder().create(this);

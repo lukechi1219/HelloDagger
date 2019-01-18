@@ -49,9 +49,11 @@ public abstract class AppModule {
     abstract Application bindsApplication(HelloApp application);
 
     @Singleton
-    @Binds
+    @Provides
     @Named("ApplicationContext")
-    abstract Context bindsApplicationContext(HelloApp application);
+    static Context providesApplicationContext(HelloApp application) {
+        return application.getApplicationContext();
+    }
 
     @Singleton
     @Binds

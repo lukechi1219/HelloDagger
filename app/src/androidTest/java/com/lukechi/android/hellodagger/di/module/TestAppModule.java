@@ -8,6 +8,7 @@ import com.lukechi.android.hellodagger.core.Heater;
 import com.lukechi.android.hellodagger.core.impl.BazService;
 import com.lukechi.android.hellodagger.core.impl.FakeBazService;
 import com.lukechi.android.hellodagger.core.impl.FakeGasHeater;
+import com.lukechi.android.hellodagger.thirdparty.ThirdPartyClass;
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
@@ -28,7 +29,7 @@ public abstract class TestAppModule {
     @Singleton
     @Provides
     @Named("ApplicationContext")
-    Context providesApplicationContext(HelloApp application) {
+    static Context providesApplicationContext(HelloApp application) {
         return application.getApplicationContext();
     }
 
@@ -49,12 +50,12 @@ public abstract class TestAppModule {
     @NonNull
     abstract BazService bindsBazService(FakeBazService bazService);
 
-    //    /**
-//     * 如果是第 3 方 lib , 無法加上 @Inject , 就要在這邊 new 或是產生 instance
-//     */
-//    @Singleton
-//    @Provides
-//    static ThirdPartyClass provideThirdParty(Context context) {
-//        return new FakeThirdPartyClass(context);
-//    }
+    /**
+     * 如果是第 3 方 lib , 無法加上 @Inject , 就要在這邊 new 或是產生 instance
+     */
+    @Singleton
+    @Provides
+    static ThirdPartyClass provideThirdParty(Context context) {
+        return new ThirdPartyClass(context);
+    }
 }

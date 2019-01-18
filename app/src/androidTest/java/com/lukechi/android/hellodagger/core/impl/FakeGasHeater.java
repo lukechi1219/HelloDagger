@@ -7,7 +7,8 @@ import javax.inject.Inject;
 public class FakeGasHeater implements Heater {
 
     @Inject
-    public FakeGasHeater() {};
+    public FakeGasHeater() {
+    }
 
     @Override
     public void heat() {

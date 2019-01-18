@@ -60,7 +60,7 @@ public abstract class AppModule {
     abstract Context bindsContext(HelloApp application);
 
     /**
-     * 如果是 impl 轉 interface 才要特別寫 provid or bind
+     * 如果是 impl 轉 interface 才要特別寫 provide or bind
      * interface provide( impl ) or interface bind( impl )
      *
      * important: if not self new instance, dagger will auto new and handle following dependencies

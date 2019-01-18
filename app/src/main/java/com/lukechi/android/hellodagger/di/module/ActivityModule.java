@@ -1,12 +1,11 @@
 package com.lukechi.android.hellodagger.di.module;
 
 import com.lukechi.android.hellodagger.activity.MainActivity;
-
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
 /**
- * A class shouldn’t know anything about how it is injected.
+ * A class shouldn't t know anything about how it is injected.
  */
 @Module
 public abstract class ActivityModule {

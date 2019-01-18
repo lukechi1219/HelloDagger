@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 final DAGGER_VERSION = '2.17'
 final MOCKITO_VERSION = '2.23.4'
@@ -30,6 +30,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    // ???
+//    configurations.all {
+//        resolutionStrategy.force 'com.android.support:support-annotations:26.1.0'
+//    }
 }
 
 dependencies {
@@ -53,8 +58,8 @@ dependencies {
     implementation "com.google.dagger:dagger:${DAGGER_VERSION}"
     implementation "com.google.dagger:dagger-android:${DAGGER_VERSION}"
     implementation "com.google.dagger:dagger-android-support:${DAGGER_VERSION}"
-    annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
-    annotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER_VERSION}"
+    kapt "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
+    kapt "com.google.dagger:dagger-android-processor:${DAGGER_VERSION}"
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'com.google.truth:truth:0.34'
@@ -62,8 +67,12 @@ dependencies {
     testImplementation "com.google.dagger:dagger:${DAGGER_VERSION}"
     testImplementation "com.google.dagger:dagger-android:${DAGGER_VERSION}"
     testImplementation "com.google.dagger:dagger-android-support:${DAGGER_VERSION}"
-    androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
-    androidTestAnnotationProcessor "com.google.dagger:dagger-android-processor:${DAGGER_VERSION}"
+    // Android Test
+    kaptAndroidTest "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
+    kaptAndroidTest "com.google.dagger:dagger-android-processor:${DAGGER_VERSION}"
+    // JUnit test
+    kaptTest "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
+    kaptTest "com.google.dagger:dagger-android-processor:${DAGGER_VERSION}"
 //    //
 //    testImplementation 'com.github.fabioCollini.daggermock:daggermock:0.8.4'
 //    androidTestImplementation 'com.github.fabioCollini.daggermock:daggermock:0.8.4'

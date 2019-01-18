@@ -1,14 +1,17 @@
 package com.lukechi.android.hellodagger.core.impl;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
+@Singleton
 public class BazService {
 
-    private final BarDAO barDAO;
+    @Inject
+    BarDAO barDAO; // field inject
 
     @Inject
-    public BazService(BarDAO barDAO) {
-        this.barDAO = barDAO;
+    public BazService() {
+        // tell dagger can new this class
     }
 
     public String work() {

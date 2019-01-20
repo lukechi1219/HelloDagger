@@ -3,12 +3,11 @@ package com.lukechi.android.hellodagger.di;
 import com.lukechi.android.hellodagger.HelloApp;
 import com.lukechi.android.hellodagger.di.module.ActivityModule;
 import com.lukechi.android.hellodagger.di.module.TestAppModule;
-
-import javax.inject.Singleton;
-
 import dagger.Component;
 import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
+
+import javax.inject.Singleton;
 
 /**
  * AndroidSupportInjectionModule includes AndroidInjectionModule
@@ -23,5 +22,6 @@ import dagger.android.support.AndroidSupportInjectionModule;
 public interface TestAppComponent extends AndroidInjector<HelloApp> {
 
     @Component.Builder
-    abstract class Builder extends AndroidInjector.Builder<HelloApp> {}
+    abstract class Builder extends AndroidInjector.Builder<HelloApp> {
+    }
 }

@@ -11,9 +11,9 @@ import javax.inject.Singleton;
 
 /**
  * setup module bindings 設定 Application 要有哪些 modules
- *
+ * <p>
  * https://proandroiddev.com/mvp-with-dagger-2-11-847d52c27c5a
- *
+ * <p>
  * AndroidSupportInjectionModule includes AndroidInjectionModule
  */
 @Singleton
@@ -33,5 +33,6 @@ public interface AppComponent extends AndroidInjector<HelloApp> {
 //    BazService getBazService(); // 可寫 可不寫?
 
     @Component.Builder
-    abstract class Builder extends AndroidInjector.Builder<HelloApp> {}
+    abstract class Builder extends AndroidInjector.Builder<HelloApp> {
+    }
 }

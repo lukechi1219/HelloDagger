@@ -4,12 +4,14 @@ import javax.inject.Inject;
 
 public class BarDAO {
 
-    @Inject
-    FooConfig fooConfig; // field inject
+    //    @Inject
+//    FooConfig fooConfig; // field inject
+    private final FooConfig fooConfig;
 
+    // Constructor injection is preferred
     @Inject
-    public BarDAO() {
-        // tell dagger can new this class
+    public BarDAO(FooConfig fooConfig) {
+        this.fooConfig = fooConfig;
     }
 
     public String queryAll() {

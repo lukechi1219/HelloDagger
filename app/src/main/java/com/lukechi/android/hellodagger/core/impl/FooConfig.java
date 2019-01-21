@@ -5,15 +5,20 @@ import android.content.Context;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+/**
+ * https://google.github.io/dagger/android#when-to-inject
+ * <p>
+ * Constructor injection is preferred whenever possible because javac will ensure that
+ * no field is referenced before it has been set, which helps avoid NullPointerExceptions.
+ */
 @Singleton
 public class FooConfig {
 
-    // final inject is better ? compare to GasHeater
-    //    @Inject
     private final Context context;
 
     private final String ip = "real FooConfig: 127.0.0.1";
 
+    // Constructor injection is preferred
     @Inject
     public FooConfig(Context context) {
         this.context = context;

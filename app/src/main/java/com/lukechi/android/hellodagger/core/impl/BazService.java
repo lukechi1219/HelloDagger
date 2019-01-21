@@ -6,12 +6,14 @@ import javax.inject.Singleton;
 @Singleton
 public class BazService {
 
-    @Inject
-    BarDAO barDAO; // field inject
+    //    @Inject
+//    BarDAO barDAO; // field inject
+    private final BarDAO barDAO;
 
+    // Constructor injection is preferred
     @Inject
-    public BazService() {
-        // tell dagger can new this class
+    public BazService(BarDAO barDAO) {
+        this.barDAO = barDAO;
     }
 
     public String work() {

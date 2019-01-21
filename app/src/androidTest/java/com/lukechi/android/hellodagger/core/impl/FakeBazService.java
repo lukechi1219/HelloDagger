@@ -6,6 +6,7 @@ public class FakeBazService extends BazService {
 
     @Inject
     public FakeBazService() {
+        super(null);
     }
 
     @Override

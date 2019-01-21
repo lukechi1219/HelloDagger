@@ -7,6 +7,12 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+/**
+ * https://google.github.io/dagger/android#when-to-inject
+ * <p>
+ * Constructor injection is preferred whenever possible because javac will ensure that
+ * no field is referenced before it has been set, which helps avoid NullPointerExceptions.
+ */
 @Singleton
 public class GasHeater implements Heater {
 

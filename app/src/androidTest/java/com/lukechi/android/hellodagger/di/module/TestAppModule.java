@@ -2,7 +2,7 @@ package com.lukechi.android.hellodagger.di.module;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import com.lukechi.android.hellodagger.HelloApp;
 import com.lukechi.android.hellodagger.core.Heater;
 import com.lukechi.android.hellodagger.core.impl.BazService;

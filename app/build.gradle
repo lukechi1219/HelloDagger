@@ -6,8 +6,8 @@ apply plugin: 'kotlin-kapt'
 
 final DAGGER_VERSION = '2.17'
 final MOCKITO_VERSION = '2.23.4'
-final TEST_SUPPORT_VERSION = '1.0.2'
-final ESPRESSO_VERSION = '3.0.2'
+final TEST_SUPPORT_VERSION = '1.1.0-alpha4'
+final ESPRESSO_VERSION = '3.1.0-alpha4'
 
 android {
     compileSdkVersion 28
@@ -42,9 +42,15 @@ dependencies {
 
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support:design:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    /*
+     * https://developer.android.com/jetpack/androidx/migrate
+     */
+//    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
+//    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.google.android.material:material:1.1.0-alpha02'
+//    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     // https://proandroiddev.com/android-jetpack-foundation-multidex-part-1-chapter-3-64a3e43c92dc
     // AndroidX is the open-source project that the Android team uses to develop, test, package, version and release libraries within Jetpack.
@@ -80,8 +86,8 @@ dependencies {
     testImplementation "org.mockito:mockito-core:${MOCKITO_VERSION}"
     androidTestImplementation "org.mockito:mockito-android:${MOCKITO_VERSION}"
     //
-    androidTestImplementation "com.android.support.test:runner:${TEST_SUPPORT_VERSION}"
-    androidTestImplementation "com.android.support.test:rules:${TEST_SUPPORT_VERSION}"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:${ESPRESSO_VERSION}"
-    androidTestImplementation "com.android.support.test.espresso:espresso-intents:${ESPRESSO_VERSION}"
+    androidTestImplementation "androidx.test:runner:${TEST_SUPPORT_VERSION}"
+    androidTestImplementation "androidx.test:rules:${TEST_SUPPORT_VERSION}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${ESPRESSO_VERSION}"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:${ESPRESSO_VERSION}"
 }

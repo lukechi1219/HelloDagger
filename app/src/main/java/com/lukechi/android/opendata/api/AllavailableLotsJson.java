@@ -9,16 +9,16 @@ public class AllavailableLotsJson {
 
     @SerializedName("data")
     @Expose
-    private AllavailableLotsData data;
+    private AllAvailableLotsData data;
 
-    public AllavailableLotsData getData() {
+    public AllAvailableLotsData getData() {
         return data;
     }
 
     /**
      * inner
      */
-    public static class AllavailableLotsData {
+    public static class AllAvailableLotsData {
 
         @SerializedName("UPDATETIME")
         @Expose
@@ -26,18 +26,18 @@ public class AllavailableLotsJson {
 
         @SerializedName("park")
         @Expose
-        List<AllavailableLot> parkingLots;
+        List<AllAvailableLot> parkingLots;
 
         public String getUpdateTime() {
             return updateTime;
         }
 
-        public List<AllavailableLot> getParkingLots() {
+        public List<AllAvailableLot> getParkingLots() {
             return parkingLots;
         }
     }
 
-    public static class AllavailableLot {
+    public static class AllAvailableLot {
 
         @SerializedName("id")
         @Expose

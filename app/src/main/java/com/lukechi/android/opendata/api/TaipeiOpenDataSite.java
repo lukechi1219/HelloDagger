@@ -10,8 +10,11 @@ import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class TaipeiParkingApi {
+public class TaipeiOpenDataSite {
 
+    /*
+     * for Taipei City Open Data traffic_realtime
+     */
     private final static String BASE_URL = "https://tcgbusfs.blob.core.windows.net/";
     // https://tcgbusfs.blob.core.windows.net/
 

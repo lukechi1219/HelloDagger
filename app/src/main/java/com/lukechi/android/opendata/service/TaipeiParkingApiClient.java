@@ -5,7 +5,7 @@ import com.lukechi.android.opendata.api.AllAvailableLotsJson.AllAvailableLot;
 import com.lukechi.android.opendata.api.AllAvailableLotsJson.AllAvailableLotsData;
 import com.lukechi.android.opendata.api.AllAvailableLotsJson.ChargeStation;
 import com.lukechi.android.opendata.api.AllAvailableLotsJson.SocketStatus;
-import com.lukechi.android.opendata.api.TaipeiParkingApi;
+import com.lukechi.android.opendata.api.TaipeiOpenDataSite;
 import com.lukechi.android.opendata.api.TaipeiParkingApiCall;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,9 +22,9 @@ public class TaipeiParkingApiClient implements Callback<AllAvailableLotsJson> {
 
     public void printAvailableLots() {
 
-        TaipeiParkingApiCall apiCall = TaipeiParkingApi.getClient(null).create(TaipeiParkingApiCall.class);
+        TaipeiParkingApiCall apiCall = TaipeiOpenDataSite.getClient(null).create(TaipeiParkingApiCall.class);
 
-        Call<AllAvailableLotsJson> call = apiCall.getAllavailableLots();
+        Call<AllAvailableLotsJson> call = apiCall.getAllAvailableLots();
 
         call.enqueue(this);
     }

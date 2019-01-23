@@ -6,5 +6,5 @@ import retrofit2.http.GET;
 public interface TaipeiParkingApiCall {
 
     @GET("blobtcmsv/TCMSV_allavailable.gz")
-    Call<AllAvailableLotsJson> getAllavailableLots();
+    Call<AllAvailableLotsJson> getAllAvailableLots();
 }

@@ -5,6 +5,7 @@ import com.lukechi.android.hellodagger.R;
 import com.lukechi.android.hellodagger.core.Heater;
 import com.lukechi.android.hellodagger.core.impl.BazService;
 import com.lukechi.android.hellodagger.thirdparty.ThirdPartyClass;
+import com.lukechi.android.opendata.service.TaipeiParkingApiClient;
 import dagger.android.support.DaggerAppCompatActivity;
 
 import javax.inject.Inject;
@@ -25,6 +26,9 @@ public class MainActivity extends DaggerAppCompatActivity {
     @Inject
     ThirdPartyClass thirdParty;
 
+    @Inject
+    TaipeiParkingApiClient parkingApiClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,5 +37,7 @@ public class MainActivity extends DaggerAppCompatActivity {
         myHeater.heat();
         bazService.work();
         thirdParty.getInfo();
+
+        parkingApiClient.printAvailableLots();
     }
 }

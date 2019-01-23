@@ -24,7 +24,7 @@ public class TaipeiParkingApiClient implements Callback<AllAvailableLotsJson> {
 
         TaipeiParkingApiCall apiCall = TaipeiOpenDataSite.getClient(null).create(TaipeiParkingApiCall.class);
 
-        Call<AllAvailableLotsJson> call = apiCall.getAllAvailableLots();
+        Call<AllAvailableLotsJson> call = apiCall.tcmsvSyncAllAvailableLots();
 
         call.enqueue(this);
     }

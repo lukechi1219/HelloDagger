@@ -1,14 +1,14 @@
 package com.lukechi.android.opendata.api;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 public class AllAvailableLotsJson {
 
+    // @Expose is optional and it has two configuration parameters: serialize and deserialize. By default they're set to true.
+    // @Expose or @Expose(serialize = false)
     @SerializedName("data")
-    @Expose
     private AllAvailableLotsData data;
 
     public AllAvailableLotsData getData() {
@@ -21,11 +21,9 @@ public class AllAvailableLotsJson {
     public static class AllAvailableLotsData {
 
         @SerializedName("UPDATETIME")
-        @Expose
         String updateTime;
 
         @SerializedName("park")
-        @Expose
         List<AllAvailableLot> parkingLots;
 
         public String getUpdateTime() {
@@ -40,23 +38,18 @@ public class AllAvailableLotsJson {
     public static class AllAvailableLot {
 
         @SerializedName("id")
-        @Expose
         String id;
 
         @SerializedName("availablecar")
-        @Expose
         String availableCar;
 
         @SerializedName("availablemotor")
-        @Expose
         String availableMotor;
 
         @SerializedName("availablebus")
-        @Expose
         String availableBus;
 
         @SerializedName("ChargeStation")
-        @Expose
         ChargeStation chargeStation;
 
         public String getId() {
@@ -86,7 +79,6 @@ public class AllAvailableLotsJson {
          * mother fucker... API field Socket spell wrongly to Scoket...
          */
         @SerializedName("scoketStatusList")
-        @Expose
         List<SocketStatus> socketStatusList;
 
         public List<SocketStatus> getSocketStatusList() {
@@ -97,11 +89,9 @@ public class AllAvailableLotsJson {
     public static class SocketStatus {
 
         @SerializedName("spot_abrv")
-        @Expose
         String spotAbrv;
 
         @SerializedName("spot_status")
-        @Expose
         String spotStatus;
 
         public String getSpotAbrv() {

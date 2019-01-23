@@ -53,6 +53,11 @@ public class AllAvailableLotsJson {
             return updateTimestamp;
         }
 
+        // for debug
+        public String getUpdateTimeCST() {
+            return updateTimeCST;
+        }
+
         public List<AllAvailableLot> getParkingLots() {
             return parkingLots;
         }

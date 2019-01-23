@@ -42,6 +42,7 @@ public class TaipeiParkingApiClient implements Callback<AllAvailableLotsJson> {
             AllAvailableLot lot = lotList.get(4);
 
             System.out.println(data.getUpdateTime());
+            System.out.println(data.getUpdateTimeCST());
             System.out.println(data.getUpdateTimestamp());
             System.out.println("total lots: " + lotList.size());
 

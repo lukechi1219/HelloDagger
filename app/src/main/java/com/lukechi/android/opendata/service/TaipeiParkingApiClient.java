@@ -14,10 +14,10 @@ import retrofit2.Response;
 import javax.inject.Inject;
 import java.util.List;
 
-public class TaipeiParkingService implements Callback<AllAvailableLotsJson> {
+public class TaipeiParkingApiClient implements Callback<AllAvailableLotsJson> {
 
     @Inject
-    public TaipeiParkingService() {
+    public TaipeiParkingApiClient() {
     }
 
     public void printAvailableLots() {

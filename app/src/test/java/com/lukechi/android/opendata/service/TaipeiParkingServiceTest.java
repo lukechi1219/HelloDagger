@@ -9,9 +9,9 @@ public class TaipeiParkingServiceTest {
     @Test
     public void testPrintAvailableLots() throws InterruptedException {
 
-        TaipeiParkingService parkingService = new TaipeiParkingService();
+        TaipeiParkingApiClient parkingApiClient = new TaipeiParkingApiClient();
 
-        parkingService.printAvailableLots();
+        parkingApiClient.printAvailableLots();
 
         Thread.sleep(3000);
 

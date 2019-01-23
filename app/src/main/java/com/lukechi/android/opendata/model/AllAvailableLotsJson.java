@@ -1,13 +1,14 @@
 package com.lukechi.android.opendata.model;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.lukechi.android.opendata.util.DateUtil;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public class AllAvailableLotsJson {
 
-    // @Expose is optional and it has two configuration parameters: serialize and deserialize. By default they're set to true.
-    // @Expose or @Expose(serialize = false)
     @SerializedName("data")
     private AllAvailableLotsData data;
 
@@ -20,14 +21,36 @@ public class AllAvailableLotsJson {
      */
     public static class AllAvailableLotsData {
 
+        // "Thu Jan 24 05:25:00 CST 2019"
         @SerializedName("UPDATETIME")
-        String updateTime;
+        String updateTimeCST;
+
+        // @Expose is optional and it has two configuration parameters: serialize and deserialize. By default they're set to true.
+        @Expose(deserialize = false)
+        String updateTimeGMT;
+
+        @Expose(serialize = false, deserialize = false)
+        Timestamp updateTimestamp;
 
         @SerializedName("park")
         List<AllAvailableLot> parkingLots;
 
+        // return GMT
         public String getUpdateTime() {
-            return updateTime;
+            if (updateTimeGMT != null) {
+                return updateTimeGMT;
+            }
+            updateTimestamp = DateUtil.parseCST(updateTimeCST);
+            updateTimeGMT = DateUtil.formatToGMT(updateTimestamp);
+
+            if (updateTimeGMT != null) {
+                return updateTimeGMT;
+            }
+            return updateTimeCST;
+        }
+
+        public Timestamp getUpdateTimestamp() {
+            return updateTimestamp;
         }
 
         public List<AllAvailableLot> getParkingLots() {

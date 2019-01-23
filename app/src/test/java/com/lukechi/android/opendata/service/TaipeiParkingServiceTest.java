@@ -13,7 +13,7 @@ public class TaipeiParkingServiceTest {
 
         parkingApiClient.printAvailableLots();
 
-        Thread.sleep(3000);
+        Thread.sleep(3 * 1000);
 
         assertEquals("test", "test");
     }

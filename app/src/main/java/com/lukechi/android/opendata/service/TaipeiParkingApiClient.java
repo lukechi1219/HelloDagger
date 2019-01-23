@@ -5,8 +5,6 @@ import com.lukechi.android.opendata.api.TaipeiParkingApiCall;
 import com.lukechi.android.opendata.model.AllAvailableLotsJson;
 import com.lukechi.android.opendata.model.AllAvailableLotsJson.AllAvailableLot;
 import com.lukechi.android.opendata.model.AllAvailableLotsJson.AllAvailableLotsData;
-import com.lukechi.android.opendata.model.AllAvailableLotsJson.ChargeStation;
-import com.lukechi.android.opendata.model.AllAvailableLotsJson.SocketStatus;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,6 +42,7 @@ public class TaipeiParkingApiClient implements Callback<AllAvailableLotsJson> {
             AllAvailableLot lot = lotList.get(4);
 
             System.out.println(data.getUpdateTime());
+            System.out.println(data.getUpdateTimestamp());
             System.out.println("total lots: " + lotList.size());
 
             System.out.println("lot id: " + lot.getId());
@@ -51,15 +50,15 @@ public class TaipeiParkingApiClient implements Callback<AllAvailableLotsJson> {
             System.out.println("lot availableMotor: " + lot.getAvailableMotor());
             System.out.println("lot availableBus: " + lot.getAvailableBus());
 
-            ChargeStation chargeStation = lot.getChargeStation();
+            AllAvailableLotsJson.ChargeStation chargeStation = lot.getChargeStation();
 
             if (chargeStation == null) {
                 System.out.println("no chargeStations");
             } else {
-                List<SocketStatus> socketStatusList = chargeStation.getSocketStatusList();
+                List<AllAvailableLotsJson.SocketStatus> socketStatusList = chargeStation.getSocketStatusList();
                 System.out.println("total charge sockets: " + socketStatusList.size());
 
-                for (SocketStatus socketStatus : socketStatusList) {
+                for (AllAvailableLotsJson.SocketStatus socketStatus : socketStatusList) {
                     System.out.println("socketStatus: " + socketStatus.getSpotAbrv() + " " + socketStatus.getSpotStatus());
                 }
             }

@@ -1,12 +1,12 @@
 package com.lukechi.android.opendata.service;
 
-import com.lukechi.android.opendata.api.AllAvailableLotsJson;
-import com.lukechi.android.opendata.api.AllAvailableLotsJson.AllAvailableLot;
-import com.lukechi.android.opendata.api.AllAvailableLotsJson.AllAvailableLotsData;
-import com.lukechi.android.opendata.api.AllAvailableLotsJson.ChargeStation;
-import com.lukechi.android.opendata.api.AllAvailableLotsJson.SocketStatus;
 import com.lukechi.android.opendata.api.TaipeiOpenDataSite;
 import com.lukechi.android.opendata.api.TaipeiParkingApiCall;
+import com.lukechi.android.opendata.model.AllAvailableLotsJson;
+import com.lukechi.android.opendata.model.AllAvailableLotsJson.AllAvailableLot;
+import com.lukechi.android.opendata.model.AllAvailableLotsJson.AllAvailableLotsData;
+import com.lukechi.android.opendata.model.AllAvailableLotsJson.ChargeStation;
+import com.lukechi.android.opendata.model.AllAvailableLotsJson.SocketStatus;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

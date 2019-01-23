@@ -1,4 +1,4 @@
-package com.lukechi.android.opendata.api;
+package com.lukechi.android.opendata.model;
 
 import com.google.gson.annotations.SerializedName;
 

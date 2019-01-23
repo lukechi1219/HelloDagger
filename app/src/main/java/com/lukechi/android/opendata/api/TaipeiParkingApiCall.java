@@ -1,5 +1,6 @@
 package com.lukechi.android.opendata.api;
 
+import com.lukechi.android.opendata.model.AllAvailableLotsJson;
 import retrofit2.Call;
 import retrofit2.http.GET;
 

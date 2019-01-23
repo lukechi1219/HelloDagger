@@ -30,6 +30,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
 
     // ???
 //    configurations.all {
@@ -61,12 +65,28 @@ dependencies {
     compileOnly 'javax.annotation:jsr250-api:1.0'
     implementation 'joda-time:joda-time:2.9.9'
 
+    // GSON body parser
+    implementation 'com.google.code.gson:gson:2.8.2'
+
+    // Retrofit http://square.github.io/retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.4.0'
+    // extra adapter
+    implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+
+    // https://github.com/ReactiveX/RxAndroid
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.10'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
+    // dagger
     implementation "com.google.dagger:dagger:${DAGGER_VERSION}"
     implementation "com.google.dagger:dagger-android:${DAGGER_VERSION}"
     implementation "com.google.dagger:dagger-android-support:${DAGGER_VERSION}"
     kapt "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
     kapt "com.google.dagger:dagger-android-processor:${DAGGER_VERSION}"
 
+    // test
     testImplementation 'junit:junit:4.12'
     testImplementation 'com.google.truth:truth:0.34'
     //

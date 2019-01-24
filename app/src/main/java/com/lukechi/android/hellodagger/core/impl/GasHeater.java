@@ -16,14 +16,12 @@ import javax.inject.Singleton;
 @Singleton
 public class GasHeater implements Heater {
 
-    // Dagger does not support injection into private fields
-    // final inject is better ? compare to FooConfig
-    @Inject
-    @Named("ApplicationContext")
-    Context context;
+    private final Context context;
 
+    // Constructor injection is preferred
     @Inject
-    public GasHeater() {
+    public GasHeater(@Named("ApplicationContext") Context context) {
+        this.context = context;
     }
 
     @Override

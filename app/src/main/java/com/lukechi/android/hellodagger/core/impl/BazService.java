@@ -6,8 +6,6 @@ import javax.inject.Singleton;
 @Singleton
 public class BazService {
 
-    //    @Inject
-//    BarDAO barDAO; // field inject
     private final BarDAO barDAO;
 
     // Constructor injection is preferred

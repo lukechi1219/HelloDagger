@@ -9,9 +9,11 @@ import com.lukechi.android.hellodagger.core.impl.BazService;
 import com.lukechi.android.hellodagger.core.impl.FakeBazService;
 import com.lukechi.android.hellodagger.core.impl.FakeGasHeater;
 import com.lukechi.android.hellodagger.thirdparty.ThirdPartyClass;
+import com.lukechi.android.hellodagger.util.NetworkUtil;
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.OkHttpClient;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -57,5 +59,11 @@ public abstract class TestAppModule {
     @Provides
     static ThirdPartyClass provideThirdParty(Context context) {
         return new ThirdPartyClass(context);
+    }
+
+    @Singleton
+    @Provides
+    public static OkHttpClient provideOkHttpClient() {
+        return NetworkUtil.buildOkHttpClient();
     }
 }

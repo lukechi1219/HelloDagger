@@ -14,13 +14,17 @@ import java.util.List;
 
 public class TaipeiParkingApiClient implements Callback<AllAvailableLotsJson> {
 
+    private final TaipeiOpenDataSite taipeiOpenDataSite;
+
     @Inject
-    public TaipeiParkingApiClient() {
+    public TaipeiParkingApiClient(TaipeiOpenDataSite taipeiOpenDataSite) {
+        this.taipeiOpenDataSite = taipeiOpenDataSite;
     }
 
     public void printAvailableLots() {
 
-        TaipeiParkingApiCall apiCall = TaipeiOpenDataSite.getClient(null).create(TaipeiParkingApiCall.class);
+        // need context? just pass null?
+        TaipeiParkingApiCall apiCall = taipeiOpenDataSite.getClient(null).create(TaipeiParkingApiCall.class);
 
         Call<AllAvailableLotsJson> call = apiCall.tcmsvSyncAllAvailableLots();
 

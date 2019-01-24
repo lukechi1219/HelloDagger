@@ -7,9 +7,11 @@ import com.lukechi.android.hellodagger.HelloApp;
 import com.lukechi.android.hellodagger.core.Heater;
 import com.lukechi.android.hellodagger.core.impl.GasHeater;
 import com.lukechi.android.hellodagger.thirdparty.ThirdPartyClass;
+import com.lukechi.android.hellodagger.util.NetworkUtil;
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.OkHttpClient;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -25,7 +27,7 @@ import javax.inject.Singleton;
  * 提供 被 inject 物件 的實作
  * <p>
  * https://github.com/googlesamples/android-architecture/blob/todo-mvp-dagger/todoapp/app/src/main/java/com/example/android/architecture/blueprints/todoapp/di/ApplicationModule.java
- *
+ * <p>
  * ref: https://stackoverflow.com/questions/46618763/dagger2-how-to-use-provides-and-binds-in-same-module
  *
  * @Binds and @ContributesAndroidInjector methods must be abstract, because they don't have method bodies.
@@ -33,7 +35,7 @@ import javax.inject.Singleton;
  * @Provides methods may be static, which means they can go on abstract classes and Java-8-compiled interfaces,
  * but non-static ("instance") @Provides methods don't work on abstract classes. This is explicitly listed in the Dagger FAQ,
  * under the sections "Why can’t @Binds and instance @Provides methods go in the same module?" and "What do I do instead?".
- *
+ * <p>
  * ref: https://google.github.io/dagger/faq.html#why-cant-binds-and-instance-provides-methods-go-in-the-same-module
  *
  * <p>
@@ -62,7 +64,7 @@ public abstract class AppModule {
     /**
      * 如果是 impl 轉 interface 才要特別寫 provide or bind
      * interface provide( impl ) or interface bind( impl )
-     *
+     * <p>
      * important: if not self new instance, dagger will auto new and handle following dependencies
      */
 //    @Singleton @Provides @NonNull
@@ -89,5 +91,11 @@ public abstract class AppModule {
     @Provides
     static ThirdPartyClass provideThirdParty(Context context) {
         return new ThirdPartyClass(context);
+    }
+
+    @Singleton
+    @Provides
+    public static OkHttpClient provideOkHttpClient() {
+        return NetworkUtil.buildOkHttpClient();
     }
 }

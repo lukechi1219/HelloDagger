@@ -1,12 +1,15 @@
+
 package com.lukechi.android.opendata.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.lukechi.android.opendata.util.DateUtil;
 
+import javax.annotation.Generated;
 import java.sql.Timestamp;
 import java.util.List;
 
+@Generated("net.hexar.json2pojo")
 public class AllParkingDescJson {
 
     @SerializedName("data")
@@ -19,21 +22,22 @@ public class AllParkingDescJson {
     /**
      * inner
      */
-    public class AllParkingDescData {
+    @Generated("net.hexar.json2pojo")
+    public static class AllParkingDescData {
 
         // "Thu Jan 24 05:25:00 CST 2019"
         @SerializedName("UPDATETIME")
-        String updateTimeCST;
+        private String updateTimeCST;
 
         // @Expose is optional and it has two configuration parameters: serialize and deserialize. By default they're set to true.
         @Expose(deserialize = false)
-        String updateTimeGMT;
+        private String updateTimeGMT;
 
         @Expose(serialize = false, deserialize = false)
-        Timestamp updateTimestamp;
+        private Timestamp updateTimestamp;
 
         @SerializedName("park")
-        List<ParkingLotDesc> parkingDescList;
+        private List<ParkingLotDesc> parkingDescList;
 
         // return GMT
         public String getUpdateTime() {
@@ -58,100 +62,75 @@ public class AllParkingDescJson {
             return updateTimeCST;
         }
 
-        public List<ParkingLotDesc> getParkingDescList() {
+        public List<ParkingLotDesc> getDescList() {
             return parkingDescList;
         }
     }
 
-    public class ParkingLotDesc {
+    @Generated("net.hexar.json2pojo")
+    public static class ParkingLotDesc {
 
         @SerializedName("id")
-        String id;
+        private String id;
 
         @SerializedName("area")
-        String area;
+        private String area;
 
         @SerializedName("name")
-        String name;
-        /*
-      "id" : "001",
-      "area" : "信義區",
-      "name" : "府前廣場地下停車場",
-      "type" : "1",
-      "type2" : "2",
-      "summary" : "為地下二層停車場，計有2024個小型車停車格，1137個機車停車位",
-      "address" : "松壽路1號地下",
-      "tel" : "25420001",
-      "payex" : "計時：30元/時(9-18)，夜間10元/時(18-9)月票：全日3,400元，所在里優惠月票3,000元(信義區西村里及興隆里)，日間2,400元(7-19)，夜間1,000元(週一至週五19-8時及週六、日與行政機關放假之紀念日、民俗日)。市府員工全日月票2,900元，市府員工日間月票2,400元(7-22)，機車計次20元(當日當次，隔日另計)，機車月票300元，市府員工機車月票150元。",
-      "serviceTime" : "00:00:00~23:59:59",
-      "tw97x" : "306812.928",
-      "tw97y" : "2769892.95",
-      "totalcar" : 2025,
-      "totalmotor" : 1360,
-      "totalbike" : 31,
-      "totalbus" : 0,
-      "ChargeStation" : {
-        "StationName" : "北市府前停車場",
-        "StationAddr" : "台北市信義區松壽路1號B1",
-        "locLongitude" : 121.56306,
-        "locLatitude" : 25.036037,
-        "openFlag" : "N",
-        "isCharge" : "N",
-        "contactName" : "詹朝清場長",
-        "contactMobilNo" : "0928-228-830",
-        "scoketCount" : 4,
-        "availableCount" : 0,
-        "country" : "台北市",
-        "town" : "信義區"
-      },
-      "Pregnancy_First" : "40",
-      "Handicap_First" : "45",
-      "totallargemotor" : "0",
-      "ChargingStation" : "4",
-      "Taxi_OneHR_Free" : "0",
-      "AED_Equipment" : "0",
-      "CellSignal_Enhancement" : "0",
-      "Accessibility_Elevator" : "0",
-      "Phone_Charge" : "0",
-      "Child_Pickup_Area" : "0",
-      "FareInfo" : {
-        "WorkingDay" : [ {
-          "Period" : "00~09",
-          "Fare" : "10"
-        }, {
-          "Period" : "09~18",
-          "Fare" : "30"
-        }, {
-          "Period" : "18~24",
-          "Fare" : "10"
-        } ],
-        "Holiday" : [ {
-          "Period" : "00~09",
-          "Fare" : "10"
-        }, {
-          "Period" : "09~18",
-          "Fare" : "30"
-        }, {
-          "Period" : "18~24",
-          "Fare" : "10"
-        } ]
-      },
-      "EntranceCoord" : {
-        "EntrancecoordInfo" : [ {
-          "Xcod" : "25.03648987",
-          "Ycod" : "121.5621068",
-          "Address" : "基隆路一段"
-        }, {
-          "Xcod" : "25.036014",
-          "Ycod" : "121.563163",
-          "Address" : "松壽路"
-        }, {
-          "Xcod" : "25.035975",
-          "Ycod" : "121.561532",
-          "Address" : "基隆路一段車行地下道"
-        } ]
-      }
-       */
+        private String name;
+
+        @SerializedName("AED_Equipment")
+        private String mAEDEquipment;
+        @SerializedName("Accessibility_Elevator")
+        private String mAccessibilityElevator;
+        @SerializedName("address")
+        private String mAddress;
+        @SerializedName("CellSignal_Enhancement")
+        private String mCellSignalEnhancement;
+        @SerializedName("ChargeStation")
+        private ChargeStation mChargeStation;
+        @SerializedName("ChargingStation")
+        private String mChargingStation;
+        @SerializedName("Child_Pickup_Area")
+        private String mChildPickupArea;
+        @SerializedName("EntranceCoord")
+        private EntranceCoord mEntranceCoord;
+        @SerializedName("FareInfo")
+        private FareInfo mFareInfo;
+        @SerializedName("Handicap_First")
+        private String mHandicapFirst;
+        @SerializedName("payex")
+        private String mPayex;
+        @SerializedName("Phone_Charge")
+        private String mPhoneCharge;
+        @SerializedName("Pregnancy_First")
+        private String mPregnancyFirst;
+        @SerializedName("serviceTime")
+        private String mServiceTime;
+        @SerializedName("summary")
+        private String mSummary;
+        @SerializedName("Taxi_OneHR_Free")
+        private String mTaxiOneHRFree;
+        @SerializedName("tel")
+        private String mTel;
+        @SerializedName("totalbike")
+        private Long mTotalbike;
+        @SerializedName("totalbus")
+        private Long mTotalbus;
+        @SerializedName("totalcar")
+        private Long mTotalcar;
+        @SerializedName("totallargemotor")
+        private String mTotallargemotor;
+        @SerializedName("totalmotor")
+        private Long mTotalmotor;
+        @SerializedName("tw97x")
+        private String mTw97x;
+        @SerializedName("tw97y")
+        private String mTw97y;
+        @SerializedName("type")
+        private String mType;
+        @SerializedName("type2")
+        private String mType2;
 
         public String getId() {
             return id;
@@ -164,5 +143,277 @@ public class AllParkingDescJson {
         public String getName() {
             return name;
         }
+
+        public String getAEDEquipment() {
+            return mAEDEquipment;
+        }
+
+        public String getAccessibilityElevator() {
+            return mAccessibilityElevator;
+        }
+
+        public String getAddress() {
+            return mAddress;
+        }
+
+        public String getCellSignalEnhancement() {
+            return mCellSignalEnhancement;
+        }
+
+        public ChargeStation getChargeStation() {
+            return mChargeStation;
+        }
+
+        public String getChargingStation() {
+            return mChargingStation;
+        }
+
+        public String getChildPickupArea() {
+            return mChildPickupArea;
+        }
+
+        public EntranceCoord getEntranceCoord() {
+            return mEntranceCoord;
+        }
+
+        public FareInfo getFareInfo() {
+            return mFareInfo;
+        }
+
+        public String getHandicapFirst() {
+            return mHandicapFirst;
+        }
+
+        public String getPayex() {
+            return mPayex;
+        }
+
+        public String getPhoneCharge() {
+            return mPhoneCharge;
+        }
+
+        public String getPregnancyFirst() {
+            return mPregnancyFirst;
+        }
+
+        public String getServiceTime() {
+            return mServiceTime;
+        }
+
+        public String getSummary() {
+            return mSummary;
+        }
+
+        public String getTaxiOneHRFree() {
+            return mTaxiOneHRFree;
+        }
+
+        public String getTel() {
+            return mTel;
+        }
+
+        public Long getTotalbike() {
+            return mTotalbike;
+        }
+
+        public Long getTotalbus() {
+            return mTotalbus;
+        }
+
+        public Long getTotalcar() {
+            return mTotalcar;
+        }
+
+        public String getTotallargemotor() {
+            return mTotallargemotor;
+        }
+
+        public Long getTotalmotor() {
+            return mTotalmotor;
+        }
+
+        public String getTw97x() {
+            return mTw97x;
+        }
+
+        public String getTw97y() {
+            return mTw97y;
+        }
+
+        public String getType() {
+            return mType;
+        }
+
+        public String getType2() {
+            return mType2;
+        }
     }
+
+    @Generated("net.hexar.json2pojo")
+    public static class EntranceCoord {
+
+        @SerializedName("EntrancecoordInfo")
+        private List<EntrancecoordInfo> mEntrancecoordInfo;
+
+        public List<EntrancecoordInfo> getEntrancecoordInfo() {
+            return mEntrancecoordInfo;
+        }
+
+    }
+
+    @Generated("net.hexar.json2pojo")
+    public static class EntrancecoordInfo {
+
+        @SerializedName("Address")
+        private String mAddress;
+        @SerializedName("Xcod")
+        private String mXcod;
+        @SerializedName("Ycod")
+        private String mYcod;
+
+        public String getAddress() {
+            return mAddress;
+        }
+
+        public String getXcod() {
+            return mXcod;
+        }
+
+        public String getYcod() {
+            return mYcod;
+        }
+    }
+
+    @Generated("net.hexar.json2pojo")
+    public static class FareInfo {
+
+        @SerializedName("Holiday")
+        private List<Holiday> mHoliday;
+        @SerializedName("WorkingDay")
+        private List<WorkingDay> mWorkingDay;
+
+        public List<Holiday> getHoliday() {
+            return mHoliday;
+        }
+
+        public List<WorkingDay> getWorkingDay() {
+            return mWorkingDay;
+        }
+
+    }
+
+    @Generated("net.hexar.json2pojo")
+    public static class Holiday {
+
+        @SerializedName("Fare")
+        private String mFare;
+        @SerializedName("Period")
+        private String mPeriod;
+
+        public String getFare() {
+            return mFare;
+        }
+
+        public String getPeriod() {
+            return mPeriod;
+        }
+
+    }
+
+    @Generated("net.hexar.json2pojo")
+    public class WorkingDay {
+
+        @SerializedName("Fare")
+        private String mFare;
+        @SerializedName("Period")
+        private String mPeriod;
+
+        public String getFare() {
+            return mFare;
+        }
+
+        public String getPeriod() {
+            return mPeriod;
+        }
+
+    }
+
+    @Generated("net.hexar.json2pojo")
+    public static class ChargeStation {
+
+        @SerializedName("availableCount")
+        private Long mAvailableCount;
+        @SerializedName("contactMobilNo")
+        private String mContactMobilNo;
+        @SerializedName("contactName")
+        private String mContactName;
+        @SerializedName("country")
+        private String mCountry;
+        @SerializedName("isCharge")
+        private String mIsCharge;
+        @SerializedName("locLatitude")
+        private Double mLocLatitude;
+        @SerializedName("locLongitude")
+        private Double mLocLongitude;
+        @SerializedName("openFlag")
+        private String mOpenFlag;
+        @SerializedName("scoketCount")
+        private Long mScoketCount;
+        @SerializedName("StationAddr")
+        private String mStationAddr;
+        @SerializedName("StationName")
+        private String mStationName;
+        @SerializedName("town")
+        private String mTown;
+
+        public Long getAvailableCount() {
+            return mAvailableCount;
+        }
+
+        public String getContactMobilNo() {
+            return mContactMobilNo;
+        }
+
+        public String getContactName() {
+            return mContactName;
+        }
+
+        public String getCountry() {
+            return mCountry;
+        }
+
+        public String getIsCharge() {
+            return mIsCharge;
+        }
+
+        public Double getLocLatitude() {
+            return mLocLatitude;
+        }
+
+        public Double getLocLongitude() {
+            return mLocLongitude;
+        }
+
+        public String getOpenFlag() {
+            return mOpenFlag;
+        }
+
+        public Long getScoketCount() {
+            return mScoketCount;
+        }
+
+        public String getStationAddr() {
+            return mStationAddr;
+        }
+
+        public String getStationName() {
+            return mStationName;
+        }
+
+        public String getTown() {
+            return mTown;
+        }
+
+    }
+
 }

@@ -23,7 +23,7 @@ public class AllParkingDescJsonObserver extends BaseObserver<AllParkingDescJson>
         System.out.println(data.getUpdateTimeCST());
         System.out.println(data.getUpdateTimestamp());
 
-        List<ParkingLotDesc> list = data.getParkingDescList();
+        List<ParkingLotDesc> list = data.getDescList();
 
 //        ParkingLotDesc desc = list.get(0);
 //        ParkingLotDesc desc = list.get(1);

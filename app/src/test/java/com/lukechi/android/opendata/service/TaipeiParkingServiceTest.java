@@ -1,5 +1,6 @@
 package com.lukechi.android.opendata.service;
 
+import android.content.Context;
 import com.lukechi.android.hellodagger.di.module.AppModule;
 import com.lukechi.android.opendata.api.AllAvailableLotsJsonObserver;
 import com.lukechi.android.opendata.api.TaipeiOpenDataSite;
@@ -17,12 +18,14 @@ public class TaipeiParkingServiceTest {
     @Test
     public void testPrintAvailableLots() throws InterruptedException {
 
-        TaipeiParkingApiClient parkingApiClient = new TaipeiParkingApiClient(
+        Context context = null;
+
+        TaipeiParkingApiClient parkingApiClient = new TaipeiParkingApiClient(context,
                 new TaipeiOpenDataSite(AppModule.provideOkHttpClient()));
 
         parkingApiClient.allAvailableLotsJsonObserver = new AllAvailableLotsJsonObserver();
 
-        parkingApiClient.printAvailableLots();
+        parkingApiClient.SyncAllAvailableLots();
 
         Thread.sleep(3 * 1000);
 

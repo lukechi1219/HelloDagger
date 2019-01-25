@@ -1,5 +1,6 @@
 package com.lukechi.android.opendata.service;
 
+import android.content.Context;
 import com.lukechi.android.opendata.api.AllAvailableLotsJsonObserver;
 import com.lukechi.android.opendata.api.TaipeiOpenDataSite;
 import com.lukechi.android.opendata.api.TaipeiParkingApiCall;
@@ -10,20 +11,20 @@ import javax.inject.Inject;
 
 public class TaipeiParkingApiClient {
 
-    private final TaipeiOpenDataSite taipeiOpenDataSite;
+    private final TaipeiParkingApiCall apiCall;
 
     @Inject
     AllAvailableLotsJsonObserver allAvailableLotsJsonObserver;
 
     @Inject
-    public TaipeiParkingApiClient(TaipeiOpenDataSite taipeiOpenDataSite) {
-        this.taipeiOpenDataSite = taipeiOpenDataSite;
+    public TaipeiParkingApiClient(Context context, TaipeiOpenDataSite taipeiOpenDataSite) {
+        // need context?
+        System.out.println(context);
+
+        this.apiCall = taipeiOpenDataSite.getClient(context).create(TaipeiParkingApiCall.class);
     }
 
-    public void printAvailableLots() {
-
-        // need context? just pass null?
-        TaipeiParkingApiCall apiCall = taipeiOpenDataSite.getClient(null).create(TaipeiParkingApiCall.class);
+    public void SyncAllAvailableLots() {
 
         apiCall.tcmsvSyncAllAvailableLots()
                 .subscribeOn(Schedulers.io()) // ?? Schedulers.io()

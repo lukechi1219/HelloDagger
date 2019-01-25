@@ -3,6 +3,7 @@ package com.lukechi.android.opendata.api;
 import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -37,7 +38,7 @@ public class TaipeiOpenDataSite {
 
             retrofit = new Retrofit.Builder()
                     .addConverterFactory(GsonConverterFactory.create(gson))
-                    //    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .baseUrl(BASE_URL)
                     .client(okHttpClient)
                     .build();

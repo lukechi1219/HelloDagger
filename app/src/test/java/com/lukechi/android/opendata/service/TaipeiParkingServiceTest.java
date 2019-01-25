@@ -3,6 +3,7 @@ package com.lukechi.android.opendata.service;
 import android.content.Context;
 import com.lukechi.android.hellodagger.di.module.AppModule;
 import com.lukechi.android.opendata.api.AllAvailableLotsJsonObserver;
+import com.lukechi.android.opendata.api.AllParkingDescJsonObserver;
 import com.lukechi.android.opendata.api.TaipeiOpenDataSite;
 import com.lukechi.android.testrule.RxImmediateSchedulerRule;
 import org.junit.ClassRule;
@@ -23,9 +24,11 @@ public class TaipeiParkingServiceTest {
         TaipeiOpenDataService todService = new TaipeiOpenDataService(context,
                 new TaipeiOpenDataSite(AppModule.provideOkHttpClient()));
 
+        todService.allParkingDescJsonObserver = new AllParkingDescJsonObserver();
         todService.allAvailableLotsJsonObserver = new AllAvailableLotsJsonObserver();
 
-        todService.SyncAllAvailableLots();
+        todService.SyncAllParkingDesc();
+//        todService.SyncAllAvailableLots();
 
         Thread.sleep(3 * 1000);
 

@@ -20,12 +20,12 @@ public class TaipeiParkingServiceTest {
 
         Context context = null;
 
-        TaipeiParkingApiClient parkingApiClient = new TaipeiParkingApiClient(context,
+        TaipeiOpenDataService todService = new TaipeiOpenDataService(context,
                 new TaipeiOpenDataSite(AppModule.provideOkHttpClient()));
 
-        parkingApiClient.allAvailableLotsJsonObserver = new AllAvailableLotsJsonObserver();
+        todService.allAvailableLotsJsonObserver = new AllAvailableLotsJsonObserver();
 
-        parkingApiClient.SyncAllAvailableLots();
+        todService.SyncAllAvailableLots();
 
         Thread.sleep(3 * 1000);
 

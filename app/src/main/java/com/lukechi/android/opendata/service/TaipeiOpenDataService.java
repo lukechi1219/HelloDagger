@@ -2,26 +2,26 @@ package com.lukechi.android.opendata.service;
 
 import android.content.Context;
 import com.lukechi.android.opendata.api.AllAvailableLotsJsonObserver;
+import com.lukechi.android.opendata.api.TaipeiOpenDataAPI;
 import com.lukechi.android.opendata.api.TaipeiOpenDataSite;
-import com.lukechi.android.opendata.api.TaipeiParkingApiCall;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 import javax.inject.Inject;
 
-public class TaipeiParkingApiClient {
+public class TaipeiOpenDataService {
 
-    private final TaipeiParkingApiCall apiCall;
+    private final TaipeiOpenDataAPI apiCall;
 
     @Inject
     AllAvailableLotsJsonObserver allAvailableLotsJsonObserver;
 
     @Inject
-    public TaipeiParkingApiClient(Context context, TaipeiOpenDataSite taipeiOpenDataSite) {
+    public TaipeiOpenDataService(Context context, TaipeiOpenDataSite taipeiOpenDataSite) {
         // need context?
         System.out.println(context);
 
-        this.apiCall = taipeiOpenDataSite.getClient(context).create(TaipeiParkingApiCall.class);
+        this.apiCall = taipeiOpenDataSite.getClient(context).create(TaipeiOpenDataAPI.class);
     }
 
     public void SyncAllAvailableLots() {

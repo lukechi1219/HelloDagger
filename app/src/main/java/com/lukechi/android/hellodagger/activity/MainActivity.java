@@ -5,7 +5,7 @@ import com.lukechi.android.hellodagger.R;
 import com.lukechi.android.hellodagger.core.Heater;
 import com.lukechi.android.hellodagger.core.impl.BazService;
 import com.lukechi.android.hellodagger.thirdparty.ThirdPartyClass;
-import com.lukechi.android.opendata.service.TaipeiParkingApiClient;
+import com.lukechi.android.opendata.service.TaipeiOpenDataService;
 import dagger.android.support.DaggerAppCompatActivity;
 
 import javax.inject.Inject;
@@ -27,7 +27,7 @@ public class MainActivity extends DaggerAppCompatActivity {
     ThirdPartyClass thirdParty;
 
     @Inject
-    TaipeiParkingApiClient parkingApiClient;
+    TaipeiOpenDataService todService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,6 @@ public class MainActivity extends DaggerAppCompatActivity {
         bazService.work();
         thirdParty.getInfo();
 
-        parkingApiClient.SyncAllAvailableLots();
+        todService.SyncAllAvailableLots();
     }
 }

@@ -9,7 +9,7 @@ import retrofit2.http.GET;
  * <p>
  * Basically, in RxJava2 a Flowable is an Observer that handles back-pressure.
  */
-public interface TaipeiParkingApiCall {
+public interface TaipeiOpenDataAPI {
 
     /*
     blobtisv/GetVD.xml.gz

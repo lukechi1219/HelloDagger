@@ -1,6 +1,8 @@
 package com.lukechi.android.opendata.api;
 
 import com.lukechi.android.opendata.model.AllAvailableLotsJson;
+import com.lukechi.android.opendata.model.AllAvailableLotsJson.AllAvailableLot;
+import com.lukechi.android.opendata.model.AllAvailableLotsJson.AllAvailableLotsData;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
@@ -21,19 +23,22 @@ public class AllAvailableLotsJsonObserver implements Observer<AllAvailableLotsJs
         System.out.println(d);
     }
 
+    /**
+     * TODO: add persist data to database
+     */
     @Override
     public void onNext(AllAvailableLotsJson json) {
 
 //                        if (response.isSuccessful()) {} // ?? if not successful ??
 
-        AllAvailableLotsJson.AllAvailableLotsData data = json.getData();
-        List<AllAvailableLotsJson.AllAvailableLot> lotList = data.getParkingLots();
+        AllAvailableLotsData data = json.getData();
+        List<AllAvailableLot> lotList = data.getParkingLots();
 
 //            AllAvailableLot lot = lotList.get(0);
 //            AllAvailableLot lot = lotList.get(1);
 //            AllAvailableLot lot = lotList.get(2);
 //            AllAvailableLot lot = lotList.get(3);
-        AllAvailableLotsJson.AllAvailableLot lot = lotList.get(4);
+        AllAvailableLot lot = lotList.get(4);
 
         System.out.println(data.getUpdateTime());
         System.out.println(data.getUpdateTimeCST());

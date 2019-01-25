@@ -3,6 +3,7 @@ package com.lukechi.android.hellodagger.di;
 import com.lukechi.android.hellodagger.HelloApp;
 import com.lukechi.android.hellodagger.di.module.ActivityModule;
 import com.lukechi.android.hellodagger.di.module.AppModule;
+import com.lukechi.android.hellodagger.di.module.NetworkModule;
 import dagger.Component;
 import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
@@ -21,6 +22,7 @@ import javax.inject.Singleton;
         AndroidSupportInjectionModule.class,
         AppModule.class,
         ActivityModule.class,
+        NetworkModule.class,
 })
 public interface AppComponent extends AndroidInjector<HelloApp> {
 

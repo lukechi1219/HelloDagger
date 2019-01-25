@@ -7,11 +7,9 @@ import com.lukechi.android.hellodagger.HelloApp;
 import com.lukechi.android.hellodagger.core.Heater;
 import com.lukechi.android.hellodagger.core.impl.GasHeater;
 import com.lukechi.android.hellodagger.thirdparty.ThirdPartyClass;
-import com.lukechi.android.hellodagger.util.NetworkUtil;
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
-import okhttp3.OkHttpClient;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -93,9 +91,4 @@ public abstract class AppModule {
         return new ThirdPartyClass(context);
     }
 
-    @Singleton
-    @Provides
-    public static OkHttpClient provideOkHttpClient() {
-        return NetworkUtil.buildOkHttpClient();
-    }
 }

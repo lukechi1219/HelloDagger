@@ -23,7 +23,7 @@ public class TaipeiOpenDataService {
     @Inject
     public TaipeiOpenDataService(Context context, TaipeiOpenDataSite taipeiOpenDataSite) {
         // need context?
-        System.out.println(context);
+        System.out.println("context: " + context);
 
         this.apiCall = taipeiOpenDataSite.getClient(context).create(TaipeiOpenDataAPI.class);
     }

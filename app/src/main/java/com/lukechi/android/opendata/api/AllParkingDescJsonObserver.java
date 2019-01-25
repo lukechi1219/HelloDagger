@@ -3,24 +3,16 @@ package com.lukechi.android.opendata.api;
 import com.lukechi.android.opendata.model.AllParkingDescJson;
 import com.lukechi.android.opendata.model.AllParkingDescJson.AllParkingDescData;
 import com.lukechi.android.opendata.model.AllParkingDescJson.ParkingLotDesc;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.List;
 
 @Singleton
-public class AllParkingDescJsonObserver implements Observer<AllParkingDescJson> {
+public class AllParkingDescJsonObserver extends BaseObserver<AllParkingDescJson> {
 
     @Inject
     public AllParkingDescJsonObserver() {
-    }
-
-    @Override
-    public void onSubscribe(Disposable d) {
-        System.out.println("onSubscribe");
-        System.out.println(d);
     }
 
     @Override
@@ -40,15 +32,5 @@ public class AllParkingDescJsonObserver implements Observer<AllParkingDescJson> 
         System.out.println(desc.getId());
         System.out.println(desc.getArea());
         System.out.println(desc.getName());
-    }
-
-    @Override
-    public void onError(Throwable t) {
-        t.printStackTrace();
-    }
-
-    @Override
-    public void onComplete() {
-        System.out.println("onComplete");
     }
 }

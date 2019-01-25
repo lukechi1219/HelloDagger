@@ -3,24 +3,16 @@ package com.lukechi.android.opendata.api;
 import com.lukechi.android.opendata.model.AllAvailableLotsJson;
 import com.lukechi.android.opendata.model.AllAvailableLotsJson.AllAvailableLot;
 import com.lukechi.android.opendata.model.AllAvailableLotsJson.AllAvailableLotsData;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.List;
 
 @Singleton
-public class AllAvailableLotsJsonObserver implements Observer<AllAvailableLotsJson> {
+public class AllAvailableLotsJsonObserver extends BaseObserver<AllAvailableLotsJson> {
 
     @Inject
     public AllAvailableLotsJsonObserver() {
-    }
-
-    @Override
-    public void onSubscribe(Disposable d) {
-        System.out.println("onSubscribe");
-        System.out.println(d);
     }
 
     /**
@@ -62,17 +54,5 @@ public class AllAvailableLotsJsonObserver implements Observer<AllAvailableLotsJs
                 System.out.println("socketStatus: " + socketStatus.getSpotAbrv() + " " + socketStatus.getSpotStatus());
             }
         }
-    }
-
-    @Override
-    public void onError(Throwable t) {
-//                        System.out.println(response.errorBody());
-//                        System.out.println(e.getMessage());
-        t.printStackTrace();
-    }
-
-    @Override
-    public void onComplete() {
-        System.out.println("onComplete");
     }
 }

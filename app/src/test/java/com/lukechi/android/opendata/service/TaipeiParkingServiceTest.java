@@ -28,7 +28,7 @@ public class TaipeiParkingServiceTest {
         todService.allAvailableLotsJsonObserver = new AllAvailableLotsJsonObserver();
 
         todService.SyncAllParkingDesc();
-//        todService.SyncAllAvailableLots();
+        todService.SyncAllAvailableLots();
 
         Thread.sleep(3 * 1000);
 

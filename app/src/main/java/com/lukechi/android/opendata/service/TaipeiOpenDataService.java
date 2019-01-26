@@ -1,10 +1,7 @@
 package com.lukechi.android.opendata.service;
 
 import android.content.Context;
-import com.lukechi.android.opendata.api.AllAvailableLotsJsonObserver;
-import com.lukechi.android.opendata.api.AllParkingDescJsonObserver;
-import com.lukechi.android.opendata.api.TaipeiOpenDataAPI;
-import com.lukechi.android.opendata.api.TaipeiOpenDataSite;
+import com.lukechi.android.opendata.api.*;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -13,6 +10,10 @@ import javax.inject.Inject;
 public class TaipeiOpenDataService {
 
     private final TaipeiOpenDataAPI apiCall;
+    private final TaipeiOpenDataAPI apiCallForXml;
+
+    @Inject
+    GetCMSXmlObserver getCMSXmlObserver;
 
     @Inject
     AllParkingDescJsonObserver allParkingDescJsonObserver;
@@ -26,6 +27,15 @@ public class TaipeiOpenDataService {
         System.out.println("context: " + context);
 
         this.apiCall = taipeiOpenDataSite.getClient(context).create(TaipeiOpenDataAPI.class);
+        this.apiCallForXml = taipeiOpenDataSite.getClientForXml(context).create(TaipeiOpenDataAPI.class);
+    }
+
+    public void SyncGetCMS() {
+
+        apiCallForXml.tisvSyncGetCMS()
+                .subscribeOn(Schedulers.io()) // ?? Schedulers.io()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(getCMSXmlObserver);
     }
 
     public void SyncAllParkingDesc() {

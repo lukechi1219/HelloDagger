@@ -17,6 +17,7 @@ public class TaipeiOpenDataSite {
     private final CustomRetrofitFactory customRetrofitFactory;
 
     private static Retrofit retrofit = null;
+    private static Retrofit retrofitForXml = null;
 
     @Inject
     public TaipeiOpenDataSite(CustomRetrofitFactory customRetrofitFactory) {
@@ -29,5 +30,13 @@ public class TaipeiOpenDataSite {
             retrofit = customRetrofitFactory.buildRetrofit(BASE_URL);
         }
         return retrofit;
+    }
+
+    // need context arg ??
+    public synchronized Retrofit getClientForXml(Context context) {
+        if (retrofitForXml == null) {
+            retrofitForXml = customRetrofitFactory.buildRetrofitForXml(BASE_URL);
+        }
+        return retrofitForXml;
     }
 }

@@ -38,6 +38,6 @@ public class MainActivity extends DaggerAppCompatActivity {
         bazService.work();
         thirdParty.getInfo();
 
-        todService.SyncAllAvailableLots();
+        todService.syncAllAvailableLots();
     }
 }

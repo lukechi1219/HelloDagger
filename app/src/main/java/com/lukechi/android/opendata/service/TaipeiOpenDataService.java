@@ -30,7 +30,7 @@ public class TaipeiOpenDataService {
         this.apiCallForXml = taipeiOpenDataSite.getClientForXml(context).create(TaipeiOpenDataAPI.class);
     }
 
-    public void SyncGetCMS() {
+    public void syncGetCMS() {
 
         apiCallForXml.tisvSyncGetCMS()
                 .subscribeOn(Schedulers.io()) // ?? Schedulers.io()
@@ -38,7 +38,7 @@ public class TaipeiOpenDataService {
                 .subscribe(getCMSXmlObserver);
     }
 
-    public void SyncAllParkingDesc() {
+    public void syncAllParkingDesc() {
 
         apiCall.tcmsvSyncAllParkingDesc()
                 .subscribeOn(Schedulers.io()) // ?? Schedulers.io()
@@ -46,7 +46,7 @@ public class TaipeiOpenDataService {
                 .subscribe(allParkingDescJsonObserver);
     }
 
-    public void SyncAllAvailableLots() {
+    public void syncAllAvailableLots() {
 
         apiCall.tcmsvSyncAllAvailableLots()
                 .subscribeOn(Schedulers.io()) // ?? Schedulers.io()

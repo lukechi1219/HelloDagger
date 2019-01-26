@@ -76,6 +76,10 @@ dependencies {
     // here annotationProcessor cant be replaced by kapt
     annotationProcessor 'com.ryanharter.auto.value:auto-value-gson:0.4.5'
 
+    // https://anson-site.blogspot.com/2015/08/androidserializable-vs-parcelable.html
+    compileOnly 'com.ryanharter.auto.value:auto-value-parcel:0.2.6'
+    annotationProcessor 'com.ryanharter.auto.value:auto-value-parcel:0.2.6'
+
     // Retrofit http://square.github.io/retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'

@@ -1,5 +1,6 @@
 package com.lukechi.android.opendata.model;
 
+import android.os.Parcelable;
 import androidx.annotation.Nullable;
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
@@ -12,7 +13,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @AutoValue
-public abstract class AllAvailableLotsJson {
+public abstract class AllAvailableLotsJson implements Parcelable {
 
     @SerializedName("data")
     public abstract AllAvailableLotsData getData();
@@ -25,7 +26,7 @@ public abstract class AllAvailableLotsJson {
      * inner
      */
     @AutoValue
-    public static abstract class AllAvailableLotsData {
+    public static abstract class AllAvailableLotsData implements Parcelable {
 
         // @Expose is optional and it has two configuration parameters: serialize and deserialize. By default they're set to true.
         @Expose(deserialize = false)
@@ -66,7 +67,7 @@ public abstract class AllAvailableLotsJson {
     }
 
     @AutoValue
-    public static abstract class AllAvailableLot {
+    public static abstract class AllAvailableLot implements Parcelable {
 
         @SerializedName("id")
         public abstract String getId();
@@ -90,7 +91,7 @@ public abstract class AllAvailableLotsJson {
     }
 
     @AutoValue
-    public static abstract class ChargeStation {
+    public static abstract class ChargeStation implements Parcelable {
         /**
          * mother fucker... API field Socket spell wrongly to Scoket...
          */
@@ -103,7 +104,7 @@ public abstract class AllAvailableLotsJson {
     }
 
     @AutoValue
-    public static abstract class SocketStatus {
+    public static abstract class SocketStatus implements Parcelable {
 
         @SerializedName("spot_abrv")
         public abstract String getSpotAbrv();

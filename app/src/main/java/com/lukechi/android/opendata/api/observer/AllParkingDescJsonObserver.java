@@ -1,5 +1,6 @@
-package com.lukechi.android.opendata.api;
+package com.lukechi.android.opendata.api.observer;
 
+import com.lukechi.android.opendata.api.BaseObserver;
 import com.lukechi.android.opendata.api.model.AllParkingDescJson;
 import com.lukechi.android.opendata.api.model.AllParkingDescJson.*;
 

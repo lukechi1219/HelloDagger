@@ -1,7 +1,11 @@
 package com.lukechi.android.opendata.service;
 
 import android.content.Context;
-import com.lukechi.android.opendata.api.*;
+import com.lukechi.android.opendata.api.TaipeiOpenDataAPI;
+import com.lukechi.android.opendata.api.TaipeiOpenDataSite;
+import com.lukechi.android.opendata.api.observer.AllAvailableLotsJsonObserver;
+import com.lukechi.android.opendata.api.observer.AllParkingDescJsonObserver;
+import com.lukechi.android.opendata.api.observer.GetCMSXmlObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 

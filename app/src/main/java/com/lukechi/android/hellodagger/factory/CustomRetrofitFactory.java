@@ -28,6 +28,8 @@ public class CustomRetrofitFactory {
         this.gsonConverterFactory = GsonConverterFactory.create(gson);
 
         this.rxJava2CallAdapterFactory = RxJava2CallAdapterFactory.create();
+        // ?? what the difference of createWithScheduler
+//        this.rxJava2CallAdapterFactory = RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io());
 
         this.okHttpClient = okHttpClient;
     }

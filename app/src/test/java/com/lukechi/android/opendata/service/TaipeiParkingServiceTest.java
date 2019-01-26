@@ -5,6 +5,7 @@ import com.lukechi.android.hellodagger.factory.CustomRetrofitFactory;
 import com.lukechi.android.hellodagger.util.NetworkUtil;
 import com.lukechi.android.opendata.api.AllAvailableLotsJsonObserver;
 import com.lukechi.android.opendata.api.AllParkingDescJsonObserver;
+import com.lukechi.android.opendata.api.GetCMSXmlObserver;
 import com.lukechi.android.opendata.api.TaipeiOpenDataSite;
 import com.lukechi.android.testrule.RxImmediateSchedulerRule;
 import org.junit.ClassRule;
@@ -24,11 +25,15 @@ public class TaipeiParkingServiceTest {
 
         TaipeiOpenDataService todService = new TaipeiOpenDataService(context,
                 new TaipeiOpenDataSite(
-                        new CustomRetrofitFactory(NetworkUtil.buildOkHttpClient())));
+                        new CustomRetrofitFactory(
+                                NetworkUtil.buildOkHttpClientForXml(),
+                                NetworkUtil.buildOkHttpClient())));
 
+        todService.getCMSXmlObserver = new GetCMSXmlObserver();
         todService.allParkingDescJsonObserver = new AllParkingDescJsonObserver();
         todService.allAvailableLotsJsonObserver = new AllAvailableLotsJsonObserver();
 
+        todService.SyncGetCMS();
         todService.SyncAllParkingDesc();
         todService.SyncAllAvailableLots();
 

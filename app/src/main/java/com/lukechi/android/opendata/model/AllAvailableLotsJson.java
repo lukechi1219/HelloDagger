@@ -1,5 +1,9 @@
 package com.lukechi.android.opendata.model;
 
+import androidx.annotation.Nullable;
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.lukechi.android.opendata.util.DateUtil;
@@ -7,23 +11,21 @@ import com.lukechi.android.opendata.util.DateUtil;
 import java.sql.Timestamp;
 import java.util.List;
 
-public class AllAvailableLotsJson {
+@AutoValue
+public abstract class AllAvailableLotsJson {
 
     @SerializedName("data")
-    private AllAvailableLotsData data;
+    public abstract AllAvailableLotsData getData();
 
-    public AllAvailableLotsData getData() {
-        return data;
+    public static TypeAdapter<AllAvailableLotsJson> typeAdapter(Gson gson) {
+        return new AutoValue_AllAvailableLotsJson.GsonTypeAdapter(gson);
     }
 
     /**
      * inner
      */
-    public static class AllAvailableLotsData {
-
-        // "Thu Jan 24 05:25:00 CST 2019"
-        @SerializedName("UPDATETIME")
-        String updateTimeCST;
+    @AutoValue
+    public static abstract class AllAvailableLotsData {
 
         // @Expose is optional and it has two configuration parameters: serialize and deserialize. By default they're set to true.
         @Expose(deserialize = false)
@@ -32,21 +34,18 @@ public class AllAvailableLotsJson {
         @Expose(serialize = false, deserialize = false)
         Timestamp updateTimestamp;
 
-        @SerializedName("park")
-        List<AllAvailableLot> parkingLots;
-
         // return GMT
         public String getUpdateTime() {
             if (updateTimeGMT != null) {
                 return updateTimeGMT;
             }
-            updateTimestamp = DateUtil.parseCST(updateTimeCST);
+            updateTimestamp = DateUtil.parseCST(getUpdateTimeCST());
             updateTimeGMT = DateUtil.formatToGMT(updateTimestamp);
 
             if (updateTimeGMT != null) {
                 return updateTimeGMT;
             }
-            return updateTimeCST;
+            return getUpdateTimeCST();
         }
 
         public Timestamp getUpdateTimestamp() {
@@ -54,80 +53,66 @@ public class AllAvailableLotsJson {
         }
 
         // for debug
-        public String getUpdateTimeCST() {
-            return updateTimeCST;
-        }
+        // "Thu Jan 24 05:25:00 CST 2019"
+        @SerializedName("UPDATETIME")
+        public abstract String getUpdateTimeCST();
 
-        public List<AllAvailableLot> getParkingLots() {
-            return parkingLots;
+        @SerializedName("park")
+        public abstract List<AllAvailableLot> getParkingLots();
+
+        public static TypeAdapter<AllAvailableLotsData> typeAdapter(Gson gson) {
+            return new AutoValue_AllAvailableLotsJson_AllAvailableLotsData.GsonTypeAdapter(gson);
         }
     }
 
-    public static class AllAvailableLot {
+    @AutoValue
+    public static abstract class AllAvailableLot {
 
         @SerializedName("id")
-        String id;
+        public abstract String getId();
 
         @SerializedName("availablecar")
-        String availableCar;
+        public abstract String getAvailableCar();
 
         @SerializedName("availablemotor")
-        String availableMotor;
+        public abstract String getAvailableMotor();
 
         @SerializedName("availablebus")
-        String availableBus;
+        public abstract String getAvailableBus();
 
+        @Nullable
         @SerializedName("ChargeStation")
-        ChargeStation chargeStation;
+        public abstract ChargeStation getChargeStation();
 
-        public String getId() {
-            return id;
-        }
-
-        public String getAvailableCar() {
-            return availableCar;
-        }
-
-        public String getAvailableMotor() {
-            return availableMotor;
-        }
-
-        public String getAvailableBus() {
-            return availableBus;
-        }
-
-        public ChargeStation getChargeStation() {
-            return chargeStation;
+        public static TypeAdapter<AllAvailableLot> typeAdapter(Gson gson) {
+            return new AutoValue_AllAvailableLotsJson_AllAvailableLot.GsonTypeAdapter(gson);
         }
     }
 
-    public static class ChargeStation {
-
+    @AutoValue
+    public static abstract class ChargeStation {
         /**
          * mother fucker... API field Socket spell wrongly to Scoket...
          */
         @SerializedName("scoketStatusList")
-        List<SocketStatus> socketStatusList;
+        public abstract List<SocketStatus> getSocketStatusList();
 
-        public List<SocketStatus> getSocketStatusList() {
-            return socketStatusList;
+        public static TypeAdapter<ChargeStation> typeAdapter(Gson gson) {
+            return new AutoValue_AllAvailableLotsJson_ChargeStation.GsonTypeAdapter(gson);
         }
     }
 
-    public static class SocketStatus {
+    @AutoValue
+    public static abstract class SocketStatus {
 
         @SerializedName("spot_abrv")
-        String spotAbrv;
+        public abstract String getSpotAbrv();
 
         @SerializedName("spot_status")
-        String spotStatus;
+        public abstract String getSpotStatus();
 
-        public String getSpotAbrv() {
-            return spotAbrv;
-        }
-
-        public String getSpotStatus() {
-            return spotStatus;
+        public static TypeAdapter<SocketStatus> typeAdapter(Gson gson) {
+            return new AutoValue_AllAvailableLotsJson_SocketStatus.GsonTypeAdapter(gson);
         }
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import com.lukechi.android.hellodagger.factory.AutoValueGsonFactory;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -34,11 +35,16 @@ public class TaipeiOpenDataSite {
 
             Gson gson = new GsonBuilder()
                     .setLenient()
+                    .registerTypeAdapterFactory(AutoValueGsonFactory.create())
                     .create();
 
+            GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create(gson);
+
             retrofit = new Retrofit.Builder()
-                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .addConverterFactory(gsonConverterFactory)
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    // what the difference of createWithScheduler ?
+//                    .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
                     .baseUrl(BASE_URL)
                     .client(okHttpClient)
                     .build();

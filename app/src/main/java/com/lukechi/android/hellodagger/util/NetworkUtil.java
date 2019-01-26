@@ -8,6 +8,17 @@ import okhttp3.Response;
 public class NetworkUtil {
 
     public static OkHttpClient buildOkHttpClient() {
+        return buildClient("application/json");
+    }
+
+    public static OkHttpClient buildOkHttpClientForXml() {
+        return buildClient("application/xml");
+    }
+
+    /**
+     *
+     */
+    private static OkHttpClient buildClient(String forceContentType) {
 
         return new OkHttpClient().newBuilder()
                 .addNetworkInterceptor((Interceptor.Chain chain) -> {
@@ -21,6 +32,12 @@ public class NetworkUtil {
 
                     Response res = chain.proceed(req.newBuilder().build());
 
+//                    System.out.println("----");
+//                    res.headers().names().stream().forEach(name -> {
+//                        System.out.println(name + ": " + res.headers().get(name));
+//                    });
+//                    System.out.println("----");
+
                     String contentType = res.headers().get("Content-Type");
                     System.out.println("contentType: " + contentType);
 
@@ -30,7 +47,7 @@ public class NetworkUtil {
                     System.out.println("contentEncoding: " + contentEncoding);
 
                     // hack for Taipei OpenData
-                    boolean needAddContentTypeJson = (contentType == null || !contentType.equals("application/json"));
+                    boolean needAddContentTypeJson = (contentType == null || !contentType.equals(forceContentType));
                     // hack for Taipei OpenData
                     boolean needAddContentEncodingGzip = (x_ms_meta_contentEncoding != null && x_ms_meta_contentEncoding.contains("gzip")
                             && (contentEncoding == null || !contentEncoding.contains("gzip")));
@@ -41,7 +58,7 @@ public class NetworkUtil {
                     Response.Builder resBuilder = res.newBuilder();
 
                     if (needAddContentTypeJson) {
-                        resBuilder = resBuilder.header("Content-Type", "application/json");
+                        resBuilder = resBuilder.header("Content-Type", forceContentType);
                     }
                     if (needAddContentEncodingGzip) {
                         resBuilder = resBuilder.header("Content-Encoding", "gzip");

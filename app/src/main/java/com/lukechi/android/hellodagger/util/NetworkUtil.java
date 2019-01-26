@@ -1,11 +1,25 @@
 package com.lukechi.android.hellodagger.util;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.lukechi.android.hellodagger.factory.AutoValueGsonFactory;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkUtil {
+
+    public static GsonConverterFactory buildGsonConverterFactory() {
+
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .registerTypeAdapterFactory(AutoValueGsonFactory.create())
+                .create();
+
+        return GsonConverterFactory.create(gson);
+    }
 
     public static OkHttpClient buildOkHttpClient() {
 

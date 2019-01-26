@@ -1,7 +1,9 @@
 package com.lukechi.android.opendata.service;
 
 import android.content.Context;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.lukechi.android.hellodagger.di.module.NetworkModule;
+import com.lukechi.android.hellodagger.util.NetworkUtil;
 import com.lukechi.android.opendata.api.AllAvailableLotsJsonObserver;
 import com.lukechi.android.opendata.api.AllParkingDescJsonObserver;
 import com.lukechi.android.opendata.api.TaipeiOpenDataSite;
@@ -22,7 +24,10 @@ public class TaipeiParkingServiceTest {
         Context context = null;
 
         TaipeiOpenDataService todService = new TaipeiOpenDataService(context,
-                new TaipeiOpenDataSite(NetworkModule.provideOkHttpClient()));
+                new TaipeiOpenDataSite(
+                        NetworkUtil.buildGsonConverterFactory(),
+                        RxJava2CallAdapterFactory.create(),
+                        NetworkModule.provideOkHttpClient()));
 
         todService.allParkingDescJsonObserver = new AllParkingDescJsonObserver();
         todService.allAvailableLotsJsonObserver = new AllAvailableLotsJsonObserver();

@@ -1,8 +1,8 @@
 package com.lukechi.android.opendata.api.observer;
 
 import com.lukechi.android.opendata.api.BaseObserver;
-import com.lukechi.android.opendata.api.model.CmsData;
-import com.lukechi.android.opendata.api.model.GetCMSXml;
+import com.lukechi.android.opendata.api.model.tisv.CmsData;
+import com.lukechi.android.opendata.api.model.tisv.GetCMSXml;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

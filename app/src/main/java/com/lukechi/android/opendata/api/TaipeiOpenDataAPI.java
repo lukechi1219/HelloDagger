@@ -2,7 +2,7 @@ package com.lukechi.android.opendata.api;
 
 import com.lukechi.android.opendata.api.model.AllAvailableLotsJson;
 import com.lukechi.android.opendata.api.model.AllParkingDescJson;
-import com.lukechi.android.opendata.api.model.GetCMSXml;
+import com.lukechi.android.opendata.api.model.tisv.GetCMSXml;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 

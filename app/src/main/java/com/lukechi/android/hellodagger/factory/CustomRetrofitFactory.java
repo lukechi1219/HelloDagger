@@ -32,6 +32,12 @@ public class CustomRetrofitFactory {
                 .registerTypeAdapterFactory(AutoValueGsonFactory.create())
                 .create();
 
+        /**
+         * TODO: TikXml didn't support TypeAdapterFactory? for inner class
+         *
+         * @GsonTypeAdapterFactory
+         * AutoValueGsonAdapterFactoryProcessor
+         */
         TikXml tikXml = new TikXml.Builder()
                 .exceptionOnUnreadXml(false)
                 .build();

@@ -13,7 +13,8 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.lukechi.android.hellodagger"
-        minSdkVersion 23
+        // only support stream() since 24
+        minSdkVersion 24
         targetSdkVersion 28
         multiDexEnabled true
         versionCode 1
@@ -68,6 +69,15 @@ dependencies {
     // GSON body parser
     implementation 'com.google.code.gson:gson:2.8.2'
 
+    // latest is 0.8.15, but annotation only up to 0.8.13 ??
+    implementation 'com.tickaroo.tikxml:annotation:0.8.13'
+    implementation 'com.tickaroo.tikxml:core:0.8.13'
+    implementation 'com.tickaroo.tikxml:retrofit-converter:0.8.13'
+    kapt 'com.tickaroo.tikxml:processor:0.8.13'
+
+    compileOnly 'com.tickaroo.tikxml:auto-value-tikxml:0.8.13'
+    kapt 'com.tickaroo.tikxml:auto-value-tikxml:0.8.13'
+
     compileOnly 'com.google.auto.value:auto-value:1.5.2'
     // here annotationProcessor cant be replaced by kapt
     annotationProcessor 'com.google.auto.value:auto-value:1.5.2'
@@ -78,7 +88,7 @@ dependencies {
 
     // https://anson-site.blogspot.com/2015/08/androidserializable-vs-parcelable.html
     compileOnly 'com.ryanharter.auto.value:auto-value-parcel:0.2.6'
-    annotationProcessor 'com.ryanharter.auto.value:auto-value-parcel:0.2.6'
+    kapt 'com.ryanharter.auto.value:auto-value-parcel:0.2.6'
 
     // Retrofit http://square.github.io/retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'

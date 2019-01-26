@@ -1,4 +1,4 @@
-package com.lukechi.android.opendata.model;
+package com.lukechi.android.opendata.api.model;
 
 import android.os.Parcelable;
 import com.google.auto.value.AutoValue;

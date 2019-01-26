@@ -1,8 +1,8 @@
 package com.lukechi.android.opendata.api;
 
-import com.lukechi.android.opendata.model.AllAvailableLotsJson;
-import com.lukechi.android.opendata.model.AllAvailableLotsJson.AllAvailableLot;
-import com.lukechi.android.opendata.model.AllAvailableLotsJson.AllAvailableLotsData;
+import com.lukechi.android.opendata.api.model.AllAvailableLotsJson;
+import com.lukechi.android.opendata.api.model.AllAvailableLotsJson.AllAvailableLot;
+import com.lukechi.android.opendata.api.model.AllAvailableLotsJson.AllAvailableLotsData;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

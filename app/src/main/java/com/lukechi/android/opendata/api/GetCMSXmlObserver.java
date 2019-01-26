@@ -1,7 +1,7 @@
 package com.lukechi.android.opendata.api;
 
-import com.lukechi.android.opendata.model.CmsData;
-import com.lukechi.android.opendata.model.GetCMSXml;
+import com.lukechi.android.opendata.api.model.CmsData;
+import com.lukechi.android.opendata.api.model.GetCMSXml;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

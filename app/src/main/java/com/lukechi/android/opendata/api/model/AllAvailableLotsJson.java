@@ -1,4 +1,4 @@
-package com.lukechi.android.opendata.model;
+package com.lukechi.android.opendata.api.model;
 
 import android.os.Parcelable;
 import androidx.annotation.Nullable;

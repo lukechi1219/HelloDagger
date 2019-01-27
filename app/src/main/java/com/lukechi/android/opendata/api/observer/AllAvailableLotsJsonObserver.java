@@ -24,8 +24,8 @@ public class AllAvailableLotsJsonObserver extends BaseObserver<AllAvailableLotsJ
 
 //                        if (response.isSuccessful()) {} // ?? if not successful ??
 
-        AllAvailableLotsData data = json.getData();
-        List<AllAvailableLot> lotList = data.getParkingLots();
+        AllAvailableLotsData data = json.data();
+        List<AllAvailableLot> lotList = data.parkingLots();
 
 //            AllAvailableLot lot = lotList.get(0);
 //            AllAvailableLot lot = lotList.get(1);
@@ -33,26 +33,26 @@ public class AllAvailableLotsJsonObserver extends BaseObserver<AllAvailableLotsJ
 //            AllAvailableLot lot = lotList.get(3);
         AllAvailableLot lot = lotList.get(4);
 
-        System.out.println(data.getUpdateTime());
-        System.out.println(data.getUpdateTimeCST());
-        System.out.println(data.getUpdateTimestamp());
+        System.out.println(data.updateTime());
+        System.out.println(data.updateTimeCST());
+        System.out.println(data.updateTimestamp());
         System.out.println("total lots: " + lotList.size());
 
-        System.out.println("lot id: " + lot.getId());
-        System.out.println("lot availableCar: " + lot.getAvailableCar());
-        System.out.println("lot availableMotor: " + lot.getAvailableMotor());
-        System.out.println("lot availableBus: " + lot.getAvailableBus());
+        System.out.println("lot id: " + lot.id());
+        System.out.println("lot availableCar: " + lot.availableCar());
+        System.out.println("lot availableMotor: " + lot.availableMotor());
+        System.out.println("lot availableBus: " + lot.availableBus());
 
-        AllAvailableLotsJson.ChargeStation chargeStation = lot.getChargeStation();
+        AllAvailableLotsJson.ChargeStation chargeStation = lot.chargeStations();
 
         if (chargeStation == null) {
             System.out.println("no chargeStations");
         } else {
-            List<AllAvailableLotsJson.SocketStatus> socketStatusList = chargeStation.getSocketStatusList();
+            List<AllAvailableLotsJson.SocketStatus> socketStatusList = chargeStation.socketStatusList();
             System.out.println("total charge sockets: " + socketStatusList.size());
 
             for (AllAvailableLotsJson.SocketStatus socketStatus : socketStatusList) {
-                System.out.println("socketStatus: " + socketStatus.getSpotAbrv() + " " + socketStatus.getSpotStatus());
+                System.out.println("socketStatus: " + socketStatus.spotAbrv() + " " + socketStatus.spotStatus());
             }
         }
     }

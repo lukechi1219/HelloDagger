@@ -1,6 +1,11 @@
 
 package com.lukechi.android.opendata.api.model;
 
+import android.os.Parcelable;
+import androidx.annotation.Nullable;
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.lukechi.android.opendata.util.DateUtil;
@@ -9,82 +14,70 @@ import javax.annotation.Generated;
 import java.sql.Timestamp;
 import java.util.List;
 
+@AutoValue
 @Generated("net.hexar.json2pojo")
-public class AllParkingDescJson {
+public abstract class AllParkingDescJson implements Parcelable {
 
     @SerializedName("data")
-    private AllParkingDescData data;
+    public abstract AllParkingDescData data();
 
-    public AllParkingDescData getData() {
-        return data;
+    public static TypeAdapter<AllParkingDescJson> typeAdapter(Gson gson) {
+        return new AutoValue_AllParkingDescJson.GsonTypeAdapter(gson);
     }
 
     /**
      * inner
      */
+    @AutoValue
     @Generated("net.hexar.json2pojo")
-    public static class AllParkingDescData {
-
-        // "Thu Jan 24 05:25:00 CST 2019"
-        @SerializedName("UPDATETIME")
-        private String updateTimeCST;
+    public static abstract class AllParkingDescData implements Parcelable {
 
         // @Expose is optional and it has two configuration parameters: serialize and deserialize. By default they're set to true.
         @Expose(deserialize = false)
-        private String updateTimeGMT;
+        String updateTimeGMT;
 
         @Expose(serialize = false, deserialize = false)
-        private Timestamp updateTimestamp;
-
-        @SerializedName("park")
-        private List<ParkingLotDesc> parkingDescList;
+        Timestamp updateTimestamp;
 
         // return GMT
-        public String getUpdateTime() {
+        public String updateTime() {
             if (updateTimeGMT != null) {
                 return updateTimeGMT;
             }
-            updateTimestamp = DateUtil.parseCST(updateTimeCST);
+            updateTimestamp = DateUtil.parseCST(updateTimeCST());
             updateTimeGMT = DateUtil.formatToGMT(updateTimestamp);
 
             if (updateTimeGMT != null) {
                 return updateTimeGMT;
             }
-            return updateTimeCST;
+            return updateTimeCST();
         }
 
-        public Timestamp getUpdateTimestamp() {
+        public Timestamp updateTimestamp() {
             return updateTimestamp;
         }
 
         // for debug
-        public String getUpdateTimeCST() {
-            return updateTimeCST;
-        }
+        // "Thu Jan 24 05:25:00 CST 2019"
+        @SerializedName("UPDATETIME")
+        public abstract String updateTimeCST();
 
-        public List<ParkingLotDesc> getDescList() {
-            return parkingDescList;
+        @SerializedName("park")
+        public abstract List<ParkingLotDesc> descList();
+
+        public static TypeAdapter<AllParkingDescData> typeAdapter(Gson gson) {
+            return new AutoValue_AllParkingDescJson_AllParkingDescData.GsonTypeAdapter(gson);
         }
     }
 
+    @AutoValue
     @Generated("net.hexar.json2pojo")
-    public static class ParkingLotDesc {
-
-        @SerializedName("id")
-        private String id;
-
-        @SerializedName("area")
-        private String area;
-
-        @SerializedName("name")
-        private String name;
+    public static abstract class ParkingLotDesc {
 
         @SerializedName("AED_Equipment")
         private String mAEDEquipment;
         @SerializedName("Accessibility_Elevator")
         private String mAccessibilityElevator;
-        @SerializedName("address")
-        private String mAddress;
         @SerializedName("CellSignal_Enhancement")
         private String mCellSignalEnhancement;
         @SerializedName("ChargeStation")
@@ -93,26 +86,14 @@ public class AllParkingDescJson {
         private String mChargingStation;
         @SerializedName("Child_Pickup_Area")
         private String mChildPickupArea;
-        @SerializedName("EntranceCoord")
-        private EntranceCoord mEntranceCoord;
-        @SerializedName("FareInfo")
-        private FareInfo mFareInfo;
         @SerializedName("Handicap_First")
         private String mHandicapFirst;
-        @SerializedName("payex")
-        private String mPayex;
         @SerializedName("Phone_Charge")
         private String mPhoneCharge;
         @SerializedName("Pregnancy_First")
         private String mPregnancyFirst;
-        @SerializedName("serviceTime")
-        private String mServiceTime;
-        @SerializedName("summary")
-        private String mSummary;
         @SerializedName("Taxi_OneHR_Free")
         private String mTaxiOneHRFree;
-        @SerializedName("tel")
-        private String mTel;
         @SerializedName("totalbike")
         private Long mTotalbike;
         @SerializedName("totalbus")
@@ -123,26 +104,52 @@ public class AllParkingDescJson {
         private String mTotallargemotor;
         @SerializedName("totalmotor")
         private Long mTotalmotor;
+
+        @SerializedName("id")
+        public abstract String id();
+
+        @SerializedName("area")
+        public abstract String area();
+
+        @SerializedName("name")
+        public abstract String name();
+
+        @SerializedName("address")
+        public abstract String address();
+
+        @SerializedName("tel")
+        public abstract String tel();
+
+        @SerializedName("summary")
+        public abstract String summary();
+
+        @SerializedName("payex")
+        public abstract String payExplain();
+
+        @SerializedName("serviceTime")
+        public abstract String serviceTime();
+
+        @Nullable
         @SerializedName("tw97x")
-        private String mTw97x;
+        public abstract String tw97x();
+
+        @Nullable
         @SerializedName("tw97y")
-        private String mTw97y;
+        public abstract String tw97y();
+
         @SerializedName("type")
-        private String mType;
+        public abstract String type();
+
+        @Nullable
         @SerializedName("type2")
-        private String mType2;
+        public abstract String type2();
 
-        public String getId() {
-            return id;
-        }
 
-        public String getArea() {
-            return area;
-        }
+        @SerializedName("FareInfo")
+        public abstract FareInfo fareInfo();
 
-        public String getName() {
-            return name;
-        }
+        @SerializedName("EntranceCoord")
+        public abstract EntranceCoord entranceCoord();
 
         public String getAEDEquipment() {
             return mAEDEquipment;
@@ -150,10 +157,6 @@ public class AllParkingDescJson {
 
         public String getAccessibilityElevator() {
             return mAccessibilityElevator;
-        }
-
-        public String getAddress() {
-            return mAddress;
         }
 
         public String getCellSignalEnhancement() {
@@ -172,21 +175,11 @@ public class AllParkingDescJson {
             return mChildPickupArea;
         }
 
-        public EntranceCoord getEntranceCoord() {
-            return mEntranceCoord;
-        }
-
-        public FareInfo getFareInfo() {
-            return mFareInfo;
-        }
 
         public String getHandicapFirst() {
             return mHandicapFirst;
         }
 
-        public String getPayex() {
-            return mPayex;
-        }
 
         public String getPhoneCharge() {
             return mPhoneCharge;
@@ -196,20 +189,9 @@ public class AllParkingDescJson {
             return mPregnancyFirst;
         }
 
-        public String getServiceTime() {
-            return mServiceTime;
-        }
-
-        public String getSummary() {
-            return mSummary;
-        }
 
         public String getTaxiOneHRFree() {
             return mTaxiOneHRFree;
-        }
-
-        public String getTel() {
-            return mTel;
         }
 
         public Long getTotalbike() {
@@ -232,114 +214,89 @@ public class AllParkingDescJson {
             return mTotalmotor;
         }
 
-        public String getTw97x() {
-            return mTw97x;
-        }
-
-        public String getTw97y() {
-            return mTw97y;
-        }
-
-        public String getType() {
-            return mType;
-        }
-
-        public String getType2() {
-            return mType2;
+        public static TypeAdapter<ParkingLotDesc> typeAdapter(Gson gson) {
+            return new AutoValue_AllParkingDescJson_ParkingLotDesc.GsonTypeAdapter(gson);
         }
     }
 
+    @AutoValue
     @Generated("net.hexar.json2pojo")
-    public static class EntranceCoord {
+    public static abstract class EntranceCoord {
 
         @SerializedName("EntrancecoordInfo")
-        private List<EntrancecoordInfo> mEntrancecoordInfo;
+        public abstract List<EntrancecoordInfo> getEntrancecoordInfo();
 
-        public List<EntrancecoordInfo> getEntrancecoordInfo() {
-            return mEntrancecoordInfo;
+        public static TypeAdapter<EntranceCoord> typeAdapter(Gson gson) {
+            return new AutoValue_AllParkingDescJson_EntranceCoord.GsonTypeAdapter(gson);
         }
-
     }
 
+    @AutoValue
     @Generated("net.hexar.json2pojo")
-    public static class EntrancecoordInfo {
+    public static abstract class EntrancecoordInfo {
 
         @SerializedName("Address")
-        private String mAddress;
+        public abstract String getAddress();
+
         @SerializedName("Xcod")
-        private String mXcod;
+        public abstract String getXcod();
+
         @SerializedName("Ycod")
-        private String mYcod;
+        public abstract String getYcod();
 
-        public String getAddress() {
-            return mAddress;
-        }
-
-        public String getXcod() {
-            return mXcod;
-        }
-
-        public String getYcod() {
-            return mYcod;
+        public static TypeAdapter<EntrancecoordInfo> typeAdapter(Gson gson) {
+            return new AutoValue_AllParkingDescJson_EntrancecoordInfo.GsonTypeAdapter(gson);
         }
     }
 
+    @AutoValue
     @Generated("net.hexar.json2pojo")
-    public static class FareInfo {
+    public static abstract class FareInfo {
 
         @SerializedName("Holiday")
-        private List<Holiday> mHoliday;
+        public abstract List<Holiday> getHoliday();
+
         @SerializedName("WorkingDay")
-        private List<WorkingDay> mWorkingDay;
+        public abstract List<WorkingDay> getWorkingDay();
 
-        public List<Holiday> getHoliday() {
-            return mHoliday;
+        public static TypeAdapter<FareInfo> typeAdapter(Gson gson) {
+            return new AutoValue_AllParkingDescJson_FareInfo.GsonTypeAdapter(gson);
         }
-
-        public List<WorkingDay> getWorkingDay() {
-            return mWorkingDay;
-        }
-
     }
 
+    @AutoValue
     @Generated("net.hexar.json2pojo")
-    public static class Holiday {
+    public static abstract class Holiday {
 
         @SerializedName("Fare")
-        private String mFare;
+        public abstract String getFare();
+
         @SerializedName("Period")
-        private String mPeriod;
+        public abstract String getPeriod();
 
-        public String getFare() {
-            return mFare;
+        public static TypeAdapter<Holiday> typeAdapter(Gson gson) {
+            return new AutoValue_AllParkingDescJson_Holiday.GsonTypeAdapter(gson);
         }
-
-        public String getPeriod() {
-            return mPeriod;
-        }
-
     }
 
+    @AutoValue
     @Generated("net.hexar.json2pojo")
-    public class WorkingDay {
+    public static abstract class WorkingDay {
 
         @SerializedName("Fare")
-        private String mFare;
+        public abstract String getFare();
+
         @SerializedName("Period")
-        private String mPeriod;
+        public abstract String getPeriod();
 
-        public String getFare() {
-            return mFare;
+        public static TypeAdapter<WorkingDay> typeAdapter(Gson gson) {
+            return new AutoValue_AllParkingDescJson_WorkingDay.GsonTypeAdapter(gson);
         }
-
-        public String getPeriod() {
-            return mPeriod;
-        }
-
     }
 
+    @AutoValue
     @Generated("net.hexar.json2pojo")
-    public static class ChargeStation {
+    public static abstract class ChargeStation {
 
         @SerializedName("availableCount")
         private Long mAvailableCount;
@@ -414,6 +371,9 @@ public class AllParkingDescJson {
             return mTown;
         }
 
+        public static TypeAdapter<ChargeStation> typeAdapter(Gson gson) {
+            return new AutoValue_AllParkingDescJson_ChargeStation.GsonTypeAdapter(gson);
+        }
     }
 
 }

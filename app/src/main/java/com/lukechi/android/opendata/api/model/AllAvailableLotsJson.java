@@ -16,7 +16,7 @@ import java.util.List;
 public abstract class AllAvailableLotsJson implements Parcelable {
 
     @SerializedName("data")
-    public abstract AllAvailableLotsData getData();
+    public abstract AllAvailableLotsData data();
 
     public static TypeAdapter<AllAvailableLotsJson> typeAdapter(Gson gson) {
         return new AutoValue_AllAvailableLotsJson.GsonTypeAdapter(gson);
@@ -36,30 +36,30 @@ public abstract class AllAvailableLotsJson implements Parcelable {
         Timestamp updateTimestamp;
 
         // return GMT
-        public String getUpdateTime() {
+        public String updateTime() {
             if (updateTimeGMT != null) {
                 return updateTimeGMT;
             }
-            updateTimestamp = DateUtil.parseCST(getUpdateTimeCST());
+            updateTimestamp = DateUtil.parseCST(updateTimeCST());
             updateTimeGMT = DateUtil.formatToGMT(updateTimestamp);
 
             if (updateTimeGMT != null) {
                 return updateTimeGMT;
             }
-            return getUpdateTimeCST();
+            return updateTimeCST();
         }
 
-        public Timestamp getUpdateTimestamp() {
+        public Timestamp updateTimestamp() {
             return updateTimestamp;
         }
 
         // for debug
         // "Thu Jan 24 05:25:00 CST 2019"
         @SerializedName("UPDATETIME")
-        public abstract String getUpdateTimeCST();
+        public abstract String updateTimeCST();
 
         @SerializedName("park")
-        public abstract List<AllAvailableLot> getParkingLots();
+        public abstract List<AllAvailableLot> parkingLots();
 
         public static TypeAdapter<AllAvailableLotsData> typeAdapter(Gson gson) {
             return new AutoValue_AllAvailableLotsJson_AllAvailableLotsData.GsonTypeAdapter(gson);
@@ -70,20 +70,20 @@ public abstract class AllAvailableLotsJson implements Parcelable {
     public static abstract class AllAvailableLot implements Parcelable {
 
         @SerializedName("id")
-        public abstract String getId();
+        public abstract String id();
 
         @SerializedName("availablecar")
-        public abstract String getAvailableCar();
+        public abstract String availableCar();
 
         @SerializedName("availablemotor")
-        public abstract String getAvailableMotor();
+        public abstract String availableMotor();
 
         @SerializedName("availablebus")
-        public abstract String getAvailableBus();
+        public abstract String availableBus();
 
         @Nullable
         @SerializedName("ChargeStation")
-        public abstract ChargeStation getChargeStation();
+        public abstract ChargeStation chargeStations();
 
         public static TypeAdapter<AllAvailableLot> typeAdapter(Gson gson) {
             return new AutoValue_AllAvailableLotsJson_AllAvailableLot.GsonTypeAdapter(gson);
@@ -96,7 +96,7 @@ public abstract class AllAvailableLotsJson implements Parcelable {
          * mother fucker... API field Socket spell wrongly to Scoket...
          */
         @SerializedName("scoketStatusList")
-        public abstract List<SocketStatus> getSocketStatusList();
+        public abstract List<SocketStatus> socketStatusList();
 
         public static TypeAdapter<ChargeStation> typeAdapter(Gson gson) {
             return new AutoValue_AllAvailableLotsJson_ChargeStation.GsonTypeAdapter(gson);
@@ -107,10 +107,10 @@ public abstract class AllAvailableLotsJson implements Parcelable {
     public static abstract class SocketStatus implements Parcelable {
 
         @SerializedName("spot_abrv")
-        public abstract String getSpotAbrv();
+        public abstract String spotAbrv();
 
         @SerializedName("spot_status")
-        public abstract String getSpotStatus();
+        public abstract String spotStatus();
 
         public static TypeAdapter<SocketStatus> typeAdapter(Gson gson) {
             return new AutoValue_AllAvailableLotsJson_SocketStatus.GsonTypeAdapter(gson);

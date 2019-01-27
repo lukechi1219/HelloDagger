@@ -7,6 +7,7 @@ import com.lukechi.android.opendata.api.TaipeiOpenDataSite;
 import com.lukechi.android.opendata.api.observer.AllAvailableLotsJsonObserver;
 import com.lukechi.android.opendata.api.observer.AllParkingDescJsonObserver;
 import com.lukechi.android.opendata.api.observer.GetCMSXmlObserver;
+import com.lukechi.android.opendata.database.entity.ParkingLot;
 import com.lukechi.android.testrule.RxImmediateSchedulerRule;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -36,6 +37,8 @@ public class TaipeiParkingServiceTest {
         todService.syncGetCMS();
         todService.syncAllParkingDesc();
         todService.syncAllAvailableLots();
+
+        ParkingLot parkingLot = ParkingLot.builder().id(1).lid(1).area("here").name("name").build();
 
         Thread.sleep(3 * 1000);
 

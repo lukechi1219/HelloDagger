@@ -1,10 +1,13 @@
 package com.lukechi.android.hellodagger.activity;
 
 import android.os.Bundle;
+import androidx.room.Room;
 import com.lukechi.android.hellodagger.R;
 import com.lukechi.android.hellodagger.core.Heater;
 import com.lukechi.android.hellodagger.core.impl.BazService;
 import com.lukechi.android.hellodagger.thirdparty.ThirdPartyClass;
+import com.lukechi.android.opendata.database.AppDatabase;
+import com.lukechi.android.opendata.database.entity.ParkingLot;
 import com.lukechi.android.opendata.service.TaipeiOpenDataService;
 import dagger.android.support.DaggerAppCompatActivity;
 
@@ -39,5 +42,13 @@ public class MainActivity extends DaggerAppCompatActivity {
         thirdParty.getInfo();
 
         todService.syncAllAvailableLots();
+
+        AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "app-database").build();
+
+        ParkingLot[] parkingLotsArray = db.parkingLotDao().loadAllParkingLot();
+
+        for (ParkingLot parkingLot : parkingLotsArray) {
+            System.out.println(parkingLot.name());
+        }
     }
 }

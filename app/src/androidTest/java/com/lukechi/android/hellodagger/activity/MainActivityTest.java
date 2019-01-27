@@ -2,10 +2,10 @@ package com.lukechi.android.hellodagger.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import androidx.test.InstrumentationRegistry;
+import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.SmallTest;
 import androidx.test.rule.ActivityTestRule;
-import androidx.test.runner.AndroidJUnit4;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +26,8 @@ public class MainActivityTest {
     public void testLaunchActivity() {
 
         // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getTargetContext();
+//        Context appContext = InstrumentationRegistry.getTargetContext();
+        Context appContext = ApplicationProvider.getApplicationContext();
 
         assertEquals("com.lukechi.android.hellodagger", appContext.getPackageName());
 

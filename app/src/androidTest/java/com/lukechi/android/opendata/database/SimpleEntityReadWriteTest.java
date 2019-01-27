@@ -2,15 +2,16 @@ package com.lukechi.android.opendata.database;
 
 import android.content.Context;
 import androidx.room.Room;
-import androidx.test.InstrumentationRegistry;
-import androidx.test.runner.AndroidJUnit4;
+import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.lukechi.android.opendata.database.dao.ParkingLotDao;
+import com.lukechi.android.opendata.database.entity.ParkingLot;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.io.IOException;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
 public class SimpleEntityReadWriteTest {
@@ -21,29 +22,49 @@ public class SimpleEntityReadWriteTest {
     @Before
     public void createDb() {
         // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getTargetContext();
+        Context appContext = ApplicationProvider.getApplicationContext();
 
-//        Context context = ApplicationProvider.getApplicationContext();
         mDb = Room.inMemoryDatabaseBuilder(appContext, AppDatabase.class).build();
         mParkingLotDao = mDb.parkingLotDao();
     }
 
     @After
-    public void closeDb() throws IOException {
+    public void closeDb() {
         mDb.close();
     }
 
     @Test
-    public void writeUserAndReadInList() throws Exception {
+    public void writeUserAndReadInList() {
 
         System.out.println("write test");
 
-        mParkingLotDao.loadAllParkingLot();
-
 //        User user = TestUtil.createUser(3);
 //        user.setName("george");
-//        mUserDao.insert(user);
-//        List<User> byName = mUserDao.findUsersByName("george");
-//        assertThat(byName.get(0), equalTo(user));
+
+//        ParkingLot parkingLot = ParkingLot.builder().id(1).lid(1).area("area").name("name").build();
+        ParkingLot parkingLotNew = ParkingLot.create(1, 2, "area", "name");
+        assertEquals(1, parkingLotNew.id());
+        assertEquals(2, parkingLotNew.lid());
+        assertEquals("area", parkingLotNew.area());
+        assertEquals("name", parkingLotNew.name());
+
+        // OnConflictStrategy.REPLACE
+        mParkingLotDao.insertParkingLots(parkingLotNew);
+
+        ParkingLot[] parkingLotsArray = mParkingLotDao.loadAllParkingLot();
+
+        assertEquals(1, parkingLotsArray.length);
+
+        for (ParkingLot parkingLot : parkingLotsArray) {
+            System.out.println(parkingLot.id());
+            System.out.println(parkingLot.lid());
+            System.out.println(parkingLot.area());
+            System.out.println(parkingLot.name());
+
+            assertEquals(1, parkingLot.id());
+            assertEquals(2, parkingLot.lid());
+            assertEquals("area", parkingLot.area());
+            assertEquals("name", parkingLot.name());
+        }
     }
 }

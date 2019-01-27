@@ -39,9 +39,7 @@ android {
 
 dependencies {
     def DAGGER_VERSION = '2.17'
-    def MOCKITO_VERSION = '2.23.4'
-    def TEST_SUPPORT_VERSION = '1.1.0-alpha4'
-    def ESPRESSO_VERSION = '3.1.0-alpha4'
+    def ESPRESSO_VERSION = '3.1.1'
     def room_version = '2.1.0-alpha04'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -68,7 +66,7 @@ dependencies {
     implementation 'joda-time:joda-time:2.9.9'
 
     // dagger
-    implementation "com.google.dagger:dagger:${DAGGER_VERSION}"
+    implementation "com.google.dagger:dagger:2.17"
     implementation "com.google.dagger:dagger-android:${DAGGER_VERSION}"
     implementation "com.google.dagger:dagger-android-support:${DAGGER_VERSION}"
     kapt "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
@@ -77,7 +75,7 @@ dependencies {
     /*
      * room
      */
-    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-runtime:2.1.0-alpha04"
     // annotationProcessor
     kapt "androidx.room:room-compiler:$room_version" // use kapt for Kotlin
     implementation "androidx.room:room-rxjava2:$room_version" // optional
@@ -136,7 +134,7 @@ dependencies {
 
     // test
     testImplementation 'junit:junit:4.12'
-    testImplementation 'com.google.truth:truth:0.34'
+    testImplementation 'com.google.truth:truth:0.42'
     //
     testImplementation "com.google.dagger:dagger:${DAGGER_VERSION}"
     testImplementation "com.google.dagger:dagger-android:${DAGGER_VERSION}"
@@ -151,11 +149,28 @@ dependencies {
 //    testImplementation 'com.github.fabioCollini.daggermock:daggermock:0.8.4'
 //    androidTestImplementation 'com.github.fabioCollini.daggermock:daggermock:0.8.4'
     //
-    testImplementation "org.mockito:mockito-core:${MOCKITO_VERSION}"
-    androidTestImplementation "org.mockito:mockito-android:${MOCKITO_VERSION}"
+    testImplementation "org.mockito:mockito-core:2.23.4"
+    androidTestImplementation "org.mockito:mockito-android:2.23.4"
     //
-    androidTestImplementation "androidx.test:runner:${TEST_SUPPORT_VERSION}"
-    androidTestImplementation "androidx.test:rules:${TEST_SUPPORT_VERSION}"
-    androidTestImplementation "androidx.test.espresso:espresso-core:${ESPRESSO_VERSION}"
-    androidTestImplementation "androidx.test.espresso:espresso-intents:${ESPRESSO_VERSION}"
+    // https://developer.android.com/training/testing/set-up-project#gradle-dependencies
+    // Core library
+    androidTestImplementation 'androidx.test:core:1.1.0'
+    // AndroidJUnitRunner and JUnit Rules
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test:rules:1.1.1'
+    // Assertions
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.ext:truth:1.1.0'
+    // Espresso dependencies
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$ESPRESSO_VERSION"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$ESPRESSO_VERSION"
+    androidTestImplementation "androidx.test.espresso:espresso-accessibility:$ESPRESSO_VERSION"
+    androidTestImplementation "androidx.test.espresso:espresso-web:$ESPRESSO_VERSION"
+    androidTestImplementation "androidx.test.espresso.idling:idling-concurrent:$ESPRESSO_VERSION"
+    // The following Espresso dependency can be either "implementation"
+    // or "androidTestImplementation", depending on whether you want the
+    // dependency to appear on your APK's compile classpath or the test APK
+    // classpath.
+    androidTestImplementation "androidx.test.espresso:espresso-idling-resource:$ESPRESSO_VERSION"
 }

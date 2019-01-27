@@ -1,20 +1,20 @@
 package com.lukechi.android.hellodagger.factory;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import com.squareup.moshi.Moshi;
 import com.tickaroo.tikxml.TikXml;
 import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.moshi.MoshiConverterFactory;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
 public class CustomRetrofitFactory {
 
-    private final GsonConverterFactory gsonConverterFactory;
+    //    private final GsonConverterFactory gsonConverterFactory;
+    private final MoshiConverterFactory moshiConverterFactory;
     private final TikXmlConverterFactory tikXmlConverterFactory;
 
     private final RxJava2CallAdapterFactory rxJava2CallAdapterFactory;
@@ -27,10 +27,14 @@ public class CustomRetrofitFactory {
     public CustomRetrofitFactory(@Named("OkHttpClientForXml") OkHttpClient okHttpClientForXml,
                                  OkHttpClient okHttpClient) {
 
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .registerTypeAdapterFactory(AutoValueGsonFactory.create())
-                .create();
+//        Gson gson = new GsonBuilder()
+//                .setLenient()
+//                .registerTypeAdapterFactory(AutoValueGsonFactory.create())
+//                .create();
+
+        Moshi moshi = new Moshi.Builder()
+                .add(AutoValueMoshiFactory.create())
+                .build();
 
         /**
          * TODO: TikXml didn't support TypeAdapterFactory? for inner class
@@ -42,7 +46,8 @@ public class CustomRetrofitFactory {
                 .exceptionOnUnreadXml(false)
                 .build();
 
-        this.gsonConverterFactory = GsonConverterFactory.create(gson);
+//        this.gsonConverterFactory = GsonConverterFactory.create(gson);
+        this.moshiConverterFactory = MoshiConverterFactory.create(moshi);
         this.tikXmlConverterFactory = TikXmlConverterFactory.create(tikXml);
 
         this.rxJava2CallAdapterFactory = RxJava2CallAdapterFactory.create();
@@ -54,12 +59,13 @@ public class CustomRetrofitFactory {
     }
 
     /**
-     * use gsonConverterFactory & okHttpClient
+     * use moshiConverterFactory & okHttpClient
      */
     public Retrofit buildRetrofit(String baseUrl) {
 
         return new Retrofit.Builder()
-                .addConverterFactory(gsonConverterFactory)
+//                .addConverterFactory(gsonConverterFactory)
+                .addConverterFactory(moshiConverterFactory)
                 .addCallAdapterFactory(rxJava2CallAdapterFactory)
                 .client(okHttpClient)
                 .baseUrl(baseUrl)

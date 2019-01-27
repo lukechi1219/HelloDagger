@@ -3,11 +3,10 @@ package com.lukechi.android.opendata.api.model;
 import android.os.Parcelable;
 import androidx.annotation.Nullable;
 import com.google.auto.value.AutoValue;
-import com.google.gson.Gson;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 import com.lukechi.android.opendata.util.DateUtil;
+import com.squareup.moshi.Json;
+import com.squareup.moshi.JsonAdapter;
+import com.squareup.moshi.Moshi;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -15,11 +14,11 @@ import java.util.List;
 @AutoValue
 public abstract class AllAvailableLotsJson implements Parcelable {
 
-    @SerializedName("data")
+    @Json(name = "data")
     public abstract AllAvailableLotsData data();
 
-    public static TypeAdapter<AllAvailableLotsJson> typeAdapter(Gson gson) {
-        return new AutoValue_AllAvailableLotsJson.GsonTypeAdapter(gson);
+    public static JsonAdapter<AllAvailableLotsJson> typeAdapter(Moshi moshi) {
+        return new AutoValue_AllAvailableLotsJson.MoshiJsonAdapter(moshi);
     }
 
     /**
@@ -29,11 +28,11 @@ public abstract class AllAvailableLotsJson implements Parcelable {
     public static abstract class AllAvailableLotsData implements Parcelable {
 
         // @Expose is optional and it has two configuration parameters: serialize and deserialize. By default they're set to true.
-        @Expose(deserialize = false)
-        String updateTimeGMT;
+//        @Expose(deserialize = false)
+        transient String updateTimeGMT;
 
-        @Expose(serialize = false, deserialize = false)
-        Timestamp updateTimestamp;
+        //        @Expose(serialize = false, deserialize = false)
+        transient Timestamp updateTimestamp;
 
         // return GMT
         public String updateTime() {
@@ -55,38 +54,38 @@ public abstract class AllAvailableLotsJson implements Parcelable {
 
         // for debug
         // "Thu Jan 24 05:25:00 CST 2019"
-        @SerializedName("UPDATETIME")
+        @Json(name = "UPDATETIME")
         public abstract String updateTimeCST();
 
-        @SerializedName("park")
+        @Json(name = "park")
         public abstract List<AllAvailableLot> parkingLots();
 
-        public static TypeAdapter<AllAvailableLotsData> typeAdapter(Gson gson) {
-            return new AutoValue_AllAvailableLotsJson_AllAvailableLotsData.GsonTypeAdapter(gson);
+        public static JsonAdapter<AllAvailableLotsData> typeAdapter(Moshi moshi) {
+            return new AutoValue_AllAvailableLotsJson_AllAvailableLotsData.MoshiJsonAdapter(moshi);
         }
     }
 
     @AutoValue
     public static abstract class AllAvailableLot implements Parcelable {
 
-        @SerializedName("id")
+        @Json(name = "id")
         public abstract String id();
 
-        @SerializedName("availablecar")
+        @Json(name = "availablecar")
         public abstract String availableCar();
 
-        @SerializedName("availablemotor")
+        @Json(name = "availablemotor")
         public abstract String availableMotor();
 
-        @SerializedName("availablebus")
+        @Json(name = "availablebus")
         public abstract String availableBus();
 
         @Nullable
-        @SerializedName("ChargeStation")
+        @Json(name = "ChargeStation")
         public abstract ChargeStation chargeStations();
 
-        public static TypeAdapter<AllAvailableLot> typeAdapter(Gson gson) {
-            return new AutoValue_AllAvailableLotsJson_AllAvailableLot.GsonTypeAdapter(gson);
+        public static JsonAdapter<AllAvailableLot> typeAdapter(Moshi moshi) {
+            return new AutoValue_AllAvailableLotsJson_AllAvailableLot.MoshiJsonAdapter(moshi);
         }
     }
 
@@ -95,25 +94,25 @@ public abstract class AllAvailableLotsJson implements Parcelable {
         /**
          * mother fucker... API field Socket spell wrongly to Scoket...
          */
-        @SerializedName("scoketStatusList")
+        @Json(name = "scoketStatusList")
         public abstract List<SocketStatus> socketStatusList();
 
-        public static TypeAdapter<ChargeStation> typeAdapter(Gson gson) {
-            return new AutoValue_AllAvailableLotsJson_ChargeStation.GsonTypeAdapter(gson);
+        public static JsonAdapter<ChargeStation> typeAdapter(Moshi moshi) {
+            return new AutoValue_AllAvailableLotsJson_ChargeStation.MoshiJsonAdapter(moshi);
         }
     }
 
     @AutoValue
     public static abstract class SocketStatus implements Parcelable {
 
-        @SerializedName("spot_abrv")
+        @Json(name = "spot_abrv")
         public abstract String spotAbrv();
 
-        @SerializedName("spot_status")
+        @Json(name = "spot_status")
         public abstract String spotStatus();
 
-        public static TypeAdapter<SocketStatus> typeAdapter(Gson gson) {
-            return new AutoValue_AllAvailableLotsJson_SocketStatus.GsonTypeAdapter(gson);
+        public static JsonAdapter<SocketStatus> typeAdapter(Moshi moshi) {
+            return new AutoValue_AllAvailableLotsJson_SocketStatus.MoshiJsonAdapter(moshi);
         }
     }
 }

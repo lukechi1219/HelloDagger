@@ -8,7 +8,8 @@ public abstract class BaseObserver<T> implements Observer<T> {
     @Override
     public void onSubscribe(Disposable d) {
         System.out.println("onSubscribe");
-        System.out.println(d);
+        System.out.println("Disposable " + d);
+        System.out.println("----");
     }
 
     @Override
@@ -21,5 +22,6 @@ public abstract class BaseObserver<T> implements Observer<T> {
     @Override
     public void onComplete() {
         System.out.println("onComplete");
+        System.out.println("----");
     }
 }

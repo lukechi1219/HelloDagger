@@ -4,11 +4,10 @@ package com.lukechi.android.opendata.api.model;
 import android.os.Parcelable;
 import androidx.annotation.Nullable;
 import com.google.auto.value.AutoValue;
-import com.google.gson.Gson;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 import com.lukechi.android.opendata.util.DateUtil;
+import com.squareup.moshi.Json;
+import com.squareup.moshi.JsonAdapter;
+import com.squareup.moshi.Moshi;
 
 import javax.annotation.Generated;
 import java.sql.Timestamp;
@@ -18,11 +17,11 @@ import java.util.List;
 @Generated("net.hexar.json2pojo")
 public abstract class AllParkingDescJson implements Parcelable {
 
-    @SerializedName("data")
+    @Json(name = "data")
     public abstract AllParkingDescData data();
 
-    public static TypeAdapter<AllParkingDescJson> typeAdapter(Gson gson) {
-        return new AutoValue_AllParkingDescJson.GsonTypeAdapter(gson);
+    public static JsonAdapter<AllParkingDescJson> typeAdapter(Moshi moshi) {
+        return new AutoValue_AllParkingDescJson.MoshiJsonAdapter(moshi);
     }
 
     /**
@@ -33,11 +32,11 @@ public abstract class AllParkingDescJson implements Parcelable {
     public static abstract class AllParkingDescData implements Parcelable {
 
         // @Expose is optional and it has two configuration parameters: serialize and deserialize. By default they're set to true.
-        @Expose(deserialize = false)
-        String updateTimeGMT;
+//        @Expose(deserialize = false)
+        transient String updateTimeGMT;
 
-        @Expose(serialize = false, deserialize = false)
-        Timestamp updateTimestamp;
+        //        @Expose(serialize = false, deserialize = false)
+        transient Timestamp updateTimestamp;
 
         // return GMT
         public String updateTime() {
@@ -59,14 +58,14 @@ public abstract class AllParkingDescJson implements Parcelable {
 
         // for debug
         // "Thu Jan 24 05:25:00 CST 2019"
-        @SerializedName("UPDATETIME")
+        @Json(name = "UPDATETIME")
         public abstract String updateTimeCST();
 
-        @SerializedName("park")
+        @Json(name = "park")
         public abstract List<ParkingLotDesc> descList();
 
-        public static TypeAdapter<AllParkingDescData> typeAdapter(Gson gson) {
-            return new AutoValue_AllParkingDescJson_AllParkingDescData.GsonTypeAdapter(gson);
+        public static JsonAdapter<AllParkingDescData> typeAdapter(Moshi moshi) {
+            return new AutoValue_AllParkingDescJson_AllParkingDescData.MoshiJsonAdapter(moshi);
         }
     }
 
@@ -74,81 +73,81 @@ public abstract class AllParkingDescJson implements Parcelable {
     @Generated("net.hexar.json2pojo")
     public static abstract class ParkingLotDesc {
 
-        @SerializedName("AED_Equipment")
+        @Json(name = "AED_Equipment")
         private String mAEDEquipment;
-        @SerializedName("Accessibility_Elevator")
+        @Json(name = "Accessibility_Elevator")
         private String mAccessibilityElevator;
-        @SerializedName("CellSignal_Enhancement")
+        @Json(name = "CellSignal_Enhancement")
         private String mCellSignalEnhancement;
-        @SerializedName("ChargeStation")
+        @Json(name = "ChargeStation")
         private ChargeStation mChargeStation;
-        @SerializedName("ChargingStation")
+        @Json(name = "ChargingStation")
         private String mChargingStation;
-        @SerializedName("Child_Pickup_Area")
+        @Json(name = "Child_Pickup_Area")
         private String mChildPickupArea;
-        @SerializedName("Handicap_First")
+        @Json(name = "Handicap_First")
         private String mHandicapFirst;
-        @SerializedName("Phone_Charge")
+        @Json(name = "Phone_Charge")
         private String mPhoneCharge;
-        @SerializedName("Pregnancy_First")
+        @Json(name = "Pregnancy_First")
         private String mPregnancyFirst;
-        @SerializedName("Taxi_OneHR_Free")
+        @Json(name = "Taxi_OneHR_Free")
         private String mTaxiOneHRFree;
-        @SerializedName("totalbike")
+        @Json(name = "totalbike")
         private Long mTotalbike;
-        @SerializedName("totalbus")
+        @Json(name = "totalbus")
         private Long mTotalbus;
-        @SerializedName("totalcar")
+        @Json(name = "totalcar")
         private Long mTotalcar;
-        @SerializedName("totallargemotor")
+        @Json(name = "totallargemotor")
         private String mTotallargemotor;
-        @SerializedName("totalmotor")
+        @Json(name = "totalmotor")
         private Long mTotalmotor;
 
-        @SerializedName("id")
+        @Json(name = "id")
         public abstract String id();
 
-        @SerializedName("area")
+        @Json(name = "area")
         public abstract String area();
 
-        @SerializedName("name")
+        @Json(name = "name")
         public abstract String name();
 
-        @SerializedName("address")
+        @Json(name = "address")
         public abstract String address();
 
-        @SerializedName("tel")
+        @Json(name = "tel")
         public abstract String tel();
 
-        @SerializedName("summary")
+        @Json(name = "summary")
         public abstract String summary();
 
-        @SerializedName("payex")
+        @Json(name = "payex")
         public abstract String payExplain();
 
-        @SerializedName("serviceTime")
+        @Json(name = "serviceTime")
         public abstract String serviceTime();
 
         @Nullable
-        @SerializedName("tw97x")
+        @Json(name = "tw97x")
         public abstract String tw97x();
 
         @Nullable
-        @SerializedName("tw97y")
+        @Json(name = "tw97y")
         public abstract String tw97y();
 
-        @SerializedName("type")
+        @Json(name = "type")
         public abstract String type();
 
         @Nullable
-        @SerializedName("type2")
+        @Json(name = "type2")
         public abstract String type2();
 
 
-        @SerializedName("FareInfo")
+        @Json(name = "FareInfo")
         public abstract FareInfo fareInfo();
 
-        @SerializedName("EntranceCoord")
+        @Json(name = "EntranceCoord")
         public abstract EntranceCoord entranceCoord();
 
         public String getAEDEquipment() {
@@ -214,8 +213,8 @@ public abstract class AllParkingDescJson implements Parcelable {
             return mTotalmotor;
         }
 
-        public static TypeAdapter<ParkingLotDesc> typeAdapter(Gson gson) {
-            return new AutoValue_AllParkingDescJson_ParkingLotDesc.GsonTypeAdapter(gson);
+        public static JsonAdapter<ParkingLotDesc> typeAdapter(Moshi moshi) {
+            return new AutoValue_AllParkingDescJson_ParkingLotDesc.MoshiJsonAdapter(moshi);
         }
     }
 
@@ -223,11 +222,12 @@ public abstract class AllParkingDescJson implements Parcelable {
     @Generated("net.hexar.json2pojo")
     public static abstract class EntranceCoord {
 
-        @SerializedName("EntrancecoordInfo")
+        @Nullable
+        @Json(name = "EntrancecoordInfo")
         public abstract List<EntrancecoordInfo> getEntrancecoordInfo();
 
-        public static TypeAdapter<EntranceCoord> typeAdapter(Gson gson) {
-            return new AutoValue_AllParkingDescJson_EntranceCoord.GsonTypeAdapter(gson);
+        public static JsonAdapter<EntranceCoord> typeAdapter(Moshi moshi) {
+            return new AutoValue_AllParkingDescJson_EntranceCoord.MoshiJsonAdapter(moshi);
         }
     }
 
@@ -235,17 +235,17 @@ public abstract class AllParkingDescJson implements Parcelable {
     @Generated("net.hexar.json2pojo")
     public static abstract class EntrancecoordInfo {
 
-        @SerializedName("Address")
+        @Json(name = "Address")
         public abstract String getAddress();
 
-        @SerializedName("Xcod")
+        @Json(name = "Xcod")
         public abstract String getXcod();
 
-        @SerializedName("Ycod")
+        @Json(name = "Ycod")
         public abstract String getYcod();
 
-        public static TypeAdapter<EntrancecoordInfo> typeAdapter(Gson gson) {
-            return new AutoValue_AllParkingDescJson_EntrancecoordInfo.GsonTypeAdapter(gson);
+        public static JsonAdapter<EntrancecoordInfo> typeAdapter(Moshi moshi) {
+            return new AutoValue_AllParkingDescJson_EntrancecoordInfo.MoshiJsonAdapter(moshi);
         }
     }
 
@@ -253,14 +253,16 @@ public abstract class AllParkingDescJson implements Parcelable {
     @Generated("net.hexar.json2pojo")
     public static abstract class FareInfo {
 
-        @SerializedName("Holiday")
+        @Nullable
+        @Json(name = "Holiday")
         public abstract List<Holiday> getHoliday();
 
-        @SerializedName("WorkingDay")
+        @Nullable
+        @Json(name = "WorkingDay")
         public abstract List<WorkingDay> getWorkingDay();
 
-        public static TypeAdapter<FareInfo> typeAdapter(Gson gson) {
-            return new AutoValue_AllParkingDescJson_FareInfo.GsonTypeAdapter(gson);
+        public static JsonAdapter<FareInfo> typeAdapter(Moshi moshi) {
+            return new AutoValue_AllParkingDescJson_FareInfo.MoshiJsonAdapter(moshi);
         }
     }
 
@@ -268,14 +270,14 @@ public abstract class AllParkingDescJson implements Parcelable {
     @Generated("net.hexar.json2pojo")
     public static abstract class Holiday {
 
-        @SerializedName("Fare")
+        @Json(name = "Fare")
         public abstract String getFare();
 
-        @SerializedName("Period")
+        @Json(name = "Period")
         public abstract String getPeriod();
 
-        public static TypeAdapter<Holiday> typeAdapter(Gson gson) {
-            return new AutoValue_AllParkingDescJson_Holiday.GsonTypeAdapter(gson);
+        public static JsonAdapter<Holiday> typeAdapter(Moshi moshi) {
+            return new AutoValue_AllParkingDescJson_Holiday.MoshiJsonAdapter(moshi);
         }
     }
 
@@ -283,14 +285,14 @@ public abstract class AllParkingDescJson implements Parcelable {
     @Generated("net.hexar.json2pojo")
     public static abstract class WorkingDay {
 
-        @SerializedName("Fare")
+        @Json(name = "Fare")
         public abstract String getFare();
 
-        @SerializedName("Period")
+        @Json(name = "Period")
         public abstract String getPeriod();
 
-        public static TypeAdapter<WorkingDay> typeAdapter(Gson gson) {
-            return new AutoValue_AllParkingDescJson_WorkingDay.GsonTypeAdapter(gson);
+        public static JsonAdapter<WorkingDay> typeAdapter(Moshi moshi) {
+            return new AutoValue_AllParkingDescJson_WorkingDay.MoshiJsonAdapter(moshi);
         }
     }
 
@@ -298,29 +300,29 @@ public abstract class AllParkingDescJson implements Parcelable {
     @Generated("net.hexar.json2pojo")
     public static abstract class ChargeStation {
 
-        @SerializedName("availableCount")
+        @Json(name = "availableCount")
         private Long mAvailableCount;
-        @SerializedName("contactMobilNo")
+        @Json(name = "contactMobilNo")
         private String mContactMobilNo;
-        @SerializedName("contactName")
+        @Json(name = "contactName")
         private String mContactName;
-        @SerializedName("country")
+        @Json(name = "country")
         private String mCountry;
-        @SerializedName("isCharge")
+        @Json(name = "isCharge")
         private String mIsCharge;
-        @SerializedName("locLatitude")
+        @Json(name = "locLatitude")
         private Double mLocLatitude;
-        @SerializedName("locLongitude")
+        @Json(name = "locLongitude")
         private Double mLocLongitude;
-        @SerializedName("openFlag")
+        @Json(name = "openFlag")
         private String mOpenFlag;
-        @SerializedName("scoketCount")
+        @Json(name = "scoketCount")
         private Long mScoketCount;
-        @SerializedName("StationAddr")
+        @Json(name = "StationAddr")
         private String mStationAddr;
-        @SerializedName("StationName")
+        @Json(name = "StationName")
         private String mStationName;
-        @SerializedName("town")
+        @Json(name = "town")
         private String mTown;
 
         public Long getAvailableCount() {
@@ -371,8 +373,8 @@ public abstract class AllParkingDescJson implements Parcelable {
             return mTown;
         }
 
-        public static TypeAdapter<ChargeStation> typeAdapter(Gson gson) {
-            return new AutoValue_AllParkingDescJson_ChargeStation.GsonTypeAdapter(gson);
+        public static JsonAdapter<ChargeStation> typeAdapter(Moshi moshi) {
+            return new AutoValue_AllParkingDescJson_ChargeStation.MoshiJsonAdapter(moshi);
         }
     }
 

@@ -65,6 +65,7 @@ public abstract class ParkingLot {
 
     @AutoValue.Builder
     public abstract static class Builder {
+
         public abstract Builder id(int id);
 
         public abstract Builder lid(int lid);

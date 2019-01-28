@@ -105,11 +105,11 @@ dependencies {
     annotationProcessor 'com.google.auto.value:auto-value:1.5.2'
 
 //    compileOnly 'com.ryanharter.auto.value:auto-value-gson:0.4.5'
-//    // here annotationProcessor cant be replaced by kapt
+//    // here annotationProcessor can not be replaced by kapt
 //    annotationProcessor 'com.ryanharter.auto.value:auto-value-gson:0.4.5'
 
     compileOnly 'com.ryanharter.auto.value:auto-value-moshi:0.4.5'
-    // here annotationProcessor cant be replaced by kapt
+    // here annotationProcessor can not be replaced by kapt
     annotationProcessor 'com.ryanharter.auto.value:auto-value-moshi:0.4.5'
 
     // https://anson-site.blogspot.com/2015/08/androidserializable-vs-parcelable.html

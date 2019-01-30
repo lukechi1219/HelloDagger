@@ -24,3 +24,11 @@ import com.lukechi.android.opendata.database.entity.ParkingLot;
 public abstract class AppDatabase extends RoomDatabase {
     public abstract ParkingLotDao parkingLotDao();
 }
+
+/*
+https://dev.to/node/implementation-of-full-text-search-on-android--1n
+https://stackoverflow.com/questions/29815248/full-text-search-example-in-android
+https://developer.android.com/training/search/search
+https://developer.android.com/training/search/
+
+ */

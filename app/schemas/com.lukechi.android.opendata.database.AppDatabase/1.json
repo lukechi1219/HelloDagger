@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "69fad18219db0852d39c83da232a992b",
+    "identityHash": "7c5d88819bd0246659647fd01df4358d",
     "entities": [
       {
         "ftsVersion": "FTS4",
@@ -10,7 +10,7 @@
           "tokenizer": "simple",
           "tokenizerArgs": [],
           "contentTable": "",
-          "languageIdColumnName": "",
+          "languageIdColumnName": "lid",
           "matchInfo": "FTS4",
           "notIndexedColumns": [],
           "prefixSizes": [],
@@ -18,7 +18,7 @@
         },
         "contentSyncTriggers": [],
         "tableName": "parking_lot",
-        "createSql": "CREATE VIRTUAL TABLE IF NOT EXISTS `${TABLE_NAME}` USING FTS4(`rowId` INTEGER NOT NULL, `lid` INTEGER NOT NULL, `id` INTEGER NOT NULL, `area` TEXT, `name` TEXT)",
+        "createSql": "CREATE VIRTUAL TABLE IF NOT EXISTS `${TABLE_NAME}` USING FTS4(`rowId` INTEGER NOT NULL, `id` INTEGER NOT NULL, `area` TEXT, `name` TEXT, languageid=`lid`)",
         "fields": [
           {
             "fieldPath": "rowId",
@@ -30,7 +30,7 @@
             "fieldPath": "lid",
             "columnName": "lid",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "id",
@@ -62,7 +62,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"69fad18219db0852d39c83da232a992b\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"7c5d88819bd0246659647fd01df4358d\")"
     ]
   }
 }

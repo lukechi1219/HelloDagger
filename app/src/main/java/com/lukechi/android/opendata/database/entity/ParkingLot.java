@@ -15,7 +15,7 @@ import com.google.auto.value.AutoValue.CopyAnnotations;
 // Use `@Fts3` only if your app has strict disk space requirements or if you
 // require compatibility with an older SQLite version.
 // https://developer.android.com/reference/androidx/room/FtsOptions
-@Fts4 // this cause error... (languageId = "lid") // full-text search
+@Fts4(languageId = "lid") // full-text search
 @Entity(tableName = "parking_lot")
 // Sometimes, certain fields or groups of fields in a database must be unique.
 // @Entity(indices = {@Index(value = {"first_name", "last_name"}, unique = true)})
@@ -36,7 +36,7 @@ public abstract class ParkingLot {
     // to specify the column that stores language information for each row:
     @CopyAnnotations
     @ColumnInfo(name = "lid")
-    public abstract int lid();
+    public abstract Integer lid();
 
     @CopyAnnotations
     @ColumnInfo(name = "id")
@@ -54,7 +54,7 @@ public abstract class ParkingLot {
 
     // MEMO: this is required for Room
     // ref: https://android.googlesource.com/platform/frameworks/support/+/androidx-master-dev/room/integration-tests/autovaluetestapp/src/androidTest/java/androidx/room/integration/autovaluetestapp/vo/Person.java
-    public static ParkingLot create(int rowId, int lid, int id, String area, String name) {
+    public static ParkingLot create(int rowId, Integer lid, int id, String area, String name) {
         return builder()
                 .rowId(rowId)
                 .lid(lid)
@@ -73,7 +73,7 @@ public abstract class ParkingLot {
 
         public abstract Builder rowId(int rowId);
 
-        public abstract Builder lid(int lid);
+        public abstract Builder lid(Integer lid);
 
         public abstract Builder id(int id);
 

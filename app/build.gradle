@@ -97,6 +97,7 @@ dependencies {
     implementation 'androidx.room:room-runtime:2.1.0-alpha04'
     // annotationProcessor
     kapt "androidx.room:room-compiler:$room_version" // use kapt for Kotlin
+    // RxJava2 https://medium.com/mindorks/room-with-rxjava-and-dagger-2722f4420651
     implementation "androidx.room:room-rxjava2:$room_version" // optional
 //    // optional - Guava support, including Optional and ListenableFuture
 //    implementation "androidx.room:room-guava:$room_version"

@@ -20,7 +20,7 @@ public class AllAvailableLotsJsonObserver extends BaseObserver<AllAvailableLotsJ
      * TODO: add persist data to database
      */
     @Override
-    public void onNext(AllAvailableLotsJson json) {
+    public void onSuccess(AllAvailableLotsJson json) {
 
 //                        if (response.isSuccessful()) {} // ?? if not successful ??
 

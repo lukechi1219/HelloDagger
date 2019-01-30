@@ -16,7 +16,7 @@ public class AllParkingDescJsonObserver extends BaseObserver<AllParkingDescJson>
     }
 
     @Override
-    public void onNext(AllParkingDescJson json) {
+    public void onSuccess(AllParkingDescJson json) {
 
         AllParkingDescData data = json.data();
         System.out.println(data.updateTime());
@@ -45,22 +45,28 @@ public class AllParkingDescJsonObserver extends BaseObserver<AllParkingDescJson>
         System.out.println(desc.payExplain());
 
         List<EntrancecoordInfo> entranceList = desc.entranceCoord().getEntrancecoordInfo();
-        for (EntrancecoordInfo entrance : entranceList) {
-            System.out.println(entrance.getAddress());
-            System.out.println(entrance.getXcod());
-            System.out.println(entrance.getYcod());
+        if (entranceList != null) {
+            for (EntrancecoordInfo entrance : entranceList) {
+                System.out.println(entrance.getAddress());
+                System.out.println(entrance.getXcod());
+                System.out.println(entrance.getYcod());
+            }
         }
 
         List<Holiday> holidayList = desc.fareInfo().getHoliday();
-        for (Holiday holiday : holidayList) {
-            System.out.println(holiday.getFare());
-            System.out.println(holiday.getPeriod());
+        if (holidayList != null) {
+            for (Holiday holiday : holidayList) {
+                System.out.println(holiday.getFare());
+                System.out.println(holiday.getPeriod());
+            }
         }
 
         List<WorkingDay> workingDayList = desc.fareInfo().getWorkingDay();
-        for (WorkingDay workingDay : workingDayList) {
-            System.out.println(workingDay.getFare());
-            System.out.println(workingDay.getPeriod());
+        if (workingDayList != null) {
+            for (WorkingDay workingDay : workingDayList) {
+                System.out.println(workingDay.getFare());
+                System.out.println(workingDay.getPeriod());
+            }
         }
     }
 }

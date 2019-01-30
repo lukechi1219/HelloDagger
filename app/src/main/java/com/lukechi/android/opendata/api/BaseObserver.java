@@ -1,9 +1,10 @@
 package com.lukechi.android.opendata.api;
 
-import io.reactivex.Observer;
+import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
 
-public abstract class BaseObserver<T> implements Observer<T> {
+// TODO: rename to BaseSingleObserver
+public abstract class BaseObserver<T> implements SingleObserver<T> {
 
     @Override
     public void onSubscribe(Disposable d) {
@@ -19,9 +20,9 @@ public abstract class BaseObserver<T> implements Observer<T> {
         t.printStackTrace();
     }
 
-    @Override
-    public void onComplete() {
-        System.out.println("onComplete");
-        System.out.println("----");
-    }
+//    @Override
+//    public void onComplete() {
+//        System.out.println("onComplete");
+//        System.out.println("----");
+//    }
 }

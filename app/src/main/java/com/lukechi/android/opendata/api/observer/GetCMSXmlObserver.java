@@ -16,7 +16,7 @@ public class GetCMSXmlObserver extends BaseObserver<GetCMSXml> {
     }
 
     @Override
-    public void onNext(GetCMSXml getCMSXml) {
+    public void onSuccess(GetCMSXml getCMSXml) {
 
         System.out.println(getCMSXml.centerName());
 

@@ -1,12 +1,10 @@
 package com.lukechi.android.hellodagger.activity;
 
 import android.os.Bundle;
-import androidx.room.Room;
 import com.lukechi.android.hellodagger.R;
 import com.lukechi.android.hellodagger.core.Heater;
 import com.lukechi.android.hellodagger.core.impl.BazService;
 import com.lukechi.android.hellodagger.thirdparty.ThirdPartyClass;
-import com.lukechi.android.opendata.database.AppDatabase;
 import com.lukechi.android.opendata.service.TaipeiOpenDataService;
 import dagger.android.support.DaggerAppCompatActivity;
 
@@ -42,10 +40,13 @@ public class MainActivity extends DaggerAppCompatActivity {
 
         todService.syncAllAvailableLots();
 
-        AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "app-database").build();
-
-        System.out.println("db: " + db);
-
+        /*
+         * Cannot access database on the main thread since it may potentially lock the UI for a long periods of time.
+         */
+//        AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "app-database").build();
+//
+//        System.out.println("db: " + db);
+//
 //        ParkingLot[] parkingLotsArray = db.parkingLotDao().loadAllParkingLot();
 //
 //        for (ParkingLot parkingLot : parkingLotsArray) {

@@ -11,6 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
@@ -42,18 +44,19 @@ public class SimpleEntityReadWriteTest {
 //        user.setName("george");
 
 //        ParkingLot parkingLot = ParkingLot.builder().id(1).lid(1).area("area").name("name").build();
-        ParkingLot parkingLotNew = ParkingLot.create(1, 2, "area", "name");
-        assertEquals(1, parkingLotNew.id());
+        ParkingLot parkingLotNew = ParkingLot.create(1, 2, 3, "area", "name");
+        assertEquals(1, parkingLotNew.rowId());
         assertEquals(2, parkingLotNew.lid());
+        assertEquals(3, parkingLotNew.id());
         assertEquals("area", parkingLotNew.area());
         assertEquals("name", parkingLotNew.name());
 
         // OnConflictStrategy.REPLACE
         mParkingLotDao.insertParkingLots(parkingLotNew);
 
-        ParkingLot[] parkingLotsArray = mParkingLotDao.loadAllParkingLot();
+        List<ParkingLot> parkingLotsArray = mParkingLotDao.loadAllParkingLot();
 
-        assertEquals(1, parkingLotsArray.length);
+        assertEquals(1, parkingLotsArray.size());
 
         for (ParkingLot parkingLot : parkingLotsArray) {
             System.out.println(parkingLot.id());

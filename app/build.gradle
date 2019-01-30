@@ -16,6 +16,12 @@ android {
         versionName "1.0"
         // testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         testInstrumentationRunner "com.lukechi.android.hellodagger.MyTestInstrumentationRunner"
+
+        // The following argument makes the Android Test Orchestrator run its
+        // "pm clear" command after each test invocation. This command ensures
+        // that the app's state is completely cleared between tests.
+        // To remove all shared state from your device's CPU and memory after each test, use the clearPackageData flag.
+        testInstrumentationRunnerArguments clearPackageData: 'true'
     }
     buildTypes {
         debug {
@@ -29,6 +35,17 @@ android {
     compileOptions {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
+    }
+    // https://developer.android.com/training/testing/unit-testing/local-unit-tests
+    testOptions {
+        unitTests.includeAndroidResources = true
+        // Android Test Orchestrator, which allows you to run each of your app's tests
+        // within its own invocation of Instrumentation.
+        // 1. Minimal shared state.
+        // 2. Crashes are isolated.
+        // Run Android Test Orchestrator by executing the following command:
+        // ./gradlew connectedCheck
+        execution 'ANDROIDX_TEST_ORCHESTRATOR'
     }
 
     // ???
@@ -45,6 +62,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
 
     /*
      * https://developer.android.com/jetpack/androidx/migrate
@@ -66,7 +85,7 @@ dependencies {
     implementation 'joda-time:joda-time:2.9.9'
 
     // dagger
-    implementation "com.google.dagger:dagger:2.17"
+    implementation 'com.google.dagger:dagger:2.17'
     implementation "com.google.dagger:dagger-android:${DAGGER_VERSION}"
     implementation "com.google.dagger:dagger-android-support:${DAGGER_VERSION}"
     kapt "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
@@ -75,7 +94,7 @@ dependencies {
     /*
      * room
      */
-    implementation "androidx.room:room-runtime:2.1.0-alpha04"
+    implementation 'androidx.room:room-runtime:2.1.0-alpha04'
     // annotationProcessor
     kapt "androidx.room:room-compiler:$room_version" // use kapt for Kotlin
     implementation "androidx.room:room-rxjava2:$room_version" // optional
@@ -149,8 +168,8 @@ dependencies {
 //    testImplementation 'com.github.fabioCollini.daggermock:daggermock:0.8.4'
 //    androidTestImplementation 'com.github.fabioCollini.daggermock:daggermock:0.8.4'
     //
-    testImplementation "org.mockito:mockito-core:2.23.4"
-    androidTestImplementation "org.mockito:mockito-android:2.23.4"
+    testImplementation 'org.mockito:mockito-core:2.23.4'
+    androidTestImplementation 'org.mockito:mockito-android:2.23.4'
     //
     // https://developer.android.com/training/testing/set-up-project#gradle-dependencies
     // Core library
@@ -158,6 +177,8 @@ dependencies {
     // AndroidJUnitRunner and JUnit Rules
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test:rules:1.1.1'
+    // https://developer.android.com/training/testing/junit-runner#using-android-test-orchestrator
+    androidTestUtil 'androidx.test:orchestrator:1.1.1'
     // Assertions
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.ext:truth:1.1.0'

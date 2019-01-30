@@ -30,13 +30,17 @@ public abstract class ParkingLot {
     @CopyAnnotations
     @PrimaryKey // default (autoGenerate = false)
     @ColumnInfo(name = "rowid")
-    public abstract int id();
+    public abstract int rowId();
 
     // In cases where a table supports content in multiple languages, use the languageId option
     // to specify the column that stores language information for each row:
     @CopyAnnotations
     @ColumnInfo(name = "lid")
     public abstract int lid();
+
+    @CopyAnnotations
+    @ColumnInfo(name = "id")
+    public abstract int id();
 
 //    @CopyAnnotations
 //    @Ignore // example code
@@ -50,10 +54,11 @@ public abstract class ParkingLot {
 
     // MEMO: this is required for Room
     // ref: https://android.googlesource.com/platform/frameworks/support/+/androidx-master-dev/room/integration-tests/autovaluetestapp/src/androidTest/java/androidx/room/integration/autovaluetestapp/vo/Person.java
-    public static ParkingLot create(int id, int lid, String area, String name) {
+    public static ParkingLot create(int rowId, int lid, int id, String area, String name) {
         return builder()
-                .id(id)
+                .rowId(rowId)
                 .lid(lid)
+                .id(id)
                 .area(area)
                 .name(name)
                 .build();
@@ -66,9 +71,11 @@ public abstract class ParkingLot {
     @AutoValue.Builder
     public abstract static class Builder {
 
-        public abstract Builder id(int id);
+        public abstract Builder rowId(int rowId);
 
         public abstract Builder lid(int lid);
+
+        public abstract Builder id(int id);
 
         public abstract Builder area(String area);
 

@@ -38,7 +38,7 @@ public class TaipeiParkingServiceTest {
         todService.syncAllParkingDesc();
         todService.syncAllAvailableLots();
 
-        ParkingLot parkingLot = ParkingLot.builder().id(1).lid(1).area("here").name("name").build();
+        ParkingLot parkingLot = ParkingLot.builder().rowId(1).lid(2).id(3).area("here").name("name").build();
 
         Thread.sleep(3 * 1000);
 

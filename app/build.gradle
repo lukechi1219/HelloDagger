@@ -23,16 +23,16 @@ android {
         // To remove all shared state from your device's CPU and memory after each test, use the clearPackageData flag.
         testInstrumentationRunnerArguments clearPackageData: 'true'
 
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
-            }
-        }
-//        kapt {
-//            arguments {
-//                arg("room.schemaLocation", "$projectDir/schemas".toString())
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
 //            }
 //        }
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas".toString())
+            }
+        }
     }
     buildTypes {
         debug {

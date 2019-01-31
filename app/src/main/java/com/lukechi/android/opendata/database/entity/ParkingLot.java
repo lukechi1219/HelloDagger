@@ -1,5 +1,7 @@
 package com.lukechi.android.opendata.database.entity;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Fts4;
@@ -36,6 +38,7 @@ public abstract class ParkingLot {
     // to specify the column that stores language information for each row:
     @CopyAnnotations
     @ColumnInfo(name = "lid")
+    @Nullable
     public abstract Integer lid();
 
     @CopyAnnotations
@@ -46,10 +49,14 @@ public abstract class ParkingLot {
 //    @Ignore // example code
 //    Bitmap picture;
 
-    //    @ColumnInfo(name = "area")
+    @CopyAnnotations
+    @ColumnInfo(name = "area")
+    @NonNull
     public abstract String area();
 
-    //    @ColumnInfo(name = "name")
+    @CopyAnnotations
+    @ColumnInfo(name = "name")
+    @NonNull
     public abstract String name();
 
     // MEMO: this is required for Room

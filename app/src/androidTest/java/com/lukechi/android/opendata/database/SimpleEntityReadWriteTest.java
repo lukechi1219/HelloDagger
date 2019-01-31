@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 @RunWith(AndroidJUnit4.class)
 public class SimpleEntityReadWriteTest {
@@ -46,7 +47,7 @@ public class SimpleEntityReadWriteTest {
 //        ParkingLot parkingLot = ParkingLot.builder().id(1).lid(1).area("area").name("name").build();
         ParkingLot parkingLotNew = ParkingLot.create(1, 2, 3, "area", "name");
         assertEquals(1, parkingLotNew.rowId());
-        assertEquals(2, parkingLotNew.lid());
+        assertEquals(2, parkingLotNew.lid().intValue());
         assertEquals(3, parkingLotNew.id());
         assertEquals("area", parkingLotNew.area());
         assertEquals("name", parkingLotNew.name());
@@ -59,13 +60,16 @@ public class SimpleEntityReadWriteTest {
         assertEquals(1, parkingLotsArray.size());
 
         for (ParkingLot parkingLot : parkingLotsArray) {
-            System.out.println(parkingLot.id());
+            System.out.println(parkingLot.rowId());
             System.out.println(parkingLot.lid());
+            System.out.println(parkingLot.id());
             System.out.println(parkingLot.area());
             System.out.println(parkingLot.name());
 
-            assertEquals(1, parkingLot.id());
-            assertEquals(2, parkingLot.lid());
+            assertEquals(1, parkingLot.rowId());
+//            assertEquals(2, parkingLot.lid().intValue());
+            assertNull(parkingLot.lid());
+            assertEquals(3, parkingLot.id());
             assertEquals("area", parkingLot.area());
             assertEquals("name", parkingLot.name());
         }

@@ -1,6 +1,8 @@
 package com.lukechi.android.hellodagger.data.source;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 import com.lukechi.android.opendata.api.TaipeiOpenDataAPI;
 import com.lukechi.android.opendata.api.TaipeiOpenDataSite;
@@ -21,6 +23,7 @@ import java.util.List;
  */
 public class ParkingLotsRepository {
 
+    private final ConnectivityManager connectivityManager;
     private final TaipeiOpenDataAPI apiCall;
 
     @Inject
@@ -28,7 +31,16 @@ public class ParkingLotsRepository {
 
     @Inject
     public ParkingLotsRepository(Context context, TaipeiOpenDataSite taipeiOpenDataSite) {
+        this.connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         this.apiCall = taipeiOpenDataSite.getClient(context).create(TaipeiOpenDataAPI.class);
+    }
+
+    private boolean isConnectedToInternet() {
+        if (connectivityManager != null) {
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            return (networkInfo != null && networkInfo.isConnected());
+        }
+        return false;
     }
 
     /*
@@ -40,9 +52,7 @@ public class ParkingLotsRepository {
 
         Observable<List<ParkingLot>> observableFromDb = getParkingLotsFromDb(limit, offset);
 
-        boolean hasConnection = false;
-//        boolean hasConnection = utils.isConnectedToInternet();
-        if (hasConnection) {
+        if (isConnectedToInternet()) {
             Observable<List<ParkingLot>> observableFromApi = getParkingLotsFromApi();
 
             return Observable.merge(observableFromApi, observableFromDb);

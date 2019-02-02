@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "7c5d88819bd0246659647fd01df4358d",
+    "identityHash": "ab2b9f1c338379a2c5828b8f64c62a5c",
     "entities": [
       {
         "ftsVersion": "FTS4",
@@ -10,7 +10,7 @@
           "tokenizer": "simple",
           "tokenizerArgs": [],
           "contentTable": "",
-          "languageIdColumnName": "lid",
+          "languageIdColumnName": "",
           "matchInfo": "FTS4",
           "notIndexedColumns": [],
           "prefixSizes": [],
@@ -18,17 +18,11 @@
         },
         "contentSyncTriggers": [],
         "tableName": "parking_lot",
-        "createSql": "CREATE VIRTUAL TABLE IF NOT EXISTS `${TABLE_NAME}` USING FTS4(`rowId` INTEGER NOT NULL, `id` INTEGER NOT NULL, `area` TEXT, `name` TEXT, languageid=`lid`)",
+        "createSql": "CREATE VIRTUAL TABLE IF NOT EXISTS `${TABLE_NAME}` USING FTS4(`id` INTEGER NOT NULL, `area` TEXT NOT NULL, `name` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "rowId",
-            "columnName": "rowId",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "lid",
-            "columnName": "lid",
+            "columnName": "rowid",
             "affinity": "INTEGER",
             "notNull": false
           },
@@ -42,18 +36,20 @@
             "fieldPath": "area",
             "columnName": "area",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "name",
             "columnName": "name",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           }
         ],
         "primaryKey": {
-          "columnNames": [],
-          "autoGenerate": false
+          "columnNames": [
+            "rowid"
+          ],
+          "autoGenerate": true
         },
         "indices": [],
         "foreignKeys": []
@@ -62,7 +58,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"7c5d88819bd0246659647fd01df4358d\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"ab2b9f1c338379a2c5828b8f64c62a5c\")"
     ]
   }
 }

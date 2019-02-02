@@ -36,6 +36,7 @@ android {
     }
     buildTypes {
         debug {
+            minifyEnabled false
             testCoverageEnabled true
         }
         release {
@@ -69,6 +70,7 @@ dependencies {
     def DAGGER_VERSION = '2.17'
     def ESPRESSO_VERSION = '3.1.1'
     def room_version = '2.1.0-alpha04'
+    def lifecycle_version = '2.0.0'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -80,6 +82,8 @@ dependencies {
      * https://developer.android.com/jetpack/androidx/migrate
      */
 //    implementation 'com.android.support:appcompat-v7:28.0.0'
+    // AndroidX:Appcompat I:art error android.view.View$OnUnhandledKeyEventListener
+    // Didn't find class
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
 //    implementation 'com.android.support:design:28.0.0'
     implementation 'com.google.android.material:material:1.1.0-alpha02'
@@ -96,6 +100,8 @@ dependencies {
     implementation 'joda-time:joda-time:2.9.9'
 
     // dagger
+    // https://github.com/google/dagger/issues/1245
+    // Downgraded dagger to 2.16 ?
     implementation 'com.google.dagger:dagger:2.17'
     implementation "com.google.dagger:dagger-android:${DAGGER_VERSION}"
     implementation "com.google.dagger:dagger-android-support:${DAGGER_VERSION}"
@@ -114,6 +120,34 @@ dependencies {
 //    implementation "androidx.room:room-guava:$room_version"
     implementation "androidx.room:room-coroutines:$room_version" // optional - Coroutines support
     testImplementation "androidx.room:room-testing:$room_version" // Test helpers
+
+    /*
+     * Dependencies for Lifecycle, including LiveData and ViewModel.
+     */
+    // ViewModel and LiveData
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+//    // alternatively - just ViewModel
+//    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version" // use -ktx for Kotlin
+//    // alternatively - just LiveData
+//    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
+//    // alternatively - Lifecycles only (no ViewModel or LiveData). Some UI AndroidX libraries use this lightweight import for Lifecycle
+//    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
+    // ??
+//    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version" // use kapt for Kotlin
+    // alternately - if using Java8, use the following instead of lifecycle-compiler ??
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+    // optional - ReactiveStreams support for LiveData
+    implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycle_version" // use -ktx for Kotlin
+    testImplementation "androidx.arch.core:core-testing:$lifecycle_version" // Test helpers for LiveData
+
+    // Didn't find class "com.google.common.collect.ImmutableMap" guava
+    // in DaggerAppComponent
+    // classpath 'com.android.tools.build.jetifier:jetifier-processor:1.0.0-beta01'
+    // ?? api ?? implementation
+//    api 'com.google.guava:guava:23.5-jre'
+    api 'org.checkerframework:checker-compat-qual:2.5.3'
+    api 'com.google.guava:guava:26.0-android'
+    api 'com.google.errorprone:error_prone_annotations:2.3.1'
 
     // GSON body parser
 //    implementation 'com.google.code.gson:gson:2.8.2'

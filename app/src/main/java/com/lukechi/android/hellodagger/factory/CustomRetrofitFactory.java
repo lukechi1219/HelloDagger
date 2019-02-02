@@ -11,6 +11,9 @@ import retrofit2.converter.moshi.MoshiConverterFactory;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+/**
+ * https://medium.com/@cdmunoz/offline-first-android-app-with-mvvm-dagger2-rxjava-livedata-and-room-part-3-af6eeafeb29b
+ */
 public class CustomRetrofitFactory {
 
     //    private final GsonConverterFactory gsonConverterFactory;

@@ -1,10 +1,15 @@
 package com.lukechi.android.hellodagger.activity;
 
 import android.os.Bundle;
+import android.widget.TextView;
+import androidx.lifecycle.ViewModelProviders;
 import com.lukechi.android.hellodagger.R;
 import com.lukechi.android.hellodagger.core.Heater;
 import com.lukechi.android.hellodagger.core.impl.BazService;
 import com.lukechi.android.hellodagger.thirdparty.ThirdPartyClass;
+import com.lukechi.android.hellodagger.ui.viewmodel.ParkingLotsViewModel;
+import com.lukechi.android.hellodagger.ui.viewmodel.ParkingLotsViewModelFactory;
+import com.lukechi.android.opendata.database.dao.ParkingLotDao;
 import com.lukechi.android.opendata.service.TaipeiOpenDataService;
 import dagger.android.support.DaggerAppCompatActivity;
 
@@ -29,16 +34,59 @@ public class MainActivity extends DaggerAppCompatActivity {
     @Inject
     TaipeiOpenDataService todService;
 
+    @Inject
+    ParkingLotDao parkingLotDao;
+
+    @Inject
+    ParkingLotsViewModelFactory parkingLotsViewModelFactory;
+
+    // lateinit
+    ParkingLotsViewModel parkingLotsViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        TextView hello_world_textview = findViewById(R.id.hello_world_textview);
+
         // auto injected!!!
         myHeater.heat();
         bazService.work();
         thirdParty.getInfo();
 
-        todService.syncAllAvailableLots();
+//        ParkingLot parkingLotNew = new ParkingLot(3, 3, "area", "name1");
+//        // OnConflictStrategy.REPLACE87
+//        parkingLotDao.insertParkingLots(parkingLotNew);
+//
+//        ParkingLot parkingLotNew2 = new ParkingLot(3, 3, "area", "name2");
+//        // OnConflictStrategy.REPLACE87
+//        parkingLotDao.insertParkingLots(parkingLotNew2); // will replace old row with same rowid
+
+        /*
+         */
+        parkingLotsViewModel = ViewModelProviders
+                .of(this, parkingLotsViewModelFactory)
+                .get(ParkingLotsViewModel.class);
+
+        parkingLotsViewModel.loadParkingLots(10, 0);
+
+        parkingLotsViewModel.parkingLotsResult().observe(this,
+                parkingLots -> {
+                    if (parkingLots.isEmpty()) {
+                        hello_world_textview.setText("Hello no parkingLots");
+                    } else {
+                        String name = parkingLots.get(0).name();
+                        String area = parkingLots.get(0).area();
+                        hello_world_textview.setText("Hello " + name + " of " + area + " of " + parkingLots.size() + " parkingLots!");
+                    }
+                });
+
+        parkingLotsViewModel.parkingLotssError().observe(this,
+                errorStr -> hello_world_textview.setText("Hello error " + errorStr));
+
+        // TODO
+        showNearByAvailableLots();
 
         /*
           https://developer.android.com/topic/performance/threads
@@ -46,33 +94,29 @@ public class MainActivity extends DaggerAppCompatActivity {
          */
 
         /*
-          !!!!!
-          https://medium.com/@cdmunoz/offline-first-android-app-with-mvvm-dagger2-rxjava-livedata-and-room-25de4e1ada14
-          https://proandroiddev.com/offline-first-android-app-with-mvvm-dagger2-rxjava-livedata-and-room-part-2-72716e3520
-         https://medium.com/@cdmunoz/offline-first-android-app-with-mvvm-dagger2-rxjava-livedata-and-room-part-3-af6eeafeb29b
+          done
           https://medium.com/@cdmunoz/offline-first-android-app-with-mvvm-dagger2-rxjava-livedata-and-room-part-4-2b476142e769
+          TODO
           https://medium.com/@cdmunoz/offline-first-android-app-with-mvvm-dagger2-rxjava-livedata-and-room-part-5-8fc4f9cee34d
          */
+    }
 
-        /*
-         * Cannot access database on the main thread since it may potentially lock the UI for a long periods of time.
-         * Room, by default, won’t allow you to run database operations on the main thread.
-         * -> .allowMainThreadQueries()
-         * Use this approach for testing purposes only, or when dealing with a really tiny database.
-         */
-//        AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "app_database")
-//                .allowMainThreadQueries()
-//                .build();
-//        UserDatabase db = Room.databaseBuilder(getApplicationContext(), UserDatabase.class, "user_db").build();
-//
-//        System.out.println("db: " + db);
-//
-//        ParkingLot[] parkingLotsArray = db.parkingLotDao().loadAllParkingLot();
-//
-//        for (ParkingLot parkingLot : parkingLotsArray) {
-//            System.out.println(parkingLot.name());
-//        }
+    @Override
+    protected void onDestroy() {
+        parkingLotsViewModel.disposeElements();
+        super.onDestroy();
+    }
 
+    /*
+     */
+    private void showNearByAvailableLots() {
+
+        getAllAvailableLots();
+    }
+
+    private void getAllAvailableLots() {
+
+        todService.syncAllAvailableLots();
 
     }
 }

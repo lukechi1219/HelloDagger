@@ -8,6 +8,7 @@ import dagger.android.DaggerApplication;
 // implements HasActivityInjector
 // https://android.jlelse.eu/new-android-injector-with-dagger-2-part-3-fe3924df6a89
 // https://github.com/SamYStudiO/beaver
+// https://medium.com/@cdmunoz/offline-first-android-app-with-mvvm-dagger2-rxjava-livedata-and-room-25de4e1ada14
 /**
  * 幾乎不需要異動 可以直接用在不同專案
  *

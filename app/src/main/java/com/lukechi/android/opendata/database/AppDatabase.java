@@ -17,6 +17,7 @@ import com.lukechi.android.opendata.database.entity.ParkingLot;
  * <p>
  * https://github.com/ashwini009/TvMaze/pull/3
  */
+// https://proandroiddev.com/offline-first-android-app-with-mvvm-dagger2-rxjava-livedata-and-room-part-2-72716e3520
 @Database(
         entities = {ParkingLot.class},
 //        views = {UserDetail.class},

@@ -82,7 +82,7 @@ public class MainActivity extends DaggerAppCompatActivity {
                     }
                 });
 
-        parkingLotsViewModel.parkingLotssError().observe(this,
+        parkingLotsViewModel.parkingLotsError().observe(this,
                 errorStr -> hello_world_textview.setText("Hello error " + errorStr));
 
         // TODO

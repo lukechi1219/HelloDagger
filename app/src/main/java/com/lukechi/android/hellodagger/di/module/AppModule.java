@@ -3,10 +3,13 @@ package com.lukechi.android.hellodagger.di.module;
 import android.app.Application;
 import android.content.Context;
 import androidx.annotation.NonNull;
+import androidx.room.Room;
 import com.lukechi.android.hellodagger.HelloApp;
 import com.lukechi.android.hellodagger.core.Heater;
 import com.lukechi.android.hellodagger.core.impl.GasHeater;
 import com.lukechi.android.hellodagger.thirdparty.ThirdPartyClass;
+import com.lukechi.android.opendata.database.AppDatabase;
+import com.lukechi.android.opendata.database.dao.ParkingLotDao;
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
@@ -55,6 +58,7 @@ public abstract class AppModule {
         return application.getApplicationContext();
     }
 
+    // ???
     @Singleton
     @Binds
     abstract Context bindsContext(HelloApp application);
@@ -91,4 +95,23 @@ public abstract class AppModule {
         return new ThirdPartyClass(context);
     }
 
+    /*
+     * Cannot access database on the main thread since it may potentially lock the UI for a long periods of time.
+     * Room, by default, won’t allow you to run database operations on the main thread.
+     * -> .allowMainThreadQueries()
+     * Use this approach for testing purposes only, or when dealing with a really tiny database.
+     */
+    @Singleton
+    @Provides
+    static ParkingLotDao provideParkingLotDao(@Named("ApplicationContext") Context appContext) {
+
+        /*
+        how / when / who will close database?
+         */
+        AppDatabase database = Room.databaseBuilder(appContext, AppDatabase.class, "app_database")
+                .allowMainThreadQueries()
+                .build();
+
+        return database.parkingLotDao();
+    }
 }

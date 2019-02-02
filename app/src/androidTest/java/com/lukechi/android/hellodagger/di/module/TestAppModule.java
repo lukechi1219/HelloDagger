@@ -3,12 +3,15 @@ package com.lukechi.android.hellodagger.di.module;
 import android.app.Application;
 import android.content.Context;
 import androidx.annotation.NonNull;
+import androidx.room.Room;
 import com.lukechi.android.hellodagger.HelloApp;
 import com.lukechi.android.hellodagger.core.Heater;
 import com.lukechi.android.hellodagger.core.impl.BazService;
 import com.lukechi.android.hellodagger.core.impl.FakeBazService;
 import com.lukechi.android.hellodagger.core.impl.FakeGasHeater;
 import com.lukechi.android.hellodagger.thirdparty.ThirdPartyClass;
+import com.lukechi.android.opendata.database.AppDatabase;
+import com.lukechi.android.opendata.database.dao.ParkingLotDao;
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
@@ -57,5 +60,14 @@ public abstract class TestAppModule {
     @Provides
     static ThirdPartyClass provideThirdParty(Context context) {
         return new ThirdPartyClass(context);
+    }
+
+    @Singleton
+    @Provides
+    static ParkingLotDao provideParkingLotDao(@Named("ApplicationContext") Context appContext) {
+        AppDatabase database = Room.inMemoryDatabaseBuilder(appContext, AppDatabase.class)
+                .allowMainThreadQueries()
+                .build();
+        return database.parkingLotDao();
     }
 }

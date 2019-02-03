@@ -1,19 +1,26 @@
 package com.lukechi.android.hellodagger.activity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.lukechi.android.hellodagger.R;
 import com.lukechi.android.hellodagger.core.Heater;
 import com.lukechi.android.hellodagger.core.impl.BazService;
 import com.lukechi.android.hellodagger.thirdparty.ThirdPartyClass;
+import com.lukechi.android.hellodagger.ui.InfiniteScrollListener;
+import com.lukechi.android.hellodagger.ui.ParkingLotsAdapter;
 import com.lukechi.android.hellodagger.ui.viewmodel.ParkingLotsViewModel;
 import com.lukechi.android.hellodagger.ui.viewmodel.ParkingLotsViewModelFactory;
 import com.lukechi.android.opendata.database.dao.ParkingLotDao;
 import com.lukechi.android.opendata.service.TaipeiOpenDataService;
 import dagger.android.support.DaggerAppCompatActivity;
+import kotlin.Unit;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 
 /**
  * A class shouldn't t know anything about how it is injected. So we hide inject code into DaggerAppCompatActivity
@@ -43,12 +50,26 @@ public class MainActivity extends DaggerAppCompatActivity {
     // lateinit
     ParkingLotsViewModel parkingLotsViewModel;
 
+    ParkingLotsAdapter parkingLotsAdapter = new ParkingLotsAdapter(new ArrayList<>());
+
+    int currentPage = 0;
+
+    final int OFFSET = 12;
+    final int LIMIT = 12;
+    final int LIST_SCROLLING = 12;
+//    final String START_ZERO_VALUE = "0";
+//    final String DATABASE_NAME = "cryptocurrencies_db";
+
+    /*
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView hello_world_textview = findViewById(R.id.hello_world_textview);
+        parkingLotsViewModel = ViewModelProviders
+                .of(this, parkingLotsViewModelFactory)
+                .get(ParkingLotsViewModel.class);
 
         // auto injected!!!
         myHeater.heat();
@@ -65,25 +86,12 @@ public class MainActivity extends DaggerAppCompatActivity {
 
         /*
          */
-        parkingLotsViewModel = ViewModelProviders
-                .of(this, parkingLotsViewModelFactory)
-                .get(ParkingLotsViewModel.class);
+        initializeRecycler();
 
-        parkingLotsViewModel.loadParkingLots(10, 0);
+        observeViewModel();
 
-        parkingLotsViewModel.parkingLotsResult().observe(this,
-                parkingLots -> {
-                    if (parkingLots.isEmpty()) {
-                        hello_world_textview.setText("Hello no parkingLots");
-                    } else {
-                        String name = parkingLots.get(0).name();
-                        String area = parkingLots.get(0).area();
-                        hello_world_textview.setText("Hello " + name + " of " + area + " of " + parkingLots.size() + " parkingLots!");
-                    }
-                });
-
-        parkingLotsViewModel.parkingLotsError().observe(this,
-                errorStr -> hello_world_textview.setText("Hello error " + errorStr));
+        findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
+        loadData();
 
         // TODO
         showNearByAvailableLots();
@@ -101,10 +109,78 @@ public class MainActivity extends DaggerAppCompatActivity {
          */
     }
 
+    /*
+     */
     @Override
     protected void onDestroy() {
-        parkingLotsViewModel.disposeElements();
+        if (parkingLotsViewModel != null) {
+            parkingLotsViewModel.disposeElements();
+        }
         super.onDestroy();
+    }
+
+    /*
+     */
+    private void observeViewModel() {
+
+        TextView hello_world_textview = findViewById(R.id.hello_world_textview);
+        RecyclerView recycler = findViewById(R.id.recycler);
+
+        parkingLotsViewModel.parkingLotsResult().observe(this,
+                parkingLots -> {
+                    if (parkingLots == null || parkingLots.isEmpty()) {
+                        hello_world_textview.setText("Hello no parkingLots");
+                        return;
+                    }
+                    String name = parkingLots.get(0).name();
+                    String area = parkingLots.get(0).area();
+                    hello_world_textview.setText("Hello " + name + " of " + area + " of " + parkingLots.size() + " parkingLots!");
+
+                    int position = parkingLotsAdapter.getItemCount();
+                    parkingLotsAdapter.addCryptocurrencies(parkingLots);
+                    recycler.setAdapter(parkingLotsAdapter);
+                    recycler.scrollToPosition(position - LIST_SCROLLING);
+                });
+
+        parkingLotsViewModel.parkingLotsError().observe(this,
+                errorStr -> {
+                    if (errorStr == null) {
+                        hello_world_textview.setText("Hello Null error");
+                    } else {
+                        hello_world_textview.setText("Hello error " + errorStr);
+                    }
+//                    String toastMessage = getString(R.string.parking_lot_error_message) + errorStr;
+//                    Toast.makeText(this, toastMessage, Toast.LENGTH_SHORT).show();
+                });
+
+        parkingLotsViewModel.getParkingLotsLoader().observe(this,
+                stillLoading -> {
+                    if (!stillLoading) {
+                        findViewById(R.id.progressBar).setVisibility(View.GONE);
+                    }
+                });
+    }
+
+    /*
+     */
+    public void loadData() {
+        parkingLotsViewModel.loadParkingLots(LIMIT, currentPage * OFFSET);
+        currentPage++;
+    }
+
+    /*
+     */
+    private void initializeRecycler() {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1);
+        gridLayoutManager.setOrientation(RecyclerView.VERTICAL);
+
+        RecyclerView recycler = findViewById(R.id.recycler);
+        recycler.setHasFixedSize(true);
+        recycler.setLayoutManager(gridLayoutManager);
+        recycler.addOnScrollListener(new InfiniteScrollListener(() -> {
+            loadData();
+            return Unit.INSTANCE; // expected return for kotlin
+        }, gridLayoutManager));
     }
 
     /*

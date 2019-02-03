@@ -9,6 +9,11 @@ import io.reactivex.Single;
 
 import java.util.List;
 
+/**
+ * https://medium.com/exploring-android/android-architecture-components-testing-your-room-dao-classes-e06e1c9a1535
+ * <p>
+ * https://stackoverflow.com/questions/29099302/sqlite-fts4-with-preferred-language
+ */
 @Dao
 public interface ParkingLotDao {
 

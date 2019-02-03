@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/parking_lot_card"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="wrap_content"
     android:layout_margin="4dp"
     app:cardCornerRadius="4dp">
 
@@ -13,15 +13,17 @@
 
         <TextView
             android:id="@+id/parking_lot_id"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginStart="153dp"
-            android:layout_marginTop="352dp"
-            android:layout_marginEnd="154dp"
-            android:layout_marginBottom="352dp"
+            android:layout_margin="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:text="parking_lot_text"
             android:textColor="@color/colorAccent"
+            android:textSize="22sp"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

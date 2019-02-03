@@ -40,6 +40,9 @@ class ParkingLotsAdapter(
     fun addCryptocurrencies(parkingLots: List<ParkingLot>) {
         val initPosition = parkingLotsList.size
         parkingLotsList.addAll(parkingLots)
+
+        System.out.println("total size: " + parkingLotsList.size.toString())
+
         notifyItemRangeInserted(initPosition, parkingLotsList.size)
     }
 

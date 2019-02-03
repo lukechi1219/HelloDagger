@@ -24,6 +24,9 @@ import java.util.ArrayList;
 
 /**
  * A class shouldn't t know anything about how it is injected. So we hide inject code into DaggerAppCompatActivity
+ *
+ * https://developer.android.com/jetpack/arch/
+ * https://developer.android.com/jetpack/docs/guide
  */
 // DaggerAppCompatActivity
 // https://medium.com/@ffvanderlaan/you-could-also-have-your-baseactivity-extend-daggerappcompatactivity-then-you-would-not-need-e5faf54fad4e
@@ -85,6 +88,8 @@ public class MainActivity extends DaggerAppCompatActivity {
 //        parkingLotDao.insertParkingLots(parkingLotNew2); // will replace old row with same rowid
 
         /*
+        https://developer.android.com/guide/topics/ui/layout/recyclerview
+        https://developer.android.com/guide/topics/ui/declaring-layout
          */
         initializeRecycler();
 
@@ -100,13 +105,6 @@ public class MainActivity extends DaggerAppCompatActivity {
           https://developer.android.com/topic/performance/threads
           For this reason, we suggest that you only use AsyncTask to handle work items shorter than 5ms in duration.
          */
-
-        /*
-          done
-          https://medium.com/@cdmunoz/offline-first-android-app-with-mvvm-dagger2-rxjava-livedata-and-room-part-4-2b476142e769
-          TODO
-          https://medium.com/@cdmunoz/offline-first-android-app-with-mvvm-dagger2-rxjava-livedata-and-room-part-5-8fc4f9cee34d
-         */
     }
 
     /*
@@ -120,6 +118,8 @@ public class MainActivity extends DaggerAppCompatActivity {
     }
 
     /*
+      TODO
+      https://medium.com/@cdmunoz/offline-first-android-app-with-mvvm-dagger2-rxjava-livedata-and-room-part-5-8fc4f9cee34d
      */
     private void observeViewModel() {
 
@@ -169,6 +169,13 @@ public class MainActivity extends DaggerAppCompatActivity {
     }
 
     /*
+    https://android.jlelse.eu/keddit-part-7-infinite-scroll-higher-order-functions-lambdas-3a11fbd5090e
+
+    https://stackoverflow.com/questions/45029368/items-not-removed-properly-from-recyclerview
+
+    https://medium.com/@kitek/recyclerview-swipe-to-delete-easier-than-you-thought-cff67ff5e5f6
+    https://thedeveloperworldisyours.com/android/delete-item-recyclerview/
+    https://android--code.blogspot.com/2015/12/android-recyclerview-add-remove-item.html
      */
     private void initializeRecycler() {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1);

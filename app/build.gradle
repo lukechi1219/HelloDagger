@@ -32,6 +32,7 @@ android {
             arguments {
                 arg("room.schemaLocation", "$projectDir/schemas".toString())
             }
+//            correctErrorTypes = true // ? for AutoValue ? AutoService ?
         }
     }
     buildTypes {
@@ -50,6 +51,7 @@ android {
     }
     // https://developer.android.com/training/testing/unit-testing/local-unit-tests
     testOptions {
+        // for ORCHESTRATOR & Robolectric
         unitTests.includeAndroidResources = true
         // Android Test Orchestrator, which allows you to run each of your app's tests
         // within its own invocation of Instrumentation.
@@ -223,6 +225,7 @@ dependencies {
     //
     // https://developer.android.com/training/testing/set-up-project#gradle-dependencies
     // Core library
+    testImplementation 'androidx.test:core:1.1.0' // for Robolectric
     androidTestImplementation 'androidx.test:core:1.1.0'
     // AndroidJUnitRunner and JUnit Rules
     androidTestImplementation 'androidx.test:runner:1.1.1'
@@ -244,4 +247,11 @@ dependencies {
     // dependency to appear on your APK's compile classpath or the test APK
     // classpath.
     androidTestImplementation "androidx.test.espresso:espresso-idling-resource:$ESPRESSO_VERSION"
+
+    /*
+    http://robolectric.org/getting-started/
+     */
+    // for CREATE VIRTUAL TABLE https://github.com/robolectric/robolectric/issues/3556
+    // testImplementation 'com.almworks.sqlite4java:sqlite4java:1.0.392'
+    testImplementation 'org.robolectric:robolectric:4.1'
 }

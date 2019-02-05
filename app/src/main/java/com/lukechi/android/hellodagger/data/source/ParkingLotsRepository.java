@@ -81,10 +81,10 @@ public class ParkingLotsRepository {
 
                     for (AllAvailableLot lotFromJson : json.data().parkingLots()) {
 
-                        Integer rowId = Integer.valueOf(lotFromJson.id());
-                        int id = rowId;
+                        int id = Integer.parseInt(lotFromJson.id());
 
-                        ParkingLot parkingLot = new ParkingLot(rowId, id, "area", "name " + lotFromJson.id());
+//                        ParkingLot parkingLot = new ParkingLot(id, "area", "name " + lotFromJson.id());
+                        ParkingLot parkingLot = ParkingLot.create(id, "area", "name " + lotFromJson.id());
 
                         list.add(parkingLot);
                     }

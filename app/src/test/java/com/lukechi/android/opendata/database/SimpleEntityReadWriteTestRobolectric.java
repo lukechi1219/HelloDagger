@@ -3,30 +3,46 @@ package com.lukechi.android.opendata.database;
 import android.content.Context;
 import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.filters.SmallTest;
 import com.lukechi.android.opendata.database.dao.ParkingLotDao;
 import com.lukechi.android.opendata.database.entity.ParkingLot;
 import io.reactivex.SingleObserver;
+import io.reactivex.android.plugins.RxAndroidPlugins;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+
+// import androidx.test.filters.SmallTest;
 // import static org.junit.Assert.assertNull;
 
-@SmallTest
-@RunWith(AndroidJUnit4.class)
-public class SimpleEntityReadWriteTest {
+// @SmallTest // ??
+@RunWith(RobolectricTestRunner.class)
+public class SimpleEntityReadWriteTestRobolectric {
 
     private ParkingLotDao mParkingLotDao;
     private AppDatabase mDb;
+
+    /**
+     * IMPORTANT for testing RxJava with Robolectric
+     * <p>
+     * https://medium.com/@peter.tackage/overriding-rxandroid-schedulers-in-rxjava-2-5561b3d14212
+     * https://medium.com/@peter.tackage/an-alternative-to-rxandroidplugins-and-rxjavaplugins-scheduler-injection-9831bbc3dfaf
+     * https://stackoverflow.com/questions/43285064/rxjava-2-overriding-io-scheduler-in-unit-test
+     */
+    @BeforeClass
+    public static void setupClass() {
+        RxAndroidPlugins.setInitMainThreadSchedulerHandler(
+                __ -> Schedulers.trampoline());
+    }
 
     @Before
     public void createDb() {

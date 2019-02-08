@@ -19,7 +19,7 @@ public class ThirdPartyClass {
 
     public String getInfo() {
         System.out.println(info);
-        System.out.println(context);
+        System.out.println("ThirdPartyClass: " + context);
         return info;
     }
 }

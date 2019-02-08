@@ -27,6 +27,8 @@ import java.util.ArrayList;
  *
  * https://developer.android.com/jetpack/arch/
  * https://developer.android.com/jetpack/docs/guide
+ *
+ * https://github.com/codepath/android_guides/wiki
  */
 // DaggerAppCompatActivity
 // https://medium.com/@ffvanderlaan/you-could-also-have-your-baseactivity-extend-daggerappcompatactivity-then-you-would-not-need-e5faf54fad4e

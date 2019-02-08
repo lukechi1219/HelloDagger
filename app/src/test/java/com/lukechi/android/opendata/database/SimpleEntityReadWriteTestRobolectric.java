@@ -3,6 +3,7 @@ package com.lukechi.android.opendata.database;
 import android.content.Context;
 import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.lukechi.android.opendata.database.dao.ParkingLotDao;
 import com.lukechi.android.opendata.database.entity.ParkingLot;
 import io.reactivex.SingleObserver;
@@ -15,7 +16,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
 
 import java.util.List;
 
@@ -24,8 +24,24 @@ import static org.junit.Assert.assertEquals;
 // import androidx.test.filters.SmallTest;
 // import static org.junit.Assert.assertNull;
 
+/*
+https://www.bouvet.no/bouvet-deler/utbrudd/building-and-testing-android-with-gradle-robolectric-and-espresso
+
+http://fedepaol.github.io/blog/2015/09/05/mocking-with-robolectric-and-dagger-2/
+
+Robolectric is intended to be fully compatible with Android’s official testing libraries since version 4.0.
+As such we encourage you to try these new APIs and provide feedback.
+At some point the Robolectric equivalents will be deprecated and removed. <---
+Using the AndroidX Test APIs reduces the cognative load for you as a developer,
+with just one set of APIs to learn for the same Android concept, no matter if you are writing an Robolectric test or an instrumentation test.
+Furthermore it will make your tests more portable and compatible with our future plans.
+
+http://robolectric.org/androidx_test/
+
+ */
 // @SmallTest // ??
-@RunWith(RobolectricTestRunner.class)
+// @RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class) // since Robolectric 4.0 , can use AndroidX to replace Robolectric
 public class SimpleEntityReadWriteTestRobolectric {
 
     private ParkingLotDao mParkingLotDao;
@@ -112,6 +128,6 @@ public class SimpleEntityReadWriteTestRobolectric {
                     }
                 });
 
-        Thread.sleep(1000);
+        Thread.sleep(3000);
     }
 }

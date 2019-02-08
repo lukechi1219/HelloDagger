@@ -38,6 +38,7 @@ Furthermore it will make your tests more portable and compatible with our future
 
 http://robolectric.org/androidx_test/
 
+if need ApplicationProvider.getApplicationContext(), must have @RunWith(AndroidJUnit4.class)
  */
 // @SmallTest // ??
 // @RunWith(RobolectricTestRunner.class)

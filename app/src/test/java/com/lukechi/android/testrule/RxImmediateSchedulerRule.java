@@ -12,6 +12,9 @@ import org.junit.runners.model.Statement;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * compare with RxAndroidPlugins.setInitMainThreadSchedulerHandler
+ */
 public class RxImmediateSchedulerRule implements TestRule {
 
     private Scheduler immediate = new Scheduler() {

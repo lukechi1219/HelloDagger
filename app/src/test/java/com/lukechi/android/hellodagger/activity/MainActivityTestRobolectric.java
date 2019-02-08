@@ -29,11 +29,18 @@ public class MainActivityTestRobolectric {
         // GIVEN
         ActivityScenario<MainActivity> scenario = ActivityScenario.launch(MainActivity.class);
 
+        // https://developer.android.com/guide/components/activities/activity-lifecycle#alc
         // WHEN
-        scenario.moveToState(Lifecycle.State.CREATED);
+        // Initialized state for a LifecycleOwner. For an Activity, this is the state when it is constructed but has not received onCreate yet.
 //        scenario.moveToState(Lifecycle.State.INITIALIZED);
+        // Created state for a LifecycleOwner. For an Activity, this state is reached in two cases: after onCreate call; right before onStop call.
+        scenario.moveToState(Lifecycle.State.CREATED);
+        // Started state for a LifecycleOwner. For an Activity, this state is reached in two cases: after onStart call; right before onPause call.
 //        scenario.moveToState(Lifecycle.State.STARTED);
+        // Resumed state for a LifecycleOwner. For an Activity, this state is reached after onResume is called.
 //        scenario.moveToState(Lifecycle.State.RESUMED);
+        // Destroyed state for a LifecycleOwner. After this event, this Lifecycle will not dispatch any more events.
+        // For instance, for an Activity, this state is reached right before Activity's onDestroy call.
 //        scenario.moveToState(Lifecycle.State.DESTROYED);
 
         // THEN check dagger injection Not Null

@@ -49,7 +49,7 @@ public class SimpleEntityReadWriteTestRobolectric {
     private AppDatabase mDb;
 
     /**
-     * IMPORTANT for testing RxJava with Robolectric
+     * IMPORTANT for testing RxJava with Robolectric, even when using blockingSingle()
      * <p>
      * https://medium.com/@peter.tackage/overriding-rxandroid-schedulers-in-rxjava-2-5561b3d14212
      * https://medium.com/@peter.tackage/an-alternative-to-rxandroidplugins-and-rxjavaplugins-scheduler-injection-9831bbc3dfaf
@@ -93,6 +93,16 @@ public class SimpleEntityReadWriteTestRobolectric {
 
         // OnConflictStrategy.REPLACE87
         mParkingLotDao.insertParkingLots(parkingLotNew);
+        System.out.println("insertParkingLots");
+
+        List<ParkingLot> parkingLotsArray = mParkingLotDao.loadAllParkingLot()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .toObservable()
+                .blockingSingle();
+
+        System.out.println("loadAllParkingLot then blockingSingle");
+        verifyParkingLot(parkingLotsArray);
 
         mParkingLotDao.loadAllParkingLot()
                 .subscribeOn(Schedulers.newThread())
@@ -106,21 +116,8 @@ public class SimpleEntityReadWriteTestRobolectric {
 
                     @Override
                     public void onSuccess(List<ParkingLot> parkingLotsArray) {
-
                         System.out.println("onSuccess");
-
-                        assertEquals(1, parkingLotsArray.size());
-
-                        for (ParkingLot parkingLot : parkingLotsArray) {
-                            System.out.println(parkingLot.id());
-                            System.out.println(parkingLot.area());
-                            System.out.println(parkingLot.name());
-
-                            // assertEquals(0, parkingLot.lid().intValue());
-                            assertEquals(1, parkingLot.id());
-                            assertEquals("area", parkingLot.area());
-                            assertEquals("name", parkingLot.name());
-                        }
+                        verifyParkingLot(parkingLotsArray);
                     }
 
                     @Override
@@ -129,6 +126,22 @@ public class SimpleEntityReadWriteTestRobolectric {
                     }
                 });
 
-        Thread.sleep(3000);
+        Thread.sleep(3 * 1000); // wait loadAllParkingLot return
+    }
+
+    private void verifyParkingLot(List<ParkingLot> parkingLotsArray) {
+
+        assertEquals(1, parkingLotsArray.size());
+
+        for (ParkingLot parkingLot : parkingLotsArray) {
+            System.out.println(parkingLot.id());
+            System.out.println(parkingLot.area());
+            System.out.println(parkingLot.name());
+
+            // assertEquals(0, parkingLot.lid().intValue());
+            assertEquals(1, parkingLot.id());
+            assertEquals("area", parkingLot.area());
+            assertEquals("name", parkingLot.name());
+        }
     }
 }

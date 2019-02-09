@@ -50,7 +50,8 @@ class ParkingLotsViewModel @Inject constructor(
         }
 
         parkingLotsRepository.getParkingLots(limit, offset)
-            .subscribeOn(Schedulers.newThread())
+//            .subscribeOn(Schedulers.newThread()) // ?? Schedulers.newThread()
+            .subscribeOn(Schedulers.io()) // ?? Schedulers.io()
             .observeOn(AndroidSchedulers.mainThread())
             .debounce(400, MILLISECONDS)
             .subscribe(disposableObserver)

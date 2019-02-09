@@ -10,8 +10,6 @@ import com.lukechi.android.opendata.api.model.AllAvailableLotsJson.AllAvailableL
 import com.lukechi.android.opendata.database.dao.ParkingLotDao;
 import com.lukechi.android.opendata.database.entity.ParkingLot;
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
@@ -64,17 +62,14 @@ public class ParkingLotsRepository {
     private Observable<List<ParkingLot>> getParkingLotsFromDb(int limit, int offset) {
 //        TODO add paging
         return parkingLotDao.loadAllParkingLot()
-                .toObservable()
                 .doOnError(tr -> Log.e("REPOSITORY DB *** ", tr.getMessage(), tr))
-                .doOnNext(list -> Log.e("REPOSITORY DB *** ", String.valueOf(list.size())));
+                .doOnSuccess(list -> Log.d("REPOSITORY DB *** ", "success getParkingLotsFromDb: " + list.size()))
+                .toObservable();
     }
 
     private Observable<List<ParkingLot>> getParkingLotsFromApi() {
 
         return apiCall.tcmsvSyncAllAvailableLots()
-                .subscribeOn(Schedulers.io()) // ?? Schedulers.io()
-                .observeOn(AndroidSchedulers.mainThread())
-                .toObservable()
                 .doOnError(tr -> Log.e("REPOSITORY API *** ", tr.getMessage(), tr))
                 .map(json -> {
                     List<ParkingLot> list = new ArrayList<>();
@@ -91,7 +86,9 @@ public class ParkingLotsRepository {
                     return list;
 
                 })
-                .doOnNext(list -> Log.e("REPOSITORY API *** ", String.valueOf(list.size())));
+                .doOnError(tr -> Log.e("REPOSITORY API *** ", "map error: " + tr.getMessage(), tr))
+                .doOnSuccess(list -> Log.d("REPOSITORY API *** ", "success getParkingLotsFromApi: " + list.size()))
+                .toObservable();
     }
 }
 

@@ -107,6 +107,12 @@ public class MainActivity extends DaggerAppCompatActivity {
           https://developer.android.com/topic/performance/threads
           For this reason, we suggest that you only use AsyncTask to handle work items shorter than 5ms in duration.
          */
+
+        try {
+            Thread.sleep(1 * 1000); // wait api return for test
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     /*

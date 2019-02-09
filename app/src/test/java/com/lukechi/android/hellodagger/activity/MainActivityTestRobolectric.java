@@ -53,6 +53,6 @@ public class MainActivityTestRobolectric {
             assertThat(activity.parkingLotsViewModelFactory).isNotNull();
         });
 
-        Thread.sleep(3000); // wait api return for test
+        Thread.sleep(3 * 1000); // wait api return for test
     }
 }

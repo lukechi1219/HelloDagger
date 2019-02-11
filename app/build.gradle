@@ -254,6 +254,7 @@ dependencies {
     http://robolectric.org/getting-started/
      */
     // for CREATE VIRTUAL TABLE https://github.com/robolectric/robolectric/issues/3556
-    // testImplementation 'com.almworks.sqlite4java:sqlite4java:1.0.392'
+    implementation 'com.almworks.sqlite4java:sqlite4java:1.0.392'
+    testImplementation 'com.almworks.sqlite4java:sqlite4java:1.0.392'
     testImplementation 'org.robolectric:robolectric:4.1'
 }

@@ -2,6 +2,7 @@ package com.lukechi.android.opendata.database;
 
 import android.content.Context;
 import androidx.room.Room;
+import androidx.room.RoomDatabase;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.lukechi.android.opendata.database.dao.ParkingLotDao;
@@ -68,6 +69,7 @@ public class SimpleEntityReadWriteTestRobolectric {
 
         mDb = Room.inMemoryDatabaseBuilder(appContext, AppDatabase.class)
                 .allowMainThreadQueries()
+                .setJournalMode(RoomDatabase.JournalMode.WRITE_AHEAD_LOGGING)
                 .build();
 
         mParkingLotDao = mDb.parkingLotDao();

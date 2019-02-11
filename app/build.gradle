@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "com.lukechi.android.hellodagger"
         // only support stream() since 24
-        minSdkVersion 24
+        minSdkVersion 23
         targetSdkVersion 28
         multiDexEnabled true
         versionCode 1

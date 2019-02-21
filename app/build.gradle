@@ -76,7 +76,7 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
 
@@ -149,11 +149,15 @@ dependencies {
     // classpath 'com.android.tools.build.jetifier:jetifier-processor:1.0.0-beta01'
     // ?? api ?? implementation
 //    api 'com.google.guava:guava:23.5-jre'
-    api 'org.checkerframework:checker-compat-qual:2.5.3'
+    api 'org.checkerframework:checker-compat-qual:2.5.3' // ??
     api 'com.google.errorprone:error_prone_annotations:2.3.1'
     // https://issuetracker.google.com/issues/116154359 ??
 //    api 'com.google.guava:guava:26.0-android'
     api 'com.google.guava:guava:27.0.1-android'
+
+    // Google Play Services
+    implementation 'com.google.android.gms:play-services-maps:16.0.0'
+//    implementation 'com.google.android.gms:play-services-location:16.0.0'
 
     // GSON body parser
 //    implementation 'com.google.code.gson:gson:2.8.2'

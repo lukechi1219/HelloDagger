@@ -1,6 +1,7 @@
 package com.lukechi.android.hellodagger.activity;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 import androidx.lifecycle.ViewModelProviders;
@@ -109,10 +110,24 @@ public class MainActivity extends DaggerAppCompatActivity {
          */
 
         try {
-            Thread.sleep(1 * 1000); // wait api return for test
+            Thread.sleep(1000); // wait api return for test
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Inflates the options menu and adds items to the menu.
+     *
+     * @param menu Options menu
+     * @return True if menu is inflated.
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar
+        // if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
     /*

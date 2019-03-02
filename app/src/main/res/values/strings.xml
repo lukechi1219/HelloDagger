@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">HelloDagger</string>
     <string name="title_activity_maps">Map</string>
+    <string name="action_map">Map</string>
+    <string name="action_status">Status</string>
+    <string name="action_settings">Settings</string>
 </resources>

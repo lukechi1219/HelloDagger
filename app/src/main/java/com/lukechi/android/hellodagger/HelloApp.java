@@ -1,8 +1,15 @@
 package com.lukechi.android.hellodagger;
 
+import android.util.Log;
 import com.lukechi.android.hellodagger.di.DaggerAppComponent;
+import com.lukechi.android.opendata.database.dao.ParkingLotDao;
+import com.lukechi.android.opendata.database.entity.ParkingLot;
 import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+
+import javax.inject.Inject;
+import java.util.List;
 
 // DaggerApplication
 // implements HasActivityInjector
@@ -16,11 +23,31 @@ import dagger.android.DaggerApplication;
  */
 public class HelloApp extends DaggerApplication {
 
+    @Inject
+    ParkingLotDao parkingLotDao;
+
     /**
      * connects HelloApp with (Dagger) AppComponent
      */
     @Override
     protected AndroidInjector<? extends HelloApp> applicationInjector() {
         return DaggerAppComponent.builder().create(this);
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        loadAppInfoFromDb();
+    }
+
+    private void loadAppInfoFromDb() {
+
+        List<ParkingLot> result = parkingLotDao.loadAllParkingLot()
+                .doOnError(tr -> Log.e("REPOSITORY DB *** ", tr.getMessage(), tr))
+                .doOnSuccess(list -> Log.e("REPOSITORY DB *** ", String.valueOf(list.size())))
+                .blockingGet();
+
+        System.out.println("loadAppInfoFromDb: " + result.size());
     }
 }

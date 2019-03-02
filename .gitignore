@@ -46,6 +46,7 @@ captures/
 /.idea/libraries
 /.idea/caches
 /.idea/modules.xml
+/.idea/navEditor.xml
 
 .DS_Store
 /captures

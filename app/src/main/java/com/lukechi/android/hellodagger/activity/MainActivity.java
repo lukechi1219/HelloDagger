@@ -1,7 +1,9 @@
 package com.lukechi.android.hellodagger.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import androidx.lifecycle.ViewModelProviders;
@@ -128,6 +130,27 @@ public class MainActivity extends DaggerAppCompatActivity {
         // if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    /*
+     */
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_map:
+                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                // intent.putExtra(EXTRA_MESSAGE, mOrderMessage);
+                startActivity(intent);
+                return true;
+            case R.id.action_status:
+                return true;
+            case R.id.action_settings:
+                return true;
+            default:
+                // Do nothing
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /*

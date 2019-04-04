@@ -37,7 +37,7 @@ class ParkingLotsAdapter(
 
     /*
      */
-    fun addCryptocurrencies(parkingLots: List<ParkingLot>) {
+    fun addParkingLots(parkingLots: List<ParkingLot>) {
         val initPosition = parkingLotsList.size
         parkingLotsList.addAll(parkingLots)
 

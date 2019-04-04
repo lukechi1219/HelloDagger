@@ -183,7 +183,7 @@ public class MainActivity extends DaggerAppCompatActivity {
                     hello_world_textview.setText("Hello " + name + " of " + area + " of " + parkingLots.size() + " parkingLots!");
 
                     int position = parkingLotsAdapter.getItemCount();
-                    parkingLotsAdapter.addCryptocurrencies(parkingLots);
+                    parkingLotsAdapter.addParkingLots(parkingLots);
                     recycler.setAdapter(parkingLotsAdapter);
                     recycler.scrollToPosition(position - LIST_SCROLLING);
                 });

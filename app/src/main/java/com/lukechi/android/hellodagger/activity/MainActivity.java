@@ -142,7 +142,6 @@ public class MainActivity extends DaggerAppCompatActivity {
 
     /*
      */
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

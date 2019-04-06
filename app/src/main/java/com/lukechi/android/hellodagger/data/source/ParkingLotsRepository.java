@@ -28,7 +28,7 @@ public class ParkingLotsRepository {
     ParkingLotDao parkingLotDao;
 
     @Inject
-    public ParkingLotsRepository(Context context, TaipeiOpenDataSite taipeiOpenDataSite) {
+    ParkingLotsRepository(Context context, TaipeiOpenDataSite taipeiOpenDataSite) {
         this.connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         this.apiCall = taipeiOpenDataSite.getClient(context).create(TaipeiOpenDataAPI.class);
     }
@@ -53,7 +53,8 @@ public class ParkingLotsRepository {
         if (isConnectedToInternet()) {
             Observable<List<ParkingLot>> observableFromApi = getParkingLotsFromApi();
 
-            return Observable.merge(observableFromApi, observableFromDb);
+            return observableFromApi;
+            // return Observable.merge(observableFromApi, observableFromDb);
             // return Observable.concatArrayEager(observableFromApi, observableFromDb);
         }
         return observableFromDb;

@@ -5,13 +5,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.lukechi.android.hellodagger.R;
 import com.lukechi.android.hellodagger.core.Heater;
 import com.lukechi.android.hellodagger.core.impl.BazService;
+import com.lukechi.android.hellodagger.helper.ViewModelHelper;
 import com.lukechi.android.hellodagger.thirdparty.ThirdPartyClass;
 import com.lukechi.android.hellodagger.ui.InfiniteScrollListener;
 import com.lukechi.android.hellodagger.ui.ParkingLotsAdapter;
@@ -27,10 +28,10 @@ import java.util.ArrayList;
 
 /**
  * A class shouldn't t know anything about how it is injected. So we hide inject code into DaggerAppCompatActivity
- *
+ * <p>
  * https://developer.android.com/jetpack/arch/
  * https://developer.android.com/jetpack/docs/guide
- *
+ * <p>
  * https://github.com/codepath/android_guides/wiki
  */
 // DaggerAppCompatActivity
@@ -98,8 +99,15 @@ public class MainActivity extends DaggerAppCompatActivity {
          */
         initializeRecycler();
 
-        observeViewModel();
+        /*
+         */
+        RecyclerView recycler = findViewById(R.id.recycler);
+        ProgressBar progressBar = findViewById(R.id.progressBar);
 
+        ViewModelHelper.viewModelDoObserve(this, parkingLotsViewModel, parkingLotsAdapter, recycler, progressBar, LIST_SCROLLING);
+
+        /*
+         */
         findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
         loadData();
 
@@ -161,50 +169,6 @@ public class MainActivity extends DaggerAppCompatActivity {
             parkingLotsViewModel.disposeElements();
         }
         super.onDestroy();
-    }
-
-    /*
-      TODO
-      https://medium.com/@cdmunoz/offline-first-android-app-with-mvvm-dagger2-rxjava-livedata-and-room-part-5-8fc4f9cee34d
-     */
-    private void observeViewModel() {
-
-        TextView hello_world_textview = findViewById(R.id.hello_world_textview);
-        RecyclerView recycler = findViewById(R.id.recycler);
-
-        parkingLotsViewModel.parkingLotsResult().observe(this,
-                parkingLots -> {
-                    if (parkingLots == null || parkingLots.isEmpty()) {
-                        hello_world_textview.setText("Hello no parkingLots");
-                        return;
-                    }
-                    String name = parkingLots.get(0).name();
-                    String area = parkingLots.get(0).area();
-                    hello_world_textview.setText("Hello " + name + " of " + area + " of " + parkingLots.size() + " parkingLots!");
-
-                    int position = parkingLotsAdapter.getItemCount();
-                    parkingLotsAdapter.addParkingLots(parkingLots);
-                    recycler.setAdapter(parkingLotsAdapter);
-                    recycler.scrollToPosition(position - LIST_SCROLLING);
-                });
-
-        parkingLotsViewModel.parkingLotsError().observe(this,
-                errorStr -> {
-                    if (errorStr == null) {
-                        hello_world_textview.setText("Hello Null error");
-                    } else {
-                        hello_world_textview.setText("Hello error " + errorStr);
-                    }
-//                    String toastMessage = getString(R.string.parking_lot_error_message) + errorStr;
-//                    Toast.makeText(this, toastMessage, Toast.LENGTH_SHORT).show();
-                });
-
-        parkingLotsViewModel.getParkingLotsLoader().observe(this,
-                stillLoading -> {
-                    if (!stillLoading) {
-                        findViewById(R.id.progressBar).setVisibility(View.GONE);
-                    }
-                });
     }
 
     /*
